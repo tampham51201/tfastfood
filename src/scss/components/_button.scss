@@ -1,0 +1,62 @@
+.btn{
+    border: none;
+    outline: none;
+    padding: 1.6rem 2rem ;
+    border-radius: .5rem;
+    cursor: pointer;
+    font-family: 'Philosopher', sans-serif;    
+    transition: background-color .1s ease;
+    @include flex(center,center);
+   
+    &:hover{
+        color: white;
+        background-color: $main-color;
+    }
+    &-icon{
+    
+        margin-right: 1rem;
+        display: inline-block;
+        i{
+            
+            font-size: 2rem;
+          
+        }
+        
+    }
+    &-txt{
+      
+    }
+    &.type-icon{
+        width: 5.5rem;
+        height: 5rem;
+         padding: 0;
+         @include flex(center,center);
+         @include tablet{
+            height: 4rem;
+            width: 4.5rem;
+        }
+        .btn-icon{
+            margin-right: 0;
+            i{ 
+                font-size: 2.5rem;
+
+            }
+        }
+      
+       }
+    &.type-cricle{
+        border-radius: 50%;
+        width: 3rem;
+        height: 3rem;
+        .btn-icon{
+            margin-right: 0;
+            i{ 
+                font-size: 2.5rem;
+
+            }
+        }
+    }
+ 
+
+}
+

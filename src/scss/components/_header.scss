@@ -1,0 +1,568 @@
+
+
+.header{
+    position: relative;
+    width: 100%;
+    height: $header-height;
+    z-index: 999;
+    background: $txt-white;
+    @include tablet{
+        height: $header-tablet-height;
+    }
+    @include mobile{
+        height: $header-mobile-height;
+    
+    }
+
+    @keyframes shrinkAnimate {
+        0% {
+       
+      
+            transform: translateY(- $header-shrink-height);
+          
+        }
+        100% {
+        
+            transform: translateY(0);
+        
+      
+          
+        }
+        
+    }
+  
+    &.shrink{
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: $header-shrink-height;
+        box-shadow: 0 1.7rem 1.5rem rgba(149,157,165,0.2);
+        animation: shrinkAnimate .6s ease-in;
+    
+
+        @include tablet{
+            display: none;
+            
+        }
+        
+        .header__top-nav{
+            display: none;
+        }
+        .header__main{
+          
+          
+            padding: 1rem;
+            .content
+            {
+                z-index: 1;
+                position: relative;
+              
+            }
+            &__top{
+            
+                &__logo{                       
+                position: relative;
+                   top:unset;
+                   left: unset;
+                   transform: unset;
+                   z-index: 2;
+                }
+                &__right{
+                    z-index: 2;
+                }
+    
+            }
+            &__menu{
+                margin-top: 0;  
+                align-items: center;
+                position: absolute;  
+            }
+        }
+        .header-call{
+            display: none;
+        }
+    }
+    &::before{     
+        content: '';
+        position: absolute;
+        top: auto;
+        bottom: -13px;
+        right: 0;
+        left: 0;
+        height: 20px;
+        background: url('/../src/assets/Image/Header/header-pattern-02.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        transform: rotateX(180deg);
+        
+   }
+    &__top-nav{
+        @include flex(center,center);
+        height: 5rem;
+        font-size: 1.4rem;
+        background-color: #e20020;
+        color: $txt-white;
+        position: relative;
+        @include mobile{
+            height: 6rem;
+        }
+        &::before{
+            content: '';
+            position: absolute;
+            top: auto;
+            bottom: -18px;
+            right: 0;
+            left: 0;
+            height: 20px;
+            z-index: 1;        
+            background: url('/../src/assets/Image/Header/header-pattern-01.png') repeat-x scroll center bottom;
+
+        }
+    
+        .content{
+            @include flex(center,space-between);
+            padding: 0 1.5rem;
+          
+           
+
+        }
+        
+        &__left{
+            @include flex(center,flex-start);
+             @include tablet{
+                flex-grow: 1;
+               justify-content: center;
+            }
+            @include mobile{
+                         
+                font-size: 1.1rem;
+                text-align: center;
+            
+            }
+            i{
+                margin-right: 1.2rem;
+                font-size: 1.6rem;
+                transform: rotateY(180deg);
+            }
+            p{
+                letter-spacing: .1rem;
+            }
+        }
+        &__right{
+            @include flex(center,flex-start);
+            gap: 1rem;
+            font-size: 1.4rem;
+            letter-spacing: .1rem;
+            cursor: pointer;
+            @include tablet{
+                display: none;
+            }
+            
+        }
+       
+    
+    
+    }
+    &__main{
+        @include flex(center,center);
+        padding-top: 4rem;
+       
+        .content{
+            @include flex(flex-start,center);
+            flex-direction: column;
+            position: relative;
+            .header-line{
+                position: absolute;
+                top:7rem;
+                left: 1rem;
+                width: calc(100% - 2rem);
+                height: .1rem;
+                background-color: #d9d9d9;
+                display: none;
+                @include tablet
+                {
+                    display: block;
+                }
+            }
+               
+                
+        }
+        &__top{
+          width: 100%;
+          position: relative;
+          @include tablet{
+            padding:  8rem 1rem 0rem;
+         }
+            @include flex(center,space-between);
+            &__item{  
+                position: relative;
+                cursor: pointer;
+                color:#000000;
+                @include flex(center,center); 
+
+      
+                &:hover i{
+                    transform: rotateY(180deg);
+                }
+                &:hover  &__list{
+                    height: max-content;   
+                    visibility: visible;
+                }
+
+                &__icon
+                {
+                    width: 5.5rem;
+                    height:5.5rem;
+                    background-color: #fcb119;
+                    font-size: 2.7rem;
+                    border-radius: 50%;
+                    margin-right: 1rem;
+                    position: relative;
+                    cursor: pointer;
+                    @include flex(center,center);
+                    @include tablet{
+                    
+                    background-color: transparent;
+                    font-size: 3rem;
+                    width: max-content;
+                    height:max-content;
+                    @include mobile{
+                        font-size: 2.2rem;
+                    }
+                    
+                    }
+                    i{        
+                        color:#000000;   
+                        transition: transform ease .4s;
+                       
+                    }  
+                    
+                    &__quantity{
+                        @include flex(center,center);
+                        position: absolute;
+                        min-width: 1.6rem;
+                        height: 1.6rem;
+                        background-color:#000000 ;
+                        border-radius: 5rem;
+                        top:0rem;
+                        right: -.6rem;
+                        color: $txt-white;
+                            display: none;
+                        font-size: 1.2rem;
+                        @include tablet{
+                            display: flex;
+                        }
+                        @include mobile{
+                           
+                            top:-.3rem;
+                            right: -.6rem;
+                        }
+                    }
+                }
+                &__content{
+                    @include tablet{
+                        @include flex(center,flex-start)
+                       
+                    }
+                    p{
+                        &:nth-child(1)
+                        {
+                            font-size: 1.5rem;
+                            margin-bottom: .5rem;
+                            @include tablet{
+                                margin-bottom: 0;
+                                margin-right: .5rem;
+                                font-size: 1.8rem;
+                            }
+                            @include mobile{
+                         
+                                font-size: 1.4rem;
+                            
+                            }
+                          
+                        }
+                        &:nth-child(2){
+                            font-weight: 600;
+                            font-size: 1.8rem;
+                            @include mobile{
+                         
+                                font-size: 1.4rem;
+                            
+                            }
+                        }
+                    }           
+                }
+                &__list{
+                    position: absolute;
+                    top:calc(100% + 3rem);
+                    right: 0;
+                    border: .2rem solid $border-color;
+                    box-shadow: $box-shadow;
+                    background-color: $main-bg;
+                    width: 35rem;
+                    max-height: 50rem;
+                    border-radius: 1rem;
+                    height: 0;   
+                    visibility: hidden;
+               
+              
+                    &::before{
+                        position: absolute;
+                        content: "";
+                        top: -3.2rem;
+                        background-color: transparent;
+                        right: 0;
+                        width: 25rem;
+                        height: 3.2rem;
+                    }
+          
+                    &__null{
+                        padding: 2rem;
+                        font-size: 1.5rem;
+                        text-align: center;
+                    }
+                    &__title{
+                        padding: 1rem;
+                        font-size: 1.5rem;
+                    }
+                    &__content{
+                        max-height:35rem; 
+                        overflow: hidden;
+                    }
+                   
+                    &__item{
+                        @include flex(center,flex-start);
+                        padding: .5rem  1rem;
+                        transition: background-color ease .3s;
+                        color: $txt-second-color;
+                        
+                        img{
+                            border: .2rem solid $border-color;
+                            width: 6rem;
+                            height: 6rem;
+                            object-fit: cover;
+                            margin-right: .5rem;
+                        }
+                        p{
+                            &:nth-child(2){
+                                flex: 1;
+                                font-size: 1.4rem;
+                                margin-right: .5rem;
+                                overflow:hidden; 
+                                height: 3rem;
+                                line-height: 1.5rem;  
+                                display: -webkit-box;
+                                -webkit-box-orient: vertical;
+                                -webkit-line-clamp: 2;
+                           
+                            }
+                            &:nth-child(3)
+
+                            {   height: 3rem;
+                                margin-right: .5rem;    
+                                color: $main-color;        
+                                font-size: 1.6rem                                                                  
+                            }
+                          
+                        } 
+                        &:hover{
+                            background-color: #f3f2f2
+                        }          
+    
+
+                    }
+                    &__more{
+                      
+                        @include flex(center,space-between);
+                        padding: 1rem 1rem;
+
+                        p{
+                            font-size: 1.5rem
+                        }
+                    }
+                  
+
+                }
+
+                &__mobile-toggle
+                {
+                    font-size: 3rem;
+                    display: none;
+                    color: #000000;
+                    @include tablet{
+                        display: block;
+                    }
+                }
+            }
+            &__right{
+                @include flex(center,center);
+               
+                &__search{
+                    position: relative;
+                    &__icon{
+                        @include flex(center,center);
+                        cursor: pointer;
+                        margin-right: 2rem;
+                        width: 4rem;
+                        height: 4rem;
+                        border-radius: 50%;
+                        background-color: #f5f5f5;
+                        @include tablet{
+                          
+                            margin-right: 0;
+                    
+                            color: #000000;
+                            background-color: transparent;
+                        }
+    
+                        &:hover i:nth-child(1){
+                            transform: rotateY(180deg);
+                        }
+    
+                        i:nth-child(1){
+                            transition: transform ease-out .4s  ;
+                            font-size: 1.8rem;
+                            @include tablet{
+                                font-size: 3rem;
+                             
+                            }
+                            @include mobile{
+                                font-size: 2.2rem;
+                             
+                            }
+        
+                   
+                        }
+                    }
+                    &__box{
+                        @include flex(center,flex-start);
+                        position: absolute;
+                        top: 7rem ;
+                        background-color: $txt-white;
+                        right: 0;
+                        border: .2rem solid  #e8e8e8;
+                        padding: 1rem 1.4rem;
+                        border-radius: 1rem;
+                        transform-origin: calc(100% - 20px) 0%;
+                        animation: SearchGrowth ease-in .3s;
+                        will-change: opacity, transform;
+                        display: none;
+                     
+                        &.active {
+                            display: flex;
+                        }
+                     
+                        
+                        &__input{
+                            outline: none;
+                            border: none;
+                            width: 25rem;
+                            margin-right: 1rem;
+                         
+    
+                        }
+                        i{
+                            font-size: 1.8rem;
+                            transform: rotateY(180deg);
+                        }
+                    }
+                }
+
+                &__accout{
+                    display: none;
+                    @include tablet{
+                        display: flex;
+                      
+                    }
+                }
+              
+            }
+            &__logo{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+                @include tablet{
+                    top: 3rem;
+                }
+                @include mobile{
+                    padding-top: 2rem;
+                    top: 1rem;
+                   img{
+                       height: 8rem;
+                       width: 28rem;
+                   }
+                }
+            }
+        }
+
+        &__menu{
+            width: 100%;
+            margin-top: 6.5rem;
+            gap: 1rem;
+            @include flex(center,center);
+            @include tablet{
+                padding: 2rem;
+                flex-direction: column;
+                position: absolute;
+                margin-top: 0;       
+                width: calc(100% - 2rem);
+                margin-left: 1rem;
+                align-items: (flex-start);
+                background-color: $main-bg;
+                top:calc(100% );
+                border: .2rem solid $border-color;
+                border-radius: .5rem;
+                transform: translateY(10rem);
+                visibility: hidden;
+                opacity: 0;
+                transition: all ease .3s;
+                &.toggle{
+                    transform: translateY(0);
+                    visibility: visible;
+                    opacity: 1;
+                }
+            
+            }
+            @include mobile{
+                padding: 1rem;
+            }
+        
+            &__item{
+                &__mobile{
+                    padding-top: 1rem;
+                    border-top: .2rem solid $border-color ;
+                    width: 100%;
+                    display: none;
+                    @include tablet{
+                        @include flex(center,flex-start);
+                        flex-direction: column;
+                      
+                    }
+                }
+                
+               button{
+                   font-size: 1.8rem;
+                   font-weight: 600;
+                   letter-spacing: .1rem;
+                   @include tablet{
+                    padding: 1rem 2rem;
+                    @include mobile{
+                        padding: .5rem 1rem;
+                        font-size: 1.4rem;
+                    }
+                    
+                    &:hover{
+                        background-color: unset;
+                        color: unset;
+                    }
+                     }
+             
+                 }
+                
+            }
+        }
+    }
+
+   
+}

@@ -1,0 +1,309 @@
+.footer{
+    position: relative;
+    background-color: $main-bg;
+    padding-top: 7rem;
+    
+    &::before{
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2rem;
+        left: 0;
+        top: -2rem;
+        background-repeat: no-repeat;
+        background: url('/../src/assets/Image/Header/header-pattern-02.png');
+        background-size: center;
+    }
+    .content{
+        @include tablet{
+            width: calc(100% - 4rem);
+           margin: 0 2rem;
+
+    
+             
+         }
+    }
+
+    &__logo{
+        position: absolute;
+        z-index: 10;
+        left: 50%;
+        transform: translateX(-50%);
+        top:2rem
+
+    }
+    &__banner{
+        cursor: pointer;
+        position: relative;
+        z-index: 4;
+        overflow: hidden;
+        max-width: 100%;
+        @include tablet{
+           padding-top: 1rem;
+           
+        }
+        @include mobile{
+            padding-top: 2rem;
+            
+         }
+
+        &::before{
+            content: "";
+            background-color: rgba($color: #ffffff, $alpha: .6);
+            top:0;
+            position: absolute;
+            left:0;
+            width: 0rem;
+            height: 0rem;
+          
+            
+         
+        }
+        &::after{
+            content: "";
+            background-color: rgba($color: #ffffff, $alpha: .6);
+            bottom: 0;
+            position: absolute;
+            right: 0;;
+            width: 0rem;
+            height: 0rem;
+        
+         
+        }
+        &:hover::before, &:hover::after  {
+            width: 100%;
+            height: 100%;   
+            transition: all .6s ease-out;
+            opacity: 0;     
+        }
+     
+ 
+    }
+    &__product-about{
+        margin-top: 2rem;
+        text-align: center;
+        
+        @include tablet{
+            text-align: left;       
+            @include flex(flex-start,center);
+            flex-direction: column;
+          
+           
+        }
+        &__title{
+            font-family: 'Mitr', sans-serif;
+            color: #000;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            font-weight: 400;
+           
+
+           
+           
+        }
+
+       
+
+        &__list{
+           
+           @include tablet{
+            @include flex(flex-start,flex-start);
+            flex-direction: column;
+            height: 0;
+            overflow: hidden;
+            transition: all ease .4s;
+          
+        
+ 
+          
+
+            &.active{
+                height: 15rem;
+         
+            }
+          
+           }
+            &__item{
+                font-size: 1.6rem;
+                max-width: 28rem;
+               margin-right: .8rem;
+
+                @include tablet{
+                  padding: .5rem 1rem;
+                  font-size: 1.4rem;           
+                  
+                 
+             
+                }
+            }
+
+        }
+       
+    }
+    &__box-title{
+        display: none;      
+        &:nth-child(2){
+            margin-top: -2rem;
+        } 
+        @include tablet{
+            @include flex(center,space-between);       
+            padding: .8rem 1rem;
+            width: 100%;         
+            cursor: pointer;
+            &:hover{
+                background-color: #e5e5e5;
+            }    
+                        
+        }
+        h3{
+         
+            font-size: 1.5rem;
+            font-family: 'Mitr', sans-serif;
+            color: #000;
+            font-weight: 400;   
+        }
+        i{
+            font-size: 2rem;
+        }
+
+    }
+
+    &__contact-about{
+        margin-top: 2rem;
+        @include tablet{
+            text-align: left;
+            margin-top: -2rem;
+            height: 0;
+            overflow: hidden;
+            transition: all ease .5s;       
+           
+
+            &.active{
+                height: 15rem;   
+
+            }
+     
+           
+                
+        }
+ 
+        &__item{
+            @include flex(center,center);
+            margin-bottom: 1rem;
+            font-size: 1.6rem;
+            i{
+                margin-right: .5rem;
+                margin-bottom: 0;
+            }
+
+            @include tablet{
+                justify-content: flex-start;
+                padding: .5rem 1rem;
+                font-size: 1.4rem;    
+                margin-bottom:0;
+             
+               
+            }
+            
+        }
+    }
+
+
+
+    &__notify{
+        text-align: center;
+        margin-top: 2rem;
+        @include tablet{
+            margin-top: -2rem;
+        }
+        &__title{
+            font-size: 2rem;
+            color: #000;
+            margin-bottom: 2rem;
+            font-family: 'Mitr', sans-serif;
+            font-weight: 400;
+            @include tablet{
+                margin-bottom: 0;
+                font-size: 1.7rem;
+            }
+        }
+        &__description{
+            font-size: 1.6rem;
+            margin-bottom: 2rem;
+            @include tablet{
+                font-size: 1.4rem;
+                margin-bottom: 1rem;
+            }
+        }
+        &__input{
+        padding: 0 2rem;
+        position: relative;
+        @include tablet{
+            width: calc(100% - 8rem);
+            margin-left: 4rem;
+        }
+        @include mobile{
+            width: calc(100% - 2rem);
+            margin-left: 1rem;
+        }
+        input{
+            padding: 0 1rem;
+            height: 5rem;
+            outline: none;
+            border: .2rem solid $border-color;
+            border-radius: 1rem;
+            width: 100%;
+            @include tablet{
+                height: 4rem;
+            }
+            }
+        button{
+            position: absolute;
+            top: 0;
+            right: 2rem;
+            border-bottom-left-radius: 0;
+            border-top-left-radius: 0;
+            border-bottom-right-radius: 1rem;
+            border-top-right-radius: 1rem;
+ 
+            
+        }
+        }
+    }
+
+    &__bottom{
+        margin-top: 7rem;
+        height: 6rem;
+        background-color: #e20020;
+     color: #ffffff;
+        @include flex(center,center);
+        position: relative;
+        &::before{
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 2rem;
+            background-size: cover;
+            top:-1rem;
+            left: 0;
+            background-image: url("/../src/assets/Image/Header/header-pattern-01.png");
+        }
+        
+        .content{
+            @include flex(center,space-between);
+            
+        }
+        &__list-icon{
+           gap: 1.2rem;
+           @include flex(center,flex-start);
+           &__item 
+           {
+         
+          
+               i{
+                    font-size: 1.8rem;
+               }
+           }
+        }
+    }
+}

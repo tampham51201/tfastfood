@@ -1,0 +1,65 @@
+.header__top-nav__right__item{
+    @include flex(center,flex-start);
+    position: relative;
+    @include tablet{
+        color: #000000;
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+    @include mobile{
+        color: #000000;
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+    }
+    &__icon{
+        margin-right: 1rem;
+        font-size: 2rem;
+        transition: transform ease .5s ;
+        @include tablet{
+            color: #000000;
+            font-size: 1.8rem;
+            margin-top: 1rem;
+            margin-left: .5rem;
+            font-size: 3rem;
+   
+        }
+        @include mobile{
+            font-size: 2.2rem;
+            ;
+        }
+ 
+    }
+    &:hover &__icon{
+
+            transform: rotateY(180deg);
+     
+    }
+    &__list{
+        position: absolute;
+        min-width: 17rem;
+        right: 0;
+        top: 140%;
+        box-shadow: $box-shadow;  
+        overflow: hidden;
+        color: $txt-second-color;
+        z-index: 9999;
+        border-radius: 1rem;
+        background-color: $txt-white;
+        border: .2rem solid #e8e8e8; 
+        visibility: hidden;
+        padding: 0 2.5rem ;
+        height: 0;
+        transition: all ease .3s;
+     
+        &.active{
+            height: max-content;
+            padding: 1.6rem 2.5rem ;
+            
+            visibility: visible;
+            
+        }
+      &__item ~ &__item{
+          margin-top: .8rem; 
+      }
+    }
+}

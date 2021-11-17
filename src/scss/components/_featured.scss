@@ -1,0 +1,8 @@
+.featured{
+   padding: 0 2rem;
+
+   @include tablet{
+      padding: 0 1rem;
+   }
+    
+}

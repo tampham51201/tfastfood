@@ -1,0 +1,76 @@
+.banner__item{
+    position: relative;
+    padding: 1rem 2rem;
+    z-index: 5;
+    overflow: hidden;
+   
+    &::after{
+        z-index: 9;
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 1rem;
+        right: 1rem;
+        background: url("/../src/assets/Image/bannerItem.png") scroll repeat-x top center;
+        height: 2rem;
+    }
+    &::before{
+        z-index: 9;
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 1rem;
+        right: 1rem;
+        background: url("/../src/assets/Image/bannerItem.png") scroll repeat-x bottom center;
+        height: 2rem;
+    }
+    &__img{
+        width: 100%;
+        overflow: hidden;
+        width: 100%;
+        img{  
+            width: 100%;
+            object-fit: contain;
+            transition: all ease .6s;
+            &:hover{
+                transform: scale(1.1);
+            }
+        }
+    }
+   
+}
+.border{
+    content: "";
+    width: 100%;
+    height: 100%;
+   
+    position: relative;
+    @include flex(center,space-between);
+        &::before{
+            z-index: 9;
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -2rem;
+            bottom: 0;
+            height: 100%;
+            background: url("/../src/assets/Image/bannerItem2.png") scroll no-repeat left center;
+            width:  2rem;
+    
+        
+        }
+        &::after{
+            z-index: 9;
+            content: "";
+            position: absolute;
+            top: 0;
+            right: -2rem;
+            bottom: 0;
+            background: url("/../src/assets/Image/bannerItem2.png") scroll no-repeat right center;
+            width:  2rem;
+        
+        }
+
+    }
+   
+  

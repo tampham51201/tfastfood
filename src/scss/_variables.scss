@@ -1,0 +1,39 @@
+$main-bg:#fff;
+$main-color:#D32512;
+$second-color:#fcb119;
+$second-bg:#f5f5f5;
+
+
+$txt-main-color:#111111;
+$txt-second-color:#243238;
+$txt-white:#fff;
+
+$border-color:#e8e8e8;
+
+$btn-main-bg:$main-color;
+$btn-main-color:#2D394B;
+
+.bg-transparent{
+    background-color: transparent;
+}
+.bg-main{
+    background-color: $main-color;
+}
+
+.bg-second{
+    background-color: $second-color;
+}
+
+$header-height:28rem;
+$header-tablet-height:22rem;
+$header-mobile-height:24rem;
+$header-shrink-height:10rem;
+
+$box-shadow: rgba(149,157,165,0.2) 0 0.8rem 2.4rem;
+
+
+$mobile-width:740px;
+$tablet-width:1024px;
+
+$numbers:(0,1,2,3,4,5,6,7,8);
+

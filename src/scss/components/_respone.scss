@@ -1,0 +1,6 @@
+.hide-mobile{
+    @include tablet{
+        display: none;
+    }
+    
+}

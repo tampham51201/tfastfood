@@ -1,0 +1,73 @@
+.hero-slider{ 
+    width: 100%;
+    position: relative;
+    cursor: pointer;
+    margin-bottom: 4rem;
+
+    &::before{
+        position: absolute;
+        left: 0;
+        content: "";
+        top: auto;
+        right: 0;
+    bottom: 0;
+        z-index: 5;    
+        background: url("/../src/assets/Image/slider-pattrean.png") repeat-x scroll center top;
+        height: 8.5rem;
+     
+       
+    }
+    &:hover   &__control{
+        width: 96%;
+        opacity: 1;
+    }
+    &__item{
+        width: 100%;
+    }
+    &__control{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        z-index: 2;
+        font-size: 3rem;
+        color: $second-color;
+    
+        @include flex(center,space-between);
+        width: 90%;
+        opacity: 0;
+        transition: all .4s ease;
+        &:hover{
+            width: 96%;
+            opacity: 1;
+        }
+
+        &__prev, &__next{
+            @include flex(center,center);
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            border: $second-color .2rem solid;
+            transition: all .4s ease;
+            @include mobile{
+                width: 3rem;
+                height: 3rem;
+                font-size: 2.2rem;
+                border: none;
+                color: $second-color;
+
+            }
+            &:hover{
+                background-color: $second-color;
+                color:$txt-main-color;
+                @include mobile{
+                    background-color: transparent;
+               
+    
+                }
+            }
+        }
+        
+    }
+    
+}
