@@ -1,12 +1,12 @@
 import React, { useRef, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 
-import logo from "../assets/Image/footer-logo_1.png";
+import logo from "../../assets/Image/footer-logo_1.png";
 import Button from "./Button";
 import NavTopItem from "./NavTopItem";
 
 const img =
-  require("../assets/Image/Product/brown-bear-printed-sweater.jpg").default;
+  require("../../assets/Image/Product/brown-bear-printed-sweater.jpg").default;
 
 const navList = [
   {

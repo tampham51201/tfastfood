@@ -1,12 +1,12 @@
 import React, { useRef } from "react";
 
-import logoFooter from "../assets/Image/footer-logo_1.png";
-import bannerFooter from "../assets/Image/footer-banner.jpg";
+import logoFooter from "../../assets/Image/footer-logo_1.png";
+import bannerFooter from "../../assets/Image/footer-banner.jpg";
 
 import { Link } from "react-router-dom";
 
-import Grid from "../components/Grid";
-import Button from "../components/Button";
+import Grid from "../../components/Grid";
+import Button from "../client/Button";
 
 const footerAbout = [
   {

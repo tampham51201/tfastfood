@@ -1,6 +1,6 @@
 import React from "react";
 
-const img_title = require("../assets/Image/title.png").default;
+const img_title = require("../../assets/Image/title.png").default;
 
 const Section = (props) => {
   return <div className="section">{props.children}</div>;
