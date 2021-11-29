@@ -1,0 +1,83 @@
+.input-item{
+   
+    label{
+        font-size: 1.4rem;
+        display: inline-block;
+        margin-left: .5rem;
+    }
+    &__box{
+        @include flex(center,space-between);
+        width: 100%;
+        padding: 1.5rem 1rem;
+        margin-bottom: 2rem;
+     
+        position: relative;
+        z-index: 1;
+        &::before{
+            content: '';
+            position: absolute;
+            bottom: .2rem;
+            height: .2rem;
+            background-color: #dedede;
+            left: 0;
+            width: 100%;
+          
+            z-index: 2;
+        }
+        &::after{
+            content: '';
+            position: absolute;
+            bottom: .2rem;
+            height: .2rem;
+            background-color: #b3b2b2;
+            left: 0;
+            width: 0;
+            transition: width .4s ease;
+            z-index: 2;
+        }
+        &.focus{
+            &::after{
+                width: 100%;
+            }
+         
+        }
+        i{
+            font-size: 2rem;
+            margin-right: 1rem;
+            color: #adadad;
+            transition: .4s ease;
+            &.focus{
+                color: $second-color;
+            }
+        }
+        input{
+            font-family: 'Poppins', sans-serif;
+            flex: 1;
+            color: #333;
+            outline: none;
+            border: none;
+            font-size: 1.6rem;
+            font-weight: 500;
+            @include mobile{
+                font-size: 1.4rem;
+            }
+          
+            &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+                color: #adadad;
+          
+              }
+           
+        }
+        input:focus ~ i {
+            color:$second-color;
+           }
+        span{
+            position: absolute;
+            bottom:-1.5rem;
+            left: 1rem;
+            color: $main-color;
+
+        }
+    }
+
+}

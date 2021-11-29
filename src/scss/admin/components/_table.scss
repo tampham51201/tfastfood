@@ -1,0 +1,31 @@
+table {
+    font-family: 'Poppins', sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    background-color: $main-bg ;
+    tr{
+     
+       margin-bottom: 1rem;
+    }
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+        
+    
+      }
+      th{
+          font-weight: 600;
+      }
+      img{
+          height: 7rem;
+      }
+    .edit,.delete{
+        width: 10rem;
+        padding: 12px;
+        text-align: center;
+    }
+}
+  
+
+

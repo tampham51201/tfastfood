@@ -1,0 +1,57 @@
+.sidebar{
+    width: max-content;
+    padding: 3rem 1rem;
+    background-color: $txt-white;
+    box-shadow: $box-shadow;
+    min-height: 100vh;
+    position: fixed;
+    z-index: 101;
+    width: 30rem;
+
+    &__logo{
+        font-size: 3rem;
+        font-weight: 600;
+        background-image: linear-gradient(to right bottom,
+        #a1adfd,#854fff);
+        color: transparent;
+        background-clip: text;
+        margin-bottom: 3rem;
+        padding: 0 2rem
+    }
+    &__list{     
+        &__item{
+            @include flex(center,flex-start);
+            color: $txt-white;
+            padding: 1.6rem ;
+            border-radius: 1rem;   
+            margin-bottom: 1rem;
+            color: #77859e;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.6rem;
+          
+            &.active{
+                background-color:#ebeef2 ;
+                color:#a37cfd;
+            }
+
+            &:hover{
+                background-color:#ebeef2 ;
+                color:#a37cfd;
+                transition: .2s ease;
+            }
+            i{
+                
+                font-size: 2.4rem;
+                margin-right: 2rem;
+              
+            }
+        
+            
+    }
+ 
+    }
+  
+
+}

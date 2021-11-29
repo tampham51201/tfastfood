@@ -1,0 +1,76 @@
+.navbar{
+    @include flex(center,space-between);
+    background-color: $main-bg;
+    padding: 1rem 3.5rem;
+    z-index: 100;
+    height: 7rem;
+    box-shadow: $box-shadow;
+    position: fixed;
+    left: 30rem;
+    right: 0;
+    
+   
+    &__search{
+        flex: 1;
+        @include flex(center,flex-start);
+        margin-right: 2rem;
+        i{
+           cursor: pointer;
+            font-size: 2rem;
+            margin-right: 2rem
+            
+        }
+        input{
+            outline: none;
+            font-size: 1.4rem;
+            border: none;
+            color: #808b98;
+            font-family: 'Poppins', sans-serif;
+            &::placeholder{
+                font-weight: 500;
+                color: #c5d1e8;
+            }
+        }
+
+    }
+
+    &__right{
+        @include flex(center,flex-start);
+        &__item{
+            cursor: pointer;
+            font-size: 2.2rem;
+            margin-right: 3rem;
+            position: relative;
+            &__quantity{
+                @include flex(center,center);
+                position: absolute;
+                font-size: 1rem;
+                min-height: 1.6rem;
+                color: $txt-white;
+                border-radius: 50%;
+                min-width: 1.6rem;
+                background-color: red;
+                top: 0;
+                right: -.8rem;
+            }
+        }
+
+        &__profile{
+            @include flex(center,flex-start);
+            cursor: pointer;
+            font-weight: 500;
+
+            &__logo{
+                @include flex(center,center);
+                width: 3rem;
+                height: 3rem;
+                border-radius: 50%;
+                background-color: #9d72ff;
+                margin-right: 1rem;
+                i{
+                    color: $main-bg;
+                }
+            }
+        }
+    }
+}

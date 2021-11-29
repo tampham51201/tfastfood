@@ -1,6 +1,7 @@
 @import '../variables';
 @import '../mixins';
 @import '../base';
+@import '../loading';
 
 
 @import '../client/components/button';
@@ -11,7 +12,9 @@
 @import '../client/components/section';
 @import '../client/components/banner-item';
 @import '../client/components/featured';
-@import '../client/components/offerAbout.scss';
+@import '../client/components/offerAbout';
+@import '../client/components/auth';
+@import '../client/components/input-item';
 
 
 @import '../respone';

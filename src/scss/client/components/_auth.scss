@@ -1,0 +1,103 @@
+.auth{
+    background-image: linear-gradient(to right bottom,$second-color,$main-color);
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    @include mobile{
+        background-image:none;  
+        height: max-content;
+    }
+   
+    &__container{
+     
+       position: absolute;
+       top: 50%;
+       left: 50%;
+       transform: translate(-50%,-50%);
+       width: 50rem;
+       background: $txt-white;
+       min-height: 90%;
+       border-radius: 1rem;
+       padding: 6rem 5.5rem 5rem;
+       @include mobile{
+           width: 100%;
+           height: 100%;
+           padding: 5rem 2rem 5rem;
+           border-radius: 0;
+       }
+    
+    }
+    &__logo{
+        text-align: center;
+        img{
+        text-align: center;
+        height: 7rem;
+    }
+    }
+    &__title{
+        margin-top: 1rem;
+        color: #333333;
+        font-size: 2.2rem;
+        font-weight: 600;
+        margin-bottom: 3rem;
+        p{
+            font-size: 1.3rem;
+            font-weight: 400;}
+        @include mobile{
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+        }
+
+
+    }
+    &__form{
+        &__forgot{
+            text-align: right;
+            font-size: 1.3rem;
+            a{
+                font-family: 'Poppins', sans-serif;
+            }  
+          
+        }
+        &__submit{
+            margin-top: 2rem;
+            padding:1.4rem 0;
+            font-size: 1.7rem;
+            border-radius: 10rem;
+            outline: none;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+            background-image: linear-gradient(to right,$second-color,$main-color);
+            font-weight: 500;
+            color: $txt-white;
+            width: 100%;
+            cursor: pointer;
+            transition: background-image 10s ease;
+            @include mobile{
+         
+              font-size: 1.5rem;
+            }
+            
+            &:hover{
+                background-image: linear-gradient(to left,$second-color,$main-color);
+            }
+        }
+    }
+
+    &__bottom{
+        margin-top: 5rem;
+        text-align: center;
+        a{
+              font-family: 'Poppins', sans-serif;
+                font-size: 1.4rem;
+                font-weight: 500;
+                color: $main-color;
+        }
+        @include mobile{
+         
+            margin-bottom: 5rem;
+        }
+    }
+}

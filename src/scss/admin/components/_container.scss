@@ -1,0 +1,43 @@
+.container-admin{
+    margin: 3rem;
+    min-height: 100%;
+ 
+   
+  
+    &__title{
+        h3{
+            font-size: 2.5rem;
+            color:  #364a63;
+            font-weight: 600;
+            
+        }
+    }
+
+    &__header{
+        @include flex(center,space-between);
+        h3{
+            font-size: 2.5rem;
+            color:  #364a63;
+            font-weight: 600;
+            
+        }
+        &__right{
+            @include flex(center,flex-start);
+        }
+
+    }
+    &__description{
+     
+        p{
+            font-size: 1.6rem;
+            color:  #9da7b9;
+           
+            
+        }
+    }
+    &__body{
+        margin-top: 3rem;
+    }
+ 
+
+}

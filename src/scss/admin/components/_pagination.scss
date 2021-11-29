@@ -1,0 +1,32 @@
+.pagination{
+    @include flex(center,flex-start);
+    margin-top: 2rem;
+    border-radius: .2rem;
+    border: .1rem solid #dddddd;
+  
+    width: max-content;
+    &__item{
+        cursor: pointer;
+        overflow: hidden;
+        @include flex(center,center);
+        width: 3.6rem;
+        height: 3.8rem;
+        background-color: $main-bg;
+        &.active{
+            background: #f7f4f4;
+            color: #854fff;
+        }
+       
+        &:not(:last-child){
+            border-right: .1rem solid #dddddd;
+        }
+        &:hover{
+            background-color:#f7f4f4 ;
+            color: #854fff;
+
+        }
+     
+      
+    }
+
+}

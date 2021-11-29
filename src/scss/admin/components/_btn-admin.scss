@@ -1,0 +1,48 @@
+.btn-admin{
+    font-family: 'Poppins', sans-serif;
+    min-height: 3rem;
+    min-width: 10rem;
+    cursor: pointer;
+    outline: none;
+    border-radius: .3rem;
+    border: none;
+    background-color:#854fff ;
+    padding: 1rem 1.6rem;
+    color: $main-bg;
+    font-size: 1.2rem;
+    font-weight: 600;
+    @include flex(center,center);
+    transition: .4s ease;
+    &__icon{
+        @include flex(center,center);
+        font-size: 2rem;
+        margin-right: 1rem;
+    }
+    &:hover{
+        background-color:#672fe7 ;
+    }
+    &.btn-sm{
+      min-height: 2rem;
+       min-width: 7.4rem;
+       padding:.8rem 1.2rem;
+    }
+    &.btn-ssm{
+        min-height: 0;
+        min-width: 6rem;
+        padding:.5rem .8rem;
+        font-size: 1.2rem;
+        font-weight: 500;
+        text-transform: uppercase;
+      }
+    &.bg-success{
+        background-color:#04b448 ;
+    }
+    &.bg-warning{
+        background-color:#ecf00f ;
+    }
+    &.bg-danger{
+        background-color:#cf0808 ;
+    }
+
+
+}

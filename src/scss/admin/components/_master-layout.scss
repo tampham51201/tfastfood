@@ -1,0 +1,14 @@
+.master-layout{
+    font-family: 'Poppins', sans-serif;
+    @include flex(flex-start, space-between);
+
+    &__content{     
+        flex:1;
+        background-color: #f4f6f9;
+        margin-left: 30rem;
+        margin-top: 7rem;
+        min-height: calc(100vh - 7rem);
+        padding-bottom:6rem;
+        position: relative;
+    }
+}

@@ -1,9 +1,12 @@
 import React, { useRef, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 
 import logo from "../../assets/Image/footer-logo_1.png";
 import Button from "./Button";
 import NavTopItem from "./NavTopItem";
+
+import axiosClient from "../../api/axiosClient";
+import swal from "sweetalert";
 
 const img =
   require("../../assets/Image/Product/brown-bear-printed-sweater.jpg").default;
@@ -23,63 +26,9 @@ const navList = [
   },
   {
     display: "My Account",
-    path: "/account",
+    path: "/profile",
   },
 ];
-const navTopList = [
-  {
-    label: "my accout",
-    display: "My Account",
-    icon: "bx bx-user",
-    listItem: [
-      {
-        name: "Sign in",
-        path: "/login",
-      },
-      {
-        name: "Compare",
-        path: "/compare",
-      },
-      {
-        name: "Wishlist",
-        path: "/wishlist",
-      },
-    ],
-  },
-  {
-    label: "Currency",
-    display: "USD $",
-    icon: "r",
-    listItem: [
-      {
-        name: "USD $",
-        path: "/",
-      },
-      {
-        name: "EUR $",
-        path: "/",
-      },
-    ],
-  },
-  {
-    label: "Language",
-    display: "English",
-    icon: "",
-    listItem: [
-      {
-        name: "Vietnamese",
-        path: "/",
-      },
-      {
-        name: "English",
-        path: "/",
-      },
-    ],
-  },
-];
-
-const navTopMobile = navTopList.slice(1, 3);
-const navTopAccount = navTopList.slice(0, 1);
 
 const cardList = [
   {
@@ -127,7 +76,84 @@ const Header = () => {
   const iconToggleRef = useRef(null);
   const headerRef = useRef(null);
 
-  let history = useHistory();
+  var authButton = [];
+  if (!localStorage.getItem("auth_token")) {
+    authButton = [
+      {
+        name: "Sign in",
+        path: "/login",
+      },
+      {
+        name: "Compare",
+        path: "/compare",
+      },
+      {
+        name: "Wishlist",
+        path: "/wishlist",
+      },
+    ];
+  } else {
+    authButton = [
+      {
+        name: "Profile",
+        path: "/profile",
+      },
+      {
+        name: "Compare",
+        path: "/compare",
+      },
+      {
+        name: "Wishlist",
+        path: "/wishlist",
+      },
+      {
+        name: "Logout",
+        path: "/",
+      },
+    ];
+  }
+  const navTopList = [
+    {
+      label: "my accout",
+      display: "My Account",
+      icon: "bx bx-user",
+      listItem: authButton,
+    },
+    {
+      label: "Currency",
+      display: "USD $",
+      icon: "",
+      listItem: [
+        {
+          name: "USD $",
+          path: "/",
+        },
+        {
+          name: "EUR $",
+          path: "/",
+        },
+      ],
+    },
+    {
+      label: "Language",
+      display: "English",
+      icon: "",
+      listItem: [
+        {
+          name: "Vietnamese",
+          path: "/",
+        },
+        {
+          name: "English",
+          path: "/",
+        },
+      ],
+    },
+  ];
+  const navTopMobile = navTopList.slice(1, 3);
+  const navTopAccount = navTopList.slice(0, 1);
+  const history = useHistory();
+  const location = useLocation();
 
   const handleToggleSearch = () => {
     searchRef.current.classList.toggle("active");
@@ -141,6 +167,22 @@ const Header = () => {
   const handleMenuClick = () => {
     toggleRef.current.classList.toggle("toggle");
     iconToggleRef.current.classList.toggle("bx-x");
+  };
+  if (location.pathname === "/logout") {
+    history.replace("/");
+  }
+
+  const handleLogout = (value) => {
+    if (value === "Logout") {
+      axiosClient.post("api/logout").then((res) => {
+        if (res.data.status === 200) {
+          localStorage.removeItem("auth_token");
+          localStorage.removeItem("auth_name");
+          history.push("/login");
+          swal("Success", res.data.message, "success");
+        }
+      });
+    }
   };
 
   useEffect(() => {
@@ -169,7 +211,12 @@ const Header = () => {
           </div>
           <div className="header__top-nav__right">
             {navTopList.map((item, index) => (
-              <NavTopItem key={index} data={item.listItem} icon={item.icon}>
+              <NavTopItem
+                key={index}
+                data={item.listItem}
+                icon={item.icon}
+                onClick={handleLogout}
+              >
                 {item.display}
               </NavTopItem>
             ))}
@@ -231,6 +278,7 @@ const Header = () => {
                     key={index}
                     data={item.listItem}
                     icon={item.icon}
+                    onClick={handleLogout}
                   ></NavTopItem>
                 ))}
               </div>
