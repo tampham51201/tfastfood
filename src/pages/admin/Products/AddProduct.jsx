@@ -4,8 +4,11 @@ import Container, {
   ContainerBody,
   ContainerTitle,
   ContainerDescription,
+  ContainerHeader,
+  ContainerHeaderRight,
 } from "../../../components/admin/Container";
 
+import { Link } from "react-router-dom";
 import InputItem from "../../../components/admin/InputItem";
 import Button from "../../../components/admin/Button";
 
@@ -79,8 +82,6 @@ const AddProduct = () => {
     formData.append("popular", product.popular);
     formData.append("status", product.status);
 
-    console.log(picture);
-
     productApi.addProduct(formData).then((res) => {
       if (res.data.status === 200) {
         swal("Success", res.data.message, "success");
@@ -96,10 +97,19 @@ const AddProduct = () => {
   return (
     <div>
       <Container>
-        <ContainerTitle> New Product</ContainerTitle>
-        <ContainerDescription>
-          Add information and add new product.
-        </ContainerDescription>
+        <ContainerHeader>
+          <ContainerTitle>
+            New Product
+            <ContainerDescription>
+              Add information and add new product.
+            </ContainerDescription>
+          </ContainerTitle>
+          <ContainerHeaderRight>
+            <Link to="/admin/product">
+              <Button>Back</Button>
+            </Link>
+          </ContainerHeaderRight>
+        </ContainerHeader>
         <ContainerBody>
           <form onSubmit={handleSubmit}>
             <SelectInput

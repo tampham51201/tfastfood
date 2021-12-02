@@ -3,9 +3,13 @@ import Container, {
   ContainerBody,
   ContainerTitle,
   ContainerDescription,
+  ContainerHeader,
+  ContainerHeaderRight,
 } from "../../../components/admin/Container";
 import InputItem from "../../../components/admin/InputItem";
 import Button from "../../../components/admin/Button";
+
+import { Link } from "react-router-dom";
 
 import swal from "sweetalert";
 import categoryApi from "../../../api/categoryApi";
@@ -49,10 +53,19 @@ const AddCategory = () => {
   return (
     <div>
       <Container>
-        <ContainerTitle> New Category</ContainerTitle>
-        <ContainerDescription>
-          Add information and add new category.
-        </ContainerDescription>
+        <ContainerHeader>
+          <ContainerTitle>
+            New Category
+            <ContainerDescription>
+              Add information and add new category.
+            </ContainerDescription>
+          </ContainerTitle>
+          <ContainerHeaderRight>
+            <Link to="/admin/category">
+              <Button>Back</Button>
+            </Link>
+          </ContainerHeaderRight>
+        </ContainerHeader>
         <ContainerBody>
           <form onSubmit={handleSubmit}>
             <InputItem

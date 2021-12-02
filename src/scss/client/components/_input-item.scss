@@ -53,11 +53,12 @@
         input{
             font-family: 'Poppins', sans-serif;
             flex: 1;
-            color: #333;
+            color: #333 !important;
             outline: none;
             border: none;
             font-size: 1.6rem;
             font-weight: 500;
+            background:transparent !important ;
             @include mobile{
                 font-size: 1.4rem;
             }

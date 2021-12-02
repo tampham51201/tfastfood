@@ -5,7 +5,11 @@ import Container, {
   ContainerBody,
   ContainerTitle,
   ContainerDescription,
+  ContainerHeader,
+  ContainerHeaderRight,
 } from "../../../components/admin/Container";
+
+import { Link } from "react-router-dom";
 import InputItem from "../../../components/admin/InputItem";
 import Button from "../../../components/admin/Button";
 import swal from "sweetalert";
@@ -63,10 +67,19 @@ const EditCategory = (props) => {
   return (
     <div>
       <Container>
-        <ContainerTitle>Edit Category</ContainerTitle>
-        <ContainerDescription>
-          Edit information and edit category.
-        </ContainerDescription>
+        <ContainerHeader>
+          <ContainerTitle>
+            Edit Category
+            <ContainerDescription>
+              Edit information ategory.
+            </ContainerDescription>
+          </ContainerTitle>
+          <ContainerHeaderRight>
+            <Link to="/admin/category">
+              <Button>Back</Button>
+            </Link>
+          </ContainerHeaderRight>
+        </ContainerHeader>
         <ContainerBody>
           <form onSubmit={handleSubmit}>
             <InputItem

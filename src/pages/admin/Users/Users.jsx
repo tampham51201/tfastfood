@@ -10,28 +10,25 @@ import Container, {
   ContainerHeaderRight,
 } from "../../../components/admin/Container";
 
-import numberWithCommas from "../../../utils/numberWithCommas";
-
 import InputItem from "../../../components/admin/InputItem";
 import Table from "../../../components/admin/Table";
 import swal from "sweetalert";
 
-import productApi from "../../../api/productApi";
+import authApi from "../../../api/authApi";
 import Loading from "../../Loading";
 
-const Products = () => {
+const Users = () => {
   const coloums = [
     "STT",
-    "Product Name",
-    "Category Name",
-    "Selling Price",
-    "Img01",
-    "Img02",
+    "Username",
+    "Email",
+    "Role",
+    "Gender",
     "Status",
     "Edit",
     "Delete",
   ];
-  const [productList, setProductList] = useState([]);
+  const [userList, setUserList] = useState([]);
 
   // search input
   const [searchInput, setSearchInput] = useState("");
@@ -39,43 +36,41 @@ const Products = () => {
 
   // paganation
   const [currentPage, setCurrentPage] = useState(1);
-  const [categorysPerPage] = useState(5);
+  const [usersPerPage] = useState(2);
 
   const [isDelete, setIsDelete] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    productApi.getAll().then((res) => {
+    authApi.getAll().then((res) => {
       if (res.data.status === 200) {
-        const newProductList = res.data.product;
-        setProductList(newProductList);
+        const newUserList = res.data.user;
+        setUserList(newUserList);
         setIsDelete(false);
         setLoading(false);
       }
     });
   }, [isDelete]);
-  const indexOfLastIndex = currentPage * categorysPerPage;
-  const indexOfFirtsIndex = indexOfLastIndex - categorysPerPage;
+
+  const indexOfLastIndex = currentPage * usersPerPage;
+  const indexOfFirtsIndex = indexOfLastIndex - usersPerPage;
   const handleSearch = (e) => {
     setSearchInput(e.target.value);
     setCurrentPage(1);
   };
 
   useEffect(() => {
-    const newsearchList = productList.filter((category) => {
-      return category.name.toLowerCase().includes(searchInput.toLowerCase());
+    const newsearchList = userList.filter((user) => {
+      return user.username.toLowerCase().includes(searchInput.toLowerCase());
     });
     setSearchList(newsearchList);
-  }, [searchInput, productList]);
+  }, [searchInput, userList]);
 
   //pagenation
-  const productsPagination = searchList.slice(
-    indexOfFirtsIndex,
-    indexOfLastIndex
-  );
+  const usersPagination = searchList.slice(indexOfFirtsIndex, indexOfLastIndex);
 
   const handleDelete = (e, id) => {
-    axios.delete(`/api/delete-category/${id}`).then((res) => {
+    authApi.Delete(id).then((res) => {
       if (res.data.status === 200) {
         setIsDelete(true);
         swal("Success", res.data.message, "success");
@@ -91,43 +86,34 @@ const Products = () => {
     <div>
       <Container>
         <ContainerHeader>
-          <h3>Products</h3>
+          <h3>Users</h3>
           <ContainerHeaderRight>
             <InputItem
               searchbox
               type="text"
               onChange={handleSearch}
               value={searchInput}
-              placeholder="Search by name"
+              placeholder="Search by username"
             />
 
-            <Link to="/admin/add-product">
+            <Link to="/admin/add-user">
               <Button>Add Product</Button>
             </Link>
           </ContainerHeaderRight>
         </ContainerHeader>
         <ContainerBody>
           <Table coloums={coloums}>
-            {productsPagination.map((item, index) => (
+            {usersPagination.map((item, index) => (
               <tr key={index}>
                 <td style={{ width: "6rem" }}>{index + 1}</td>
-                <td>{item.name}</td>
-                <td>{item.category.name}</td>
-                <td>{numberWithCommas(item.selling_price)}</td>
+                <td>{item.username}</td>
+                <td>{item.email}</td>
 
+                <td style={{ width: "12rem" }}>{item.roles.name}</td>
                 <td style={{ width: "12rem" }}>
-                  <img
-                    src={`http://localhost:8000/${item.img01}`}
-                    alt="img01"
-                  />
+                  {item.gender === 1 ? "Male" : "Female"}
                 </td>
-                <td style={{ width: "12rem" }}>
-                  <img
-                    src={`http://localhost:8000/${item.img02}`}
-                    alt="img03"
-                  />
-                </td>
-                <td style={{ width: "16rem", textAlign: "center" }}>
+                <td style={{ width: "12rem", textAlign: "center" }}>
                   <Button
                     size="ssm"
                     bg={item.status === 1 ? "success" : "danger"}
@@ -136,8 +122,30 @@ const Products = () => {
                   </Button>
                 </td>
 
+                {/* <td className="icon-details">
+                  <i class="bx bx-dots-horizontal-rounded"></i>
+                  <ul className="icon-details__list">
+                    <li>
+                      <Link to={`edit-product/${item.id}`}>
+                        <i className="bx bx-edit-alt"></i>Details User
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to={`edit-product/${item.id}`}>
+                        <i className="bx bx-edit-alt"></i>Edit User
+                      </Link>
+                    </li>
+                    <li
+                      onClick={(e) => {
+                        handleDelete(e, item.id);
+                      }}
+                    >
+                      <i className="bx bx-trash-alt"></i> Delete User
+                    </li>
+                  </ul>
+                </td> */}
                 <td className="edit">
-                  <Link to={`edit-product/${item.id}`}>
+                  <Link to={`edit-user/${item.id}`}>
                     <Button size="sm" bg="success">
                       <i className="bx bx-edit-alt"></i>
                     </Button>
@@ -158,7 +166,7 @@ const Products = () => {
             ))}
           </Table>
           <Pagination
-            postsPage={categorysPerPage}
+            postsPage={usersPerPage}
             totalPages={searchList.length}
             paginate={(number) => {
               setCurrentPage(number);
@@ -170,4 +178,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default Users;

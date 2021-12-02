@@ -58,8 +58,8 @@ const Login = () => {
         </div>
         <form className="auth__form" onSubmit={handleSubmit}>
           <InputItem
-            label="Username"
-            placeholder="Type your username"
+            label="Email or username"
+            placeholder="Type your username or email"
             type="text"
             icon="bx bx-user"
             name="username"

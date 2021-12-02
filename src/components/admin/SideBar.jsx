@@ -33,22 +33,25 @@ const sidebar = [
 
 const SideBar = () => {
   const location = useLocation();
+
   return (
     <div className="sidebar">
       <div className="sidebar__logo">ADMIN MASTER</div>
       <div className="sidebar__list">
-        {sidebar.map((item, index) => (
-          <Link
-            to={item.path}
-            key={index}
-            className={`sidebar__list__item  ${
-              item.path === location.pathname ? "active" : ""
-            }`}
-          >
-            <i className={item.icon}></i>
-            {item.display}
-          </Link>
-        ))}
+        {sidebar.map((item, index) => {
+          return (
+            <Link
+              to={item.path}
+              key={index}
+              className={`sidebar__list__item  ${
+                location.pathname.includes(item.path) ? "active" : ""
+              }`}
+            >
+              <i className={item.icon}></i>
+              {item.display}
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

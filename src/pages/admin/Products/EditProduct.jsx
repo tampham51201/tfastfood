@@ -4,7 +4,11 @@ import Container, {
   ContainerBody,
   ContainerTitle,
   ContainerDescription,
+  ContainerHeader,
+  ContainerHeaderRight,
 } from "../../../components/admin/Container";
+
+import { Link } from "react-router-dom";
 
 import InputItem from "../../../components/admin/InputItem";
 import Button from "../../../components/admin/Button";
@@ -78,7 +82,7 @@ const EditProduct = (props) => {
     formData.append("description", description);
     formData.append("slug", product.slug);
     formData.append("qty", product.qty);
-    formData.append("img01", `${picture.img01}`);
+    formData.append("img01", picture.img01);
     formData.append("img02", picture.img02);
     formData.append("orginal_price", product.orginal_price);
     formData.append("selling_price", product.selling_price);
@@ -103,8 +107,19 @@ const EditProduct = (props) => {
   return (
     <div>
       <Container>
-        <ContainerTitle> Edit Product</ContainerTitle>
-        <ContainerDescription>Edit information product.</ContainerDescription>
+        <ContainerHeader>
+          <ContainerTitle>
+            Edit Product
+            <ContainerDescription>
+              Edit information product.
+            </ContainerDescription>
+          </ContainerTitle>
+          <ContainerHeaderRight>
+            <Link to="/admin/product">
+              <Button>Back</Button>
+            </Link>
+          </ContainerHeaderRight>
+        </ContainerHeader>
         <ContainerBody>
           <form onSubmit={handleSubmit}>
             <SelectInput

@@ -59,6 +59,7 @@
             @include flex(center,flex-start);
             cursor: pointer;
             font-weight: 500;
+            position: relative;
 
             &__logo{
                 @include flex(center,center);
@@ -71,6 +72,46 @@
                     color: $main-bg;
                 }
             }
+        }
+        &__auth{
+        position: absolute;
+        top: 140%;
+      
+     
+        width: 110%;
+        right: 0;
+        background-color: $main-bg;
+        box-shadow: $box-shadow;
+        border-radius: .4rem;
+        border:.1rem solid #dddddd ;
+        display: none;
+        &.active{
+            display: block;
+        }
+        a{
+            
+            border-bottom: .1rem solid #dddddd;
+        }
+       
+        &__item{
+            padding: .8rem 3rem;
+            font-size: 1.4rem;
+            font-family: 'Poppins', sans-serif;
+            border-bottom: .1rem solid #dddddd;
+ 
+
+     
+            i{
+                margin-right: 2rem;
+            }
+            &:hover{
+                background-color: #f8f8f8;
+                color: #9d72ff;
+            }
+
+        }
+      
+      
         }
     }
 }

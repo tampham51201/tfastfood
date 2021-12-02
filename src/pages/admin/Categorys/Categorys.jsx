@@ -99,7 +99,7 @@ const Categorys = () => {
                 <td>{item.name}</td>
                 <td style={{ width: "16rem" }}>{item.slug}</td>
 
-                <td style={{ width: "16rem", textAlign: "center" }}>
+                <td style={{ width: "16rem" }}>
                   <Button
                     size="ssm"
                     bg={item.status === 1 ? "success" : "danger"}

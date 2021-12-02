@@ -107,8 +107,12 @@ const Header = () => {
         path: "/wishlist",
       },
       {
+        name: "Admin",
+        path: "/admin",
+      },
+      {
         name: "Logout",
-        path: "/",
+        path: "/login",
       },
     ];
   }
