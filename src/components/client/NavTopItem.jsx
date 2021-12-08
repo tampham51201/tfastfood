@@ -1,14 +1,32 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 const NavTopItem = (props) => {
   const listRef = useRef(null);
+  const reItemBtn = useRef(null);
+
+  useEffect(() => {
+    const handleNav = (e) => {
+      if (!reItemBtn.current.contains(e.target)) {
+        listRef.current.classList.remove("active");
+      }
+    };
+    document.addEventListener("mousedown", handleNav);
+
+    return () => {
+      document.removeEventListener("mousedown", handleNav);
+    };
+  }, []);
   const handleClick = () => {
     listRef.current.classList.toggle("active");
   };
   return (
-    <div className="header__top-nav__right__item" onClick={handleClick}>
+    <div
+      className="header__top-nav__right__item"
+      ref={reItemBtn}
+      onClick={handleClick}
+    >
       <i className={`${props.icon} header__top-nav__right__item__icon`}></i>
       <p>{props.children}</p>
       {props.icondown ? "" : <i className="bx bx-chevron-down"></i>}

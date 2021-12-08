@@ -36,7 +36,7 @@ const Users = () => {
 
   // paganation
   const [currentPage, setCurrentPage] = useState(1);
-  const [usersPerPage] = useState(2);
+  const [usersPerPage] = useState(5);
 
   const [isDelete, setIsDelete] = useState(false);
   const [loading, setLoading] = useState(true);

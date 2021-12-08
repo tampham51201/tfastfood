@@ -39,8 +39,10 @@ const Categorys = () => {
       setLoading(false);
     });
   }, [isDelete]);
+
   const indexOfLastIndex = currentPage * categorysPerPage;
   const indexOfFirtsIndex = indexOfLastIndex - categorysPerPage;
+  
   const handleSearch = (e) => {
     setSearchInput(e.target.value);
     setCurrentPage(1);

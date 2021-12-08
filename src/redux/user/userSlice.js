@@ -1,14 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authApi from "../../api/authApi";
 
-export const getUser = createAsyncThunk("users/getUser", async () => {
+export const getUser = createAsyncThunk("users/getUser", () => {
   return authApi.getUser((res) => {
     res.data.user.json();
   });
 });
 
 const initialState = {
-  value: [],
+  value: null,
   status: null,
 };
 export const userSlice = createSlice({

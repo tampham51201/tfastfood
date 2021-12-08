@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Link, useHistory, useLocation } from "react-router-dom";
 
 import logo from "../../assets/Image/footer-logo_1.png";
@@ -8,27 +8,10 @@ import NavTopItem from "./NavTopItem";
 import axiosClient from "../../api/axiosClient";
 import swal from "sweetalert";
 
+import categoryApi from "../../api/categoryApi";
+
 const img =
   require("../../assets/Image/Product/brown-bear-printed-sweater.jpg").default;
-
-const navList = [
-  {
-    display: "Home",
-    path: "/",
-  },
-  {
-    display: "Product",
-    path: "/category",
-  },
-  {
-    display: "Contact",
-    path: "/contact",
-  },
-  {
-    display: "My Account",
-    path: "/profile",
-  },
-];
 
 const cardList = [
   {
@@ -76,6 +59,8 @@ const Header = () => {
   const iconToggleRef = useRef(null);
   const headerRef = useRef(null);
 
+  const [categorys, setCategorys] = useState([]);
+
   var authButton = [];
   if (!localStorage.getItem("auth_token")) {
     authButton = [
@@ -112,7 +97,7 @@ const Header = () => {
       },
       {
         name: "Logout",
-        path: "/login",
+        path: "login",
       },
     ];
   }
@@ -159,6 +144,15 @@ const Header = () => {
   const history = useHistory();
   const location = useLocation();
 
+  useEffect(() => {
+    categoryApi.getStatus().then((res) => {
+      if (res.data.status === 200) {
+        const newCategoryList = res.data.categorys;
+        console.log(newCategoryList);
+        setCategorys(newCategoryList);
+      }
+    });
+  }, []);
   const handleToggleSearch = () => {
     searchRef.current.classList.toggle("active");
     iconSearchRef.current.classList.toggle("bx-x");
@@ -182,7 +176,7 @@ const Header = () => {
         if (res.data.status === 200) {
           localStorage.removeItem("auth_token");
           localStorage.removeItem("auth_name");
-          history.push("/login");
+          history.push("login");
           swal("Success", res.data.message, "success");
         }
       });
@@ -195,9 +189,11 @@ const Header = () => {
         document.body.scrollTop > 310 ||
         document.documentElement.scrollTop > 310
       ) {
-        headerRef.current.classList.add("shrink");
+        if (headerRef.current !== null)
+          headerRef.current.classList.add("shrink");
       } else {
-        headerRef.current.classList.remove("shrink");
+        if (headerRef.current !== null)
+          headerRef.current.classList.remove("shrink");
       }
     });
     return () => {
@@ -339,18 +335,27 @@ const Header = () => {
             </div>
           </div>
           <div className="header__main__menu" ref={toggleRef}>
-            {navList.map((item, index) => (
+            {categorys.map((item, index) => (
               <div className="header__main__menu__item" key={index}>
-                <Link to={item.path}>
+                <Link to={`/category/${item.slug}`}>
                   <Button
                     backgroundColor="transparent"
                     onClick={handleMenuClick}
                   >
-                    {item.display}
+                    {item.name}
                   </Button>
                 </Link>
               </div>
             ))}
+
+            <div className="header__main__menu__item">
+              <Link to="/profile">
+                <Button backgroundColor="transparent" onClick={handleMenuClick}>
+                  My Account
+                </Button>
+              </Link>
+            </div>
+
             <div className="header__main__menu__item__mobile">
               {navTopMobile.map((item, index) => (
                 <NavTopItem key={index} data={item.listItem} icon={item.icon}>

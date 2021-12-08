@@ -46,8 +46,7 @@
         background-color: $main-bg;
         margin-top: .6rem;
         cursor: pointer;
-        width: 40rem;
-      
+        width: 40rem;  
         &::-webkit-file-upload-button{
             width: 7rem;
             height: 4.6rem;
@@ -83,10 +82,8 @@
     option{
         border: 1rem solid #ffffff;
         border-radius: 2rem ;
-     
         display: block;
       
-
     }
     span{
         position: absolute;
@@ -204,7 +201,7 @@
 .img_input{
   
     height: 8rem;
-    width: 6rem;
+  
     margin-top: -1.5rem;
     margin-bottom: 2rem;
     img{

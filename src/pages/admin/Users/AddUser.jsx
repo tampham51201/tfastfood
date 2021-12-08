@@ -76,7 +76,9 @@ const AddUser = () => {
     formData.append("last_name", user.last_name);
     formData.append("phone_number", user.phone_number);
     formData.append("andress", user.andress);
-    formData.append("data_birth", user.date_birth);
+    formData.append("date_birth", user.date_birth);
+
+    console.log(user.date_birth);
 
     formData.append("avata", avata);
     formData.append("gender", checkGender);
@@ -186,7 +188,8 @@ const AddUser = () => {
             />
             <InputItem
               label="Date of Birth"
-              type="text"
+              type="date"
+              placeholder="dd-mm-yyyy"
               onChange={handleInputUser}
               name="date_birth"
               value={user.date_birth}

@@ -25,18 +25,26 @@ const EditProduct = (props) => {
     img01: "",
     img02: "",
   };
-
+  const CheckInits = {
+    featured: "",
+    popular: "",
+    status: "",
+  };
   const [categorys, setCategorys] = useState([]);
   const [description, setDescription] = useState("");
   const [picture, setPicture] = useState(PictureInits);
   const [product, setProduct] = useState([]);
+  const [check, setCheck] = useState(CheckInits);
+
   const [errors, setErorrs] = useState([]);
   const [loading, setLoading] = useState(true);
+
   const history = useHistory();
   useEffect(() => {
     categoryApi.getStatus().then((res) => {
       if (res.status === 200) {
         const newCategorys = res.data.categorys;
+
         setCategorys(newCategorys);
       }
     });
@@ -48,6 +56,11 @@ const EditProduct = (props) => {
       if (res.data.status === 200) {
         const newProduct = res.data.product;
         setProduct(newProduct);
+        setCheck({
+          featured: newProduct.featured,
+          popular: newProduct.popular,
+          status: newProduct.status,
+        });
         setDescription(newProduct.description);
         setPicture({
           img01: newProduct.img01,
@@ -73,7 +86,9 @@ const EditProduct = (props) => {
   const handleFiletProduct = (e) => {
     setPicture({ ...picture, [e.target.name]: e.target.files[0] });
   };
-
+  const handleCheck = (e) => {
+    setCheck({ ...check, [e.target.name]: e.target.checked ? 1 : 0 });
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -86,9 +101,9 @@ const EditProduct = (props) => {
     formData.append("img02", picture.img02);
     formData.append("orginal_price", product.orginal_price);
     formData.append("selling_price", product.selling_price);
-    formData.append("featured", product.featured);
-    formData.append("popular", product.popular);
-    formData.append("status", product.status);
+    formData.append("featured", check.featured);
+    formData.append("popular", check.popular);
+    formData.append("status", check.status);
 
     const product_id = props.match.params.id;
     productApi.Update(product_id, formData).then((res) => {
@@ -173,7 +188,7 @@ const EditProduct = (props) => {
               message={errors.qty}
             />
             <InputItem
-              label="Image 01"
+              label="Image"
               type="file"
               onChange={handleFiletProduct}
               name="img01"
@@ -183,16 +198,20 @@ const EditProduct = (props) => {
               <img src={`http://localhost:8000/${product.img01}`} alt="img01" />
             </div>
 
-            <InputItem
+            {/* <InputItem
               label="Image 02"
               type="file"
               onChange={handleFiletProduct}
               name="img02"
               message={errors.img02}
             />
-            <div className="img_input">
-              <img src={`http://localhost:8000/${product.img02}`} alt="img02" />
-            </div>
+            {product.img02 !== null ? (
+              <div className="img_input">
+                <img src={`http://localhost:8000/${product.img02}`} />
+              </div>
+            ) : (
+              ""
+            )} */}
 
             <InputItem
               label="Description"
@@ -206,25 +225,23 @@ const EditProduct = (props) => {
             <InputItem
               label="Featured"
               type="checkbox"
-              onChange={handleInputProduct}
+              onChange={handleCheck}
               name="featured"
-              // valueNumber={product.featured}
-              message={errors.featured}
+              checked={check.featured === 1 ? true : false}
             />
             <InputItem
               label="Popular"
               type="checkbox"
-              onChange={handleInputProduct}
+              onChange={handleCheck}
               name="popular"
-              // valueNumber={product.popular}
-              message={errors.popular}
+              checked={check.popular === 1 ? true : false}
             />
             <InputItem
               label="Status"
               type="checkbox"
-              onChange={handleInputProduct}
+              onChange={handleCheck}
+              checked={check.status === 1 ? true : false}
               name="status"
-              // valueNumber={product.status}
             />
             <Button submit>Add New</Button>
           </form>

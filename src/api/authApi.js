@@ -19,7 +19,10 @@ const authApi = {
     const url = `/api/edit-user/${id}`;
     return axiosClient.get(url);
   },
-
+  Update: (id, data) => {
+    const url = `/api/update-user/${id}`;
+    return axiosClient.post(url, data);
+  },
   Delete: (id) => {
     const url = `/api/delete-user/${id}`;
     return axiosClient.delete(url);

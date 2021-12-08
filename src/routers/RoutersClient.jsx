@@ -12,8 +12,8 @@ const RoutersClient = () => {
   return (
     <Switch>
       <Route path="/" exact={true} component={Home} />
-      <Route exact path="/category/:slug" exact={true} component={Product} />
-      <Route exact path="/category" exact={true} component={Category} />
+      <Route exact path="/product/:slug" exact={true} component={Product} />
+      <Route exact path="/category/:slug" exact={true} component={Category} />
       <Route exact path="/cart" exact={true} component={Cart} />
 
       <Route exact path="/profile">

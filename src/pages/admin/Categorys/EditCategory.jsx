@@ -41,7 +41,7 @@ const EditCategory = (props) => {
         history.push("admin/category");
       }
     });
-  }, []);
+  }, [props]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

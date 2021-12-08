@@ -1,0 +1,99 @@
+.category{
+    @include flex(flex-start,space-between);
+    margin-top: 3rem;
+    &__filter{
+        padding: 2rem;
+        width: 25%;
+        border: .2rem solid $border-color;
+        border-radius: 2rem;
+        margin-right: 2rem;
+        &__title{
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.4rem;
+            color: $txt-main-color;
+            letter-spacing: .1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+        &__widget{
+            margin-top: 1rem;
+           &__title{
+            color: $txt-main-color;
+
+               font-size: 1.4rem;
+               font-weight: 600;
+            letter-spacing: .1rem;
+
+           }
+           &__content{
+              gap: 1rem;
+           }
+        }
+    }
+    &__content{
+        flex:1;
+        &__banner{
+            width: 100%;
+            border-radius: 2rem;
+            overflow: hidden;
+
+        }
+        &__info{
+            margin: 2rem 0;
+            &__title{
+                color: $txt-main-color;
+                font-size: 2.6rem;
+                font-weight: 600;
+                letter-spacing: .1rem;
+                margin-bottom: .8rem;
+            }
+            &__description{
+                font-size: 1.3rem;
+                font-family: 'Poppins', sans-serif;
+                line-height: 1.9rem;
+                font-weight: 400;
+            }
+        }
+        &__section{
+            @include flex(center,space-between);
+            border: .2rem solid $border-color;
+            border-radius: 1.6rem;
+            padding: 2rem 1rem;
+            font-size: 1.5rem;
+            
+            &__total{
+               @include flex(center,flex-start);
+               i{
+                font-size: 2.6rem;
+                cursor: pointer;
+                margin-right: 1rem ;
+            //     &:nth-child(2){
+            //        font-size: 3.2rem;
+            //        margin-right: 1rem;
+            //      color: #666666;;
+            //    }
+            }
+               
+            }
+            &__sort-by{
+                select{
+                    width: 25rem;
+                    border-radius: .5rem;
+                    border: .2rem solid $border-color;
+                    outline: none;
+                    padding: .5rem;
+                    margin-left: 1rem;
+                    color: #666666;
+                    option{
+                        padding: 2rem;
+                        display: block;
+                    }
+                
+                }
+            }
+        }
+        &__list-product{
+            margin-top: 4rem;
+        }
+    }
+}

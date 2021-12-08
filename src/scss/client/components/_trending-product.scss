@@ -1,0 +1,43 @@
+.trending-product{
+    background: url(../../../assets/Image/tab-bg.jpg) no-repeat scroll ;
+    background-size: cover;
+    padding-top :5rem;
+    padding: 5rem;
+
+    &__select{
+        margin-top: 2rem;
+         @include flex(center,center);
+    .btn{
+        margin-right: 1.4rem;
+        @include tablet{
+          font-size: 1.6rem;
+        }
+        @include mobile{
+            font-size: 1.4rem;
+         margin-right: .5rem;
+
+        }
+    }
+    }
+    &__content{
+       margin-top: 4rem;
+       width: 100%;
+       position: relative;
+       padding-bottom: 7rem;
+    }
+    &__control
+    {
+        position: absolute;
+        bottom: 0rem;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+        font-size: 3rem;
+       
+    
+        @include flex(center,space-between);
+        &__prev{
+            margin-right: 1rem;
+        }
+    }
+}

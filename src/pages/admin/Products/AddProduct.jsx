@@ -39,15 +39,24 @@ const AddProduct = () => {
     img02: "",
   };
 
+  const CheckInits = {
+    featured: "",
+    popular: "",
+    status: "",
+  };
+
   const [categorys, setCategorys] = useState([]);
   const [description, setDescription] = useState("");
   const [picture, setPicture] = useState(PictureInits);
   const [product, setProduct] = useState(ProductInits);
 
+  const [check, setCheck] = useState(CheckInits);
+
   useEffect(() => {
     categoryApi.getStatus().then((res) => {
       if (res.status === 200) {
         const newCategorys = res.data.categorys;
+
         setCategorys(newCategorys);
       }
     });
@@ -64,6 +73,10 @@ const AddProduct = () => {
     setPicture({ ...picture, [e.target.name]: e.target.files[0] });
   };
 
+  const handleCheck = (e) => {
+    setCheck({ ...check, [e.target.name]: e.target.checked });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -78,9 +91,9 @@ const AddProduct = () => {
 
     formData.append("orginal_price", product.orginal_price);
     formData.append("selling_price", product.selling_price);
-    formData.append("featured", product.featured);
-    formData.append("popular", product.popular);
-    formData.append("status", product.status);
+    formData.append("featured", check.featured);
+    formData.append("popular", check.popular);
+    formData.append("status", check.status);
 
     productApi.addProduct(formData).then((res) => {
       if (res.data.status === 200) {
@@ -170,13 +183,13 @@ const AddProduct = () => {
               message={product.message.img01}
             />
 
-            <InputItem
+            {/* <InputItem
               label="Image 02"
               type="file"
               onChange={handleFiletProduct}
               name="img02"
               message={product.message.img02}
-            />
+            /> */}
 
             <InputItem
               label="Description"
@@ -190,25 +203,26 @@ const AddProduct = () => {
             <InputItem
               label="Featured"
               type="checkbox"
-              onChange={handleInputProduct}
+              onChange={handleCheck}
               name="featured"
-              value={product.featured}
+              value={check.featured}
               message={product.message.featured}
             />
             <InputItem
               label="Popular"
               type="checkbox"
-              onChange={handleInputProduct}
+              onChange={handleCheck}
               name="popular"
-              value={product.popular}
+              value={check.popular}
               message={product.message.popular}
             />
             <InputItem
               label="Status"
               type="checkbox"
-              onChange={handleInputProduct}
+              onChange={handleCheck}
               name="status"
-              value={product.status}
+              value={check.status}
+              message={product.message.status}
             />
             <Button submit>Add New</Button>
           </form>

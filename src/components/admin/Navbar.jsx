@@ -1,4 +1,7 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
+
+import { useSelector, useDispatch } from "react-redux";
+import { getUser } from "../../redux/user/userSlice";
 
 import { Link, useHistory } from "react-router-dom";
 import swal from "sweetalert";
@@ -6,8 +9,31 @@ import axiosClient from "../../api/axiosClient";
 
 const Navbar = () => {
   const refAuth = useRef(null);
+  const authBtn = useRef(null);
   const history = useHistory();
+
   let authButton = "";
+
+  useEffect(() => {
+    const handleNav = (e) => {
+      if (!authBtn.current.contains(e.target)) {
+        refAuth.current.classList.remove("active");
+      }
+    };
+    document.addEventListener("mousedown", handleNav);
+
+    return () => {
+      document.removeEventListener("mousedown", handleNav);
+    };
+  }, []);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    return dispatch(getUser());
+  }, [dispatch]);
+
+  const users = useSelector((state) => state.users.value);
+
   const handleLogout = () => {
     axiosClient.post("api/logout").then((res) => {
       if (res.data.status === 200) {
@@ -20,7 +46,7 @@ const Navbar = () => {
   };
 
   const handleAuth = () => {
-    refAuth.current.classList.toggle("active");
+    refAuth.current.classList.add("active");
   };
 
   if (localStorage.getItem("auth_token")) {
@@ -61,12 +87,14 @@ const Navbar = () => {
           </div>
           <div
             className="navbar__right__profile"
+            ref={authBtn}
             onClick={authButton !== "" ? handleAuth : null}
           >
             <div className="navbar__right__profile__logo">
               <i className="bx bx-user"></i>
             </div>
-            tampham512
+            {users === null ? "" : users.data.user.username}
+
             <i className="bx bx-chevron-down"></i>
             {authButton}
           </div>

@@ -10,6 +10,11 @@ const categoryApi = {
     const url = `/api/edit-category/${id}`;
     return axiosClient.get(url);
   },
+
+  getSlug: (slug) => {
+    const url = `/api/slug-category/${slug}`;
+    return axiosClient.get(url);
+  },
   getStatus: () => {
     const url = `api/all-category`;
     return axiosClient.get(url);

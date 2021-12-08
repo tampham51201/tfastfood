@@ -5,7 +5,6 @@ const productApi = {
     const url = "/api/view-product";
     return axiosClient.get(url);
   },
-
   getId: (id) => {
     const url = `/api/edit-product/${id}`;
     return axiosClient.get(url);

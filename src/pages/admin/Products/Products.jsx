@@ -25,8 +25,8 @@ const Products = () => {
     "Product Name",
     "Category Name",
     "Selling Price",
-    "Img01",
-    "Img02",
+    "Image",
+
     "Status",
     "Edit",
     "Delete",
@@ -39,7 +39,7 @@ const Products = () => {
 
   // paganation
   const [currentPage, setCurrentPage] = useState(1);
-  const [categorysPerPage] = useState(5);
+  const [categorysPerPage] = useState(7);
 
   const [isDelete, setIsDelete] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -82,11 +82,9 @@ const Products = () => {
       }
     });
   };
-
   if (loading) {
     return <Loading />;
   }
-
   return (
     <div>
       <Container>
@@ -100,7 +98,6 @@ const Products = () => {
               value={searchInput}
               placeholder="Search by name"
             />
-
             <Link to="/admin/add-product">
               <Button>Add Product</Button>
             </Link>
@@ -112,28 +109,31 @@ const Products = () => {
               <tr key={index}>
                 <td style={{ width: "6rem" }}>{index + 1}</td>
                 <td>{item.name}</td>
-                <td>{item.category.name}</td>
-                <td>{numberWithCommas(item.selling_price)}</td>
-
+                <td style={{ width: "16rem" }}>{item.category.name}</td>
+                <td style={{ width: "14rem" }}>
+                  {numberWithCommas(item.selling_price)}
+                </td>
                 <td style={{ width: "12rem" }}>
                   <img
                     src={`http://localhost:8000/${item.img01}`}
                     alt="img01"
                   />
                 </td>
-                <td style={{ width: "12rem" }}>
+                {/* <td style={{ width: "12rem" }}>
+           
                   <img
                     src={`http://localhost:8000/${item.img02}`}
-                    alt="img03"
+                    alt="img02"
                   />
-                </td>
-                <td style={{ width: "16rem", textAlign: "center" }}>
+                </td> */}
+                <td style={{ width: "12rem", textAlign: "center" }}>
                   <Button
                     size="ssm"
                     bg={item.status === 1 ? "success" : "danger"}
                   >
                     {item.status === 1 ? "Active" : "InActive"}
                   </Button>
+                  {item.featured}/{item.popular}
                 </td>
 
                 <td className="edit">

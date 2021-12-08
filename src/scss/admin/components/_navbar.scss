@@ -60,6 +60,7 @@
             cursor: pointer;
             font-weight: 500;
             position: relative;
+            // width: 18rem;
 
             &__logo{
                 @include flex(center,center);
@@ -75,10 +76,8 @@
         }
         &__auth{
         position: absolute;
-        top: 140%;
-      
-     
-        width: 110%;
+        top: 140%;           
+        width: 19rem;
         right: 0;
         background-color: $main-bg;
         box-shadow: $box-shadow;
@@ -98,9 +97,7 @@
             font-size: 1.4rem;
             font-family: 'Poppins', sans-serif;
             border-bottom: .1rem solid #dddddd;
- 
 
-     
             i{
                 margin-right: 2rem;
             }

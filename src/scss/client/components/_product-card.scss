@@ -1,0 +1,84 @@
+.product-card{
+   background-color: $txt-white;
+   border-radius: 2rem;
+   padding: 1rem;
+   box-shadow: $box-shadow;
+
+   &.border-product{
+       border:.2rem solid $border-color;
+   }
+   &__img{
+       overflow: hidden;
+       position: relative;
+       border-bottom: .1rem solid rgb(204, 204, 204);
+       padding-top: 100%;
+       padding-bottom: 10rem;
+       @include tablet{
+        padding-bottom: 8rem;
+       }
+     
+       img{
+           position: absolute;      
+           left:50%;
+           top: 50%;
+           transform: translate(-50%,-50%) scale(.9);
+           transition: .4s ease;
+       
+       }
+      
+   }
+   &__btn{
+       position: absolute;
+       @include flex(center,center);
+       left: 50%;
+       transform: translateX(-50%);
+       bottom:-10rem;
+       transition: .4s ease;
+       @include tablet{
+        bottom:1rem;
+       }
+       button{
+           margin-right: .6rem;    
+       }
+      
+   }
+
+   &__info{
+       text-align: center;
+       padding-bottom: 1rem;
+       &__name{
+           margin: 2rem 0 1rem;
+           font-size: 1.8rem ;
+           overflow: hidden;
+           line-height: 2rem;
+           height:  2rem;
+           
+       }
+       &__price{
+           font-size: 1.8rem;
+           font-weight: 600;
+           color: $main-color;
+           
+          &__old{
+              margin-left: 1rem;
+              color:$txt-second-color;
+              font-size: 1.6rem;
+              font-weight: 500;
+          }
+       }
+   }
+
+
+
+   &:hover  &__btn{
+     
+        bottom:1rem;
+      
+   }
+ 
+    &:hover img {
+        transform: translate(-50%,-50%) rotateZ(30deg) scale(1);
+    
+        
+    }
+}

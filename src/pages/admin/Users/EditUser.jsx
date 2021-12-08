@@ -35,6 +35,7 @@ const EditUser = (props) => {
         setCheckStatus(newUser.status);
         setCheckGender(newUser.gender);
         setUser(newUser);
+        console.log(newUser);
         setLoading(false);
       } else if (res.data.status === 404) {
         swal("Erorr", res.data.message, "error");
@@ -68,10 +69,9 @@ const EditUser = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("username", user.username_input);
-    formData.append("email", user.email_input);
-    formData.append("password", user.password_input);
-    formData.append("password_confirm", user.password_confirm);
+    formData.append("username", user.username);
+    formData.append("email", user.email);
+    formData.append("password", user.password);
     formData.append("role_as", user.role_as);
 
     formData.append("first_name", user.first_name);
@@ -83,9 +83,8 @@ const EditUser = (props) => {
     formData.append("avata", avata);
     formData.append("gender", checkGender);
     formData.append("status", checkStatus);
-    console.log(checkStatus);
-
-    authApi.addUser(formData).then((res) => {
+    const idUser = props.match.params.id;
+    authApi.Update(idUser, formData).then((res) => {
       if (res.data.status === 200) {
         swal("Success", res.data.message, "success");
       } else if (res.data.status === 400) {
@@ -141,7 +140,7 @@ const EditUser = (props) => {
 
             <SelectInput
               label="Select Role"
-              value={user.role_as}
+              value={`${user.role_as}`}
               name="role_as"
               onChange={handleInputUser}
               data={roles}
@@ -152,14 +151,14 @@ const EditUser = (props) => {
               type="text"
               onChange={handleInputUser}
               name="first_name"
-              value={user.first_name}
+              value={user.first_name || ""}
             />
             <InputItem
               label="Last Name"
               type="text"
               onChange={handleInputUser}
               name="last_name"
-              value={user.last_name}
+              value={user.last_name || ""}
             />
             <InputItem
               label="Image Avata"
@@ -181,21 +180,21 @@ const EditUser = (props) => {
               type="text"
               onChange={handleInputUser}
               name="phone_number"
-              value={user.phone_number}
+              value={user.phone_number || ""}
             />
             <InputItem
               label="Andress"
               type="text"
               onChange={handleInputUser}
               name="andress"
-              value={user.andress}
+              value={user.andress || ""}
             />
             <InputItem
               label="Date of Birth"
-              type="text"
+              type="date"
               onChange={handleInputUser}
               name="date_birth"
-              value={user.date_birth}
+              value={user.date_birth || ""}
             />
             <InputItem
               label="Genner"

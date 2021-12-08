@@ -499,7 +499,7 @@
         &__menu{
             width: 100%;
             margin-top: 6.5rem;
-            gap: 1rem;
+            gap: .5rem;
             @include flex(center,center);
             @include tablet{
                 padding: 2rem;
