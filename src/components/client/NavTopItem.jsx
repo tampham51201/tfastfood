@@ -32,17 +32,35 @@ const NavTopItem = (props) => {
       {props.icondown ? "" : <i className="bx bx-chevron-down"></i>}
       {props.data ? (
         <ul className="header__top-nav__right__item__list" ref={listRef}>
-          {props.data.map((item, index) => (
-            <li
-              className="header__top-nav__right__item__list__item"
-              key={index}
-              onClick={props.onClick ? () => props.onClick(item.name) : null}
-            >
-              <Link to={item.path} key={index}>
-                {item.name}
-              </Link>
-            </li>
-          ))}
+          {props.data.map((item, index) => {
+            if (item.name === "Đăng Xuất")
+              return (
+                <li
+                  className="header__top-nav__right__item__list__item"
+                  key={index}
+                  onClick={
+                    props.onClick ? () => props.onClick(item.name) : null
+                  }
+                >
+                  {item.name}
+                </li>
+              );
+            else {
+              return (
+                <li
+                  className="header__top-nav__right__item__list__item"
+                  key={index}
+                  onClick={
+                    props.onClick ? () => props.onClick(item.name) : null
+                  }
+                >
+                  <Link to={item.path} key={index}>
+                    {item.name}
+                  </Link>
+                </li>
+              );
+            }
+          })}
         </ul>
       ) : (
         ""

@@ -7,6 +7,10 @@ import { Swiper, SwiperSlide } from "swiper/react/swiper-react";
 import "swiper/swiper-bundle.min.css";
 import "swiper/swiper.min.css";
 
+import { useSelector, useDispatch } from "react-redux";
+
+import { getUser } from "../../redux/user/userSlice";
+
 import ProductCard from "./ProductCard";
 
 // Import Swiper styles
@@ -22,6 +26,14 @@ const TrendingProducts = (props) => {
   const [isActive, setIsActive] = useState(0);
   const [products, setProducts] = useState([]);
   const [productsActive, setProductsActive] = useState([]);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    return dispatch(getUser());
+  }, [dispatch]);
+  const user = useSelector((state) => state.users.value);
+  console.log(user);
 
   const handleClick = (type) => {
     let temp = props.data;
@@ -62,7 +74,7 @@ const TrendingProducts = (props) => {
   return (
     <div className="trending-product">
       <Section>
-        <SectionTitle color="white">Trending Product</SectionTitle>
+        <SectionTitle color="white">Sản Phẩm Thịnh Hành</SectionTitle>
         <SectionBody>
           <div className="content">
             <div className="trending-product__select">
@@ -73,7 +85,7 @@ const TrendingProducts = (props) => {
                   handleClick("FEATURED");
                 }}
               >
-                Featured
+                Đặt Sắc
               </Button>
               <Button
                 backgroundColor={isActive === 1 ? "main" : "white"}
@@ -82,7 +94,7 @@ const TrendingProducts = (props) => {
                   handleClick("BEST");
                 }}
               >
-                New Products
+                Sản Phẩm Mới
               </Button>
               <Button
                 backgroundColor={isActive === 2 ? "main" : "white"}
@@ -91,7 +103,7 @@ const TrendingProducts = (props) => {
                   handleClick("NEW");
                 }}
               >
-                Best Sellers
+                Bán Chạy Nhất
               </Button>
             </div>
 
@@ -133,11 +145,16 @@ const TrendingProducts = (props) => {
               {products.map((item, index) => (
                 <SwiperSlide key={index}>
                   <ProductCard
+                    slug={item.slug}
                     img01={`${baseURL}/${item.img01}`}
                     img02={`${baseURL}/${item.img02}`}
                     name={item.name}
                     priceSell={item.selling_price}
                     priceOld={item.orginal_price}
+                    idProduct={item.id}
+                    idUser={
+                      user === null || user.data === "" ? 0 : user.data.user.id
+                    }
                   />
                 </SwiperSlide>
               ))}

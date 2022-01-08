@@ -1,9 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authApi from "../../api/authApi";
 
-export const getUser = createAsyncThunk("users/getUser", () => {
+export const getUser = createAsyncThunk("users/getUser", async () => {
   return authApi.getUser((res) => {
-    res.data.user.json();
+    if (res.data.status === 200) {
+      res.data.user.json();
+    }
   });
 });
 

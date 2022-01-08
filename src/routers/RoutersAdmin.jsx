@@ -16,20 +16,21 @@ import Products from "../pages/admin/Products/Products";
 import EditProduct from "../pages/admin/Products/EditProduct";
 import AddProduct from "../pages/admin/Products/AddProduct";
 
-import Orders from "../pages/admin/Orders";
+import Orders from "../pages/admin/Order/Orders";
+import OrderDetail from "../pages/admin/Order/OrderDetail";
 
 const RoutersAdmin = () => {
   return (
     <Switch>
       <Route exact={true} path="/admin/doahboard" component={Dashboard} />
       <Route exact={true} path="/admin/user" component={Users} />
-      <Route exact={true} path="/admin/add-user" component={AddUser} />
-      <Route exact={true} path="/admin/edit-user/:id" component={EditUser} />
+      <Route exact={true} path="/admin/user-add" component={AddUser} />
+      <Route exact={true} path="/admin/user-edit/:id" component={EditUser} />
 
-      <Route exact={true} path="/admin/add-category" component={AddCategory} />
+      <Route exact={true} path="/admin/category-add" component={AddCategory} />
       <Route
         exact={true}
-        path="/admin/edit-category/:id"
+        path="/admin/category-edit/:id"
         component={EditCategory}
       />
       <Route exact={true} path="/admin/category" component={Categorys} />
@@ -37,12 +38,17 @@ const RoutersAdmin = () => {
       <Route exact={true} path="/admin/product" component={Products} />
       <Route
         exact={true}
-        path="/admin/edit-product/:id"
+        path="/admin/product-edit/:id"
         component={EditProduct}
       />
-      <Route exact={true} path="/admin/add-product" component={AddProduct} />
+      <Route exact={true} path="/admin/product-add" component={AddProduct} />
 
       <Route exact={true} path="/admin/order" component={Orders} />
+      <Route
+        exact={true}
+        path="/admin/details-order/:id"
+        component={OrderDetail}
+      />
 
       <Redirect from="/admin" to="/admin/doahboard" />
     </Switch>

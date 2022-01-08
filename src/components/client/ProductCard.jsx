@@ -4,45 +4,63 @@ import Button from "./Button";
 import { Link } from "react-router-dom";
 import numberWithCommas from "../../utils/numberWithCommas";
 
+import { useDispatch } from "react-redux";
+import { addItems } from "../../redux/shopping-cart/cartItemsSlice";
+
 const ProductCard = (props) => {
   const border = props.border ? "border-product" : "";
+  const dispatch = useDispatch();
+  const addCart = () => {
+    dispatch(
+      addItems({
+        idProduct: props.idProduct,
+        slug: props.slug,
+        quantity: 1,
+        price: props.priceSell,
+        idUser: props.idUser,
+      })
+    );
+    alert("Đã thêm vào giỏ hàng!");
+  };
   return (
     <div className={`product-card ${border}`}>
-      <Link to={`/category/${props.slug}`}>
-        <div className="product-card__img">
+      <div className="product-card__img">
+        <Link to={`/product/${props.slug}`}>
           <img src={props.img01} alt="" />
-          <div className="product-card__btn">
-            <div className="product-card__btn__item">
-              <Button
-                type="cricle"
-                backgroundColor="second"
-                icon="bx bxs-cart-alt"
-              ></Button>
-            </div>
-            <div className="product-card__btn__item">
-              <Button
-                type="cricle"
-                backgroundColor="second"
-                icon="bx bxs-heart"
-              ></Button>
-            </div>
-            <div className="product-card__btn__item">
-              <Button
-                type="cricle"
-                backgroundColor="second"
-                icon="bx bx-revision"
-              ></Button>
-            </div>
-            <div className="product-card__btn__item">
-              <Button
-                type="cricle"
-                backgroundColor="second"
-                icon="bx bxs-show"
-              ></Button>
-            </div>
+        </Link>
+        <div className="product-card__btn">
+          <div className="product-card__btn__item">
+            <Button
+              type="cricle"
+              onClick={addCart}
+              backgroundColor="second"
+              icon="bx bxs-cart-alt"
+            ></Button>
+          </div>
+          <div className="product-card__btn__item">
+            <Button
+              type="cricle"
+              backgroundColor="second"
+              icon="bx bxs-heart"
+            ></Button>
+          </div>
+          <div className="product-card__btn__item">
+            <Button
+              type="cricle"
+              backgroundColor="second"
+              icon="bx bx-revision"
+            ></Button>
+          </div>
+          <div className="product-card__btn__item">
+            <Button
+              type="cricle"
+              backgroundColor="second"
+              icon="bx bxs-show"
+            ></Button>
           </div>
         </div>
-      </Link>
+      </div>
+
       <div className="product-card__info">
         <div className="product-card__info__name">{props.name}</div>
         <div className="product-card__info__price">
@@ -64,6 +82,8 @@ ProductCard.propTypes = {
   priceOld: PropTypes.string,
   priceSell: PropTypes.string,
   border: PropTypes.bool,
+  idProduct: PropTypes.number,
+  idUser: PropTypes.number,
 };
 
 export default ProductCard;

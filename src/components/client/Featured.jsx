@@ -14,7 +14,7 @@ SwiperCore.use([Autoplay]);
 const Featured = (props) => {
   return (
     <Section>
-      <SectionTitle>Getting Hungry</SectionTitle>
+      <SectionTitle>Cảm Thấy Đói Bụng</SectionTitle>
       <SectionBody>
         <div className="content">
           <div className="featured">

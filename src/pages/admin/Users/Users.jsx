@@ -20,13 +20,13 @@ import Loading from "../../Loading";
 const Users = () => {
   const coloums = [
     "STT",
-    "Username",
+    "Tên Đăng Nhập",
     "Email",
-    "Role",
-    "Gender",
-    "Status",
-    "Edit",
-    "Delete",
+    "Quyền",
+    "Giới Tính",
+    "Trạng Thái",
+    "Sửa",
+    "Xóa",
   ];
   const [userList, setUserList] = useState([]);
 
@@ -96,8 +96,8 @@ const Users = () => {
               placeholder="Search by username"
             />
 
-            <Link to="/admin/add-user">
-              <Button>Add Product</Button>
+            <Link to="/admin/user-add">
+              <Button>Thêm Người Dùng</Button>
             </Link>
           </ContainerHeaderRight>
         </ContainerHeader>
@@ -111,7 +111,7 @@ const Users = () => {
 
                 <td style={{ width: "12rem" }}>{item.roles.name}</td>
                 <td style={{ width: "12rem" }}>
-                  {item.gender === 1 ? "Male" : "Female"}
+                  {item.gender === 0 ? "Nam" : "Nữ"}
                 </td>
                 <td style={{ width: "12rem", textAlign: "center" }}>
                   <Button
@@ -145,7 +145,7 @@ const Users = () => {
                   </ul>
                 </td> */}
                 <td className="edit">
-                  <Link to={`edit-user/${item.id}`}>
+                  <Link to={`user-edit/${item.id}`}>
                     <Button size="sm" bg="success">
                       <i className="bx bx-edit-alt"></i>
                     </Button>

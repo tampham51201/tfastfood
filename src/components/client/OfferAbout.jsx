@@ -25,7 +25,7 @@ const OfferAbout = (props) => {
                 {props.description}
               </p>
               <div className="offer-about__info__btn">
-                <Button backgroundColor="second">View More</Button>
+                <Button backgroundColor="second">Xem Thêm</Button>
               </div>
             </div>
           </SectionBody>

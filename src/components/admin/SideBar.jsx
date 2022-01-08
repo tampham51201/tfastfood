@@ -5,27 +5,27 @@ import { useLocation } from "react-router";
 
 const sidebar = [
   {
-    display: "Doahboard",
+    display: "Tổng Quan",
     path: "/admin/doahboard",
     icon: "bx bx-line-chart",
   },
   {
-    display: "Users",
+    display: "Người Dùng",
     path: "/admin/user",
     icon: "bx bxs-user-account",
   },
   {
-    display: "Category",
+    display: "Danh Mục",
     path: "/admin/category",
     icon: "bx bx-category",
   },
   {
-    display: "Products",
+    display: "Sản Phẩm",
     path: "/admin/product",
     icon: "bx bx-category",
   },
   {
-    display: "Orders",
+    display: "Đơn Hàng",
     path: "/admin/order",
     icon: "bx bx-basket",
   },

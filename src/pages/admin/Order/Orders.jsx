@@ -14,8 +14,22 @@ import Table from "../../../components/admin/Table";
 import swal from "sweetalert";
 import categoryApi from "../../../api/categoryApi";
 import Loading from "../../Loading";
-const Categorys = () => {
-  const coloums = ["STT", "Name", "Slug", "Status", "Edit", "Delete"];
+import billsApi from "../../../api/billsApi";
+import numberWithCommas from "../../../utils/numberWithCommas";
+import dateFormat from "dateformat";
+const Orders = () => {
+  const coloums = [
+    "STT",
+    "Mã Hóa Đơn",
+    "Tên Khách Hàng",
+    "Số Điện Thoại",
+
+    "Địa Chỉ",
+    "Ngày Đặt Hàng",
+    "Đơn Giá",
+    "Trạng Thái",
+    "",
+  ];
   const [categorylist, setCategorylist] = useState([]);
 
   // search input
@@ -30,10 +44,11 @@ const Categorys = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    categoryApi.getAll().then((res) => {
+    billsApi.getAll().then((res) => {
       if (res.data.status === 200) {
-        const newCategoryList = res.data.category;
+        const newCategoryList = res.data.bills;
         setCategorylist(newCategoryList);
+        console.log(newCategoryList);
         setIsDelete(false);
       }
       setLoading(false);
@@ -50,7 +65,19 @@ const Categorys = () => {
 
   useEffect(() => {
     const newsearchList = categorylist.filter((category) => {
-      return category.name.toLowerCase().includes(searchInput.toLowerCase());
+      return (
+        category.full_name.toLowerCase().includes(searchInput.toLowerCase()) ||
+        ("hd000" + category.id)
+          .toLowerCase()
+          .includes(searchInput.toLowerCase()) ||
+        category.phone_number
+          .toLowerCase()
+          .includes(searchInput.toLowerCase()) ||
+        dateFormat(category.created_at, "dd/mm/yyyy h:MM TT")
+          .toString()
+          .toLowerCase()
+          .includes(searchInput.toLowerCase())
+      );
     });
     setSearchList(newsearchList);
   }, [searchInput, categorylist]);
@@ -78,19 +105,19 @@ const Categorys = () => {
     <div>
       <Container>
         <ContainerHeader>
-          <h3>Categorys</h3>
+          <h3>Hóa Đơn</h3>
           <ContainerHeaderRight>
             <InputItem
               searchbox
               type="text"
               onChange={handleSearch}
               value={searchInput}
-              placeholder="Search by name"
+              placeholder="Tìm với mã hóa đơn hoặc tên..."
             />
 
-            <Link to="/admin/category-add">
+            {/* <Link to="/admin/category-add">
               <Button>Add Category</Button>
-            </Link>
+            </Link> */}
           </ContainerHeaderRight>
         </ContainerHeader>
         <ContainerBody>
@@ -98,34 +125,41 @@ const Categorys = () => {
             {categorysPagination.map((item, index) => (
               <tr key={index}>
                 <td style={{ width: "8rem" }}>{index + 1}</td>
-                <td>{item.name}</td>
-                <td style={{ width: "16rem" }}>{item.slug}</td>
+                <td style={{ width: "12rem" }}>HD000{item.id}</td>
+                <td style={{ width: "20rem" }}>{item.full_name}</td>
 
+                <td style={{ width: "16rem" }}>{item.phone_number}</td>
+                <td style={{ width: "20rem" }}>{item.andress}</td>
                 <td style={{ width: "16rem" }}>
+                  {dateFormat(item.created_at, "dd/mm/yyyy h:MM TT")}
+                </td>
+                <td style={{ width: "16rem" }}>
+                  {numberWithCommas(item.total_price)}
+                </td>
+
+                <td style={{ width: "20rem" }}>
                   <Button
                     size="ssm"
-                    bg={item.status === 1 ? "success" : "danger"}
+                    bg={
+                      item.status === 2
+                        ? "success"
+                        : item.status === 1
+                        ? "warning"
+                        : "danger"
+                    }
                   >
-                    {item.status === 1 ? "Active" : "InActive"}
+                    {item.status === 0 ? "Chưa Duyệt" : ""}
+                    {item.status === 1 ? "Đã Duyệt - Đang Giao" : ""}
+                    {item.status === 2 ? "Đã Giao Hàng" : ""}
+                    {item.status === 3 ? "Đã Hủy" : ""}
                   </Button>
                 </td>
-                <td className="edit">
-                  <Link to={`category-edit/${item.id}`}>
+                <td className="edit" style={{ width: "14rem" }}>
+                  <Link to={`/admin/details-order/${item.id}`}>
                     <Button size="sm" bg="success">
-                      <i className="bx bx-edit-alt"></i>
+                      XEM CHI TIẾT
                     </Button>
                   </Link>
-                </td>
-                <td className="delete">
-                  <Button
-                    size="sm"
-                    bg="danger"
-                    onClick={(e) => {
-                      handleDelete(e, item.id);
-                    }}
-                  >
-                    <i className="bx bx-trash-alt"></i>
-                  </Button>
                 </td>
               </tr>
             ))}
@@ -143,4 +177,4 @@ const Categorys = () => {
   );
 };
 
-export default Categorys;
+export default Orders;

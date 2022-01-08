@@ -1,0 +1,13 @@
+.order-detail{
+    @include flex(flex-start,space-between);
+    padding: 2rem;
+    background: white;
+    border-radius: .2rem;
+    margin-bottom: 2rem;
+    box-shadow: $box-shadow;
+    font-size: 1.5rem;
+    span{
+        width: 14rem;
+        display: inline-block;
+    }
+}

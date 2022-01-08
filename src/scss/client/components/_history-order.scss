@@ -1,0 +1,202 @@
+.history-order{
+    margin-top: 2rem;
+    background: white;
+
+    &__control{ 
+        @include flex(center,flex-start);
+        // background: $txt-white;
+        box-shadow: $box-shadow;
+        // border-bottom: .3rem solid  $border-color;
+        justify-content: space-around;
+        &__item{
+            padding: 2rem 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+            cursor: pointer;  
+            width: 25%;  
+            text-align: center;
+            border-bottom: .3rem solid $border-color;
+         
+            &.active{
+                border-bottom: .3rem solid $main-color;
+            }
+            
+        }
+ 
+    }
+    &__content{  
+        box-shadow: $box-shadow;
+        height: 100%;
+        &__null{
+            height: 80vh;
+            text-align: center;
+            @include flex(center,center);
+            font-size: 2rem;
+            font-weight: 600;
+            i{
+                display: block;
+                font-size: 9rem;
+            }
+        }
+        &__item{
+            background: $txt-white;
+            margin-bottom: 1rem ;
+            padding: 2rem;
+            box-shadow: $box-shadow;
+            
+            &__info{
+                @include flex(center,space-between);
+                // border-bottom: .1rem 
+                // solid $border-color;
+                padding-bottom: 1.5rem;
+                // margin-bottom: 1rem;
+                &__left{
+                    font-size: 1.5rem;
+                }
+                &__right{
+                    font-size: 1.6rem;
+                    color: $main-color;
+                    font-weight: 600;
+                    @include flex(center,flex-start);
+                    button{
+                       font-size: 1.4rem ;
+                       font-weight: 600;
+                       margin-left: 2rem
+                    }
+                }
+            }
+            &__list{
+                &__item{
+                    @include flex(center,flex-start);
+                    padding: 2rem 0;
+                    border-top: .1rem 
+                    solid $border-color;
+                  
+                    &__img{
+                        height: 9rem;
+                        width: 9rem;
+                        position: relative;
+                        border: .15rem solid $border-color;
+                        img{
+                            position: absolute;
+                            top:50%;
+                            left: 50%;
+                            transform: translate(-50%,-50%);
+                            width: 8.5rem;
+                        }
+                    }
+                    &__name{
+                        flex: 1;
+                        padding: 0 2rem;
+                     
+                        font-size: 1.6rem ;
+                        a{
+                            font-family: 'Mitr', sans-serif !important;
+                        }
+                    }
+                    &__quantity{
+                        font-size: 1.6rem;
+                        text-align: right;
+                    }
+
+                }
+
+            }
+            &__bottom{
+                font-size: 1.5rem;
+                border-top: .1rem solid $border-color;
+                padding: 2rem ;
+                margin-top: 1rem;
+                background-color: $border-color;
+       
+                @include flex(center,flex-end);
+
+                i{
+                    color: $main-color;
+                    font-size: 2.6rem;
+                }
+                span{
+                    font-size: 1.8rem;
+                    font-weight: 600;
+                    color: $main-color;
+                    display: block;
+                    margin-left: 1rem;
+                  
+                }
+          
+            }
+          
+         
+            &__container{
+                //    border-bottom: .1rem solid $border-color;
+                   padding-bottom: 2rem;
+                   margin-top: -1rem;
+                   text-align: right;
+                   button{
+                    padding: .5rem 4rem;
+                    margin-left: 2rem;
+                    background: $main-color;
+                    color: $txt-white;
+                    cursor: pointer;
+                    outline: none;
+                    border: .1rem solid $border-color ;
+                    font-weight: 600;
+                    
+    
+                }
+            }
+            
+            &__review {
+                &.toggle{
+                    height: 0;
+                    overflow: hidden;
+                }
+            
+                textarea
+                {
+                    margin-top: -2rem;
+                    border-radius: .2rem;
+                    &:focus{
+                       
+                        border: .1rem solid $main-color;
+                        box-shadow: $box-shadow;
+                        
+                    }
+                }
+                &__info{
+                    @include flex(center,space-between);
+                    margin-top: 2rem;
+                    margin-bottom: 1rem;
+                    font-size: 1.5rem;
+                 
+                    span{
+                      
+                    }
+                    &__rate-star{
+                
+                        font-size: 2.3rem;
+                       
+                    }
+                }
+               
+                &__btn{
+                    width: 100%;
+                    text-align: right;
+                    @include flex(center,flex-end);
+
+                    button{
+                        border-radius: .1rem;
+                        font-weight: 600;
+                        padding: 1rem 3rem;
+                     
+                    
+                    }
+                    
+                }
+              
+                
+            }
+           
+        }
+    }
+}

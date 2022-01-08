@@ -29,23 +29,23 @@ const footerAbout = [
 
 const footerAboutLink = [
   {
-    display: "Prices drop",
+    display: "Giảm Giá",
     path: "/about",
   },
   {
-    display: "New product",
+    display: "Sản Phẩm Mới",
     path: "/about",
   },
   {
-    display: "Best sales",
+    display: "Sản Phẩm Tốt Nhất",
     path: "/about",
   },
   {
-    display: "Contact us",
+    display: "Liên Hệ",
     path: "/about",
   },
   {
-    display: "Sitemap",
+    display: "Bản Đồ",
     path: "/about",
   },
 ];
@@ -111,10 +111,10 @@ const Footer = () => {
         <Grid col={3} mdCol={1} smCol={1} gap={2}>
           <div className="footer__product-about">
             <h3 className="footer__product-about__title hide-mobile">
-              Products
+              CÁC SẢN PHẨM
             </h3>
             <div className="footer__box-title" onClick={handleClickBoxProduct}>
-              <h3>Product</h3>
+              <h3>CÁC SẢN PHẨM</h3>
               <i className="bx bx-plus" ref={iconBoxProductRef}></i>
             </div>
             <div className="footer__product-about__list" ref={boxProductRef}>
@@ -126,7 +126,7 @@ const Footer = () => {
             </div>
           </div>
           <div className="footer__box-title" onClick={handleClickBoxContact}>
-            <h3>Store Infomation</h3>
+            <h3>THÔNG TIN CỬA HÀNG</h3>
             <i className="bx bx-plus" ref={iconBoxContactRef}></i>
           </div>
           <div className="footer__contact-about" ref={boxContactRef}>
@@ -138,12 +138,12 @@ const Footer = () => {
             ))}
           </div>
           <div className="footer__notify">
-            <h3 className="footer__notify__title">Newsletter</h3>
+            <h3 className="footer__notify__title">BẢN TIN</h3>
             <p className="footer__notify__description">
-              Sign Up And Get Exculsive Disc
+              Đăng Ký Và Nhận Đĩa Exculsive
             </p>
             <div className="footer__notify__input">
-              <input type="text" placeholder="Your email address" />
+              <input type="text" placeholder="Địa Chỉ Email Của Bản" />
               <Button
                 icon="bx bx-paper-plane"
                 backgroundColor="second"
@@ -165,7 +165,7 @@ const Footer = () => {
             ))}
           </div>
           <p className="footer__bottom__blank">
-            © 2021 - Ecommerce Software By Tama
+            © 2021 - Hệ Thống Thương Mại Điện Tử Của Tâm
           </p>
         </div>
       </div>

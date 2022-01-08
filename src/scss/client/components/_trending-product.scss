@@ -9,6 +9,8 @@
          @include flex(center,center);
     .btn{
         margin-right: 1.4rem;
+        font-size: 1.5rem;
+        font-weight: 700;
         @include tablet{
           font-size: 1.6rem;
         }

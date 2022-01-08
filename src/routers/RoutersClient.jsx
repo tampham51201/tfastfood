@@ -7,6 +7,8 @@ import Category from "../pages/client/Category";
 import Home from "../pages/client/Home";
 import Product from "../pages/client/Product";
 import Profile from "../pages/client/Profile";
+import Checkout from "../pages/client/Checkout";
+import HistoryOrder from "../pages/client/HistoryOrder";
 
 const RoutersClient = () => {
   return (
@@ -15,6 +17,14 @@ const RoutersClient = () => {
       <Route exact path="/product/:slug" exact={true} component={Product} />
       <Route exact path="/category/:slug" exact={true} component={Category} />
       <Route exact path="/cart" exact={true} component={Cart} />
+
+      <Route exact path="/checkout" exact={true} component={Checkout} />
+      <Route
+        exact
+        path="/history-order"
+        exact={true}
+        component={HistoryOrder}
+      />
 
       <Route exact path="/profile">
         {!localStorage.getItem("auth_token") ? (

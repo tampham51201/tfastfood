@@ -33,6 +33,7 @@ const Navbar = () => {
   }, [dispatch]);
 
   const users = useSelector((state) => state.users.value);
+  console.log(users);
 
   const handleLogout = () => {
     axiosClient.post("api/logout").then((res) => {
@@ -54,16 +55,16 @@ const Navbar = () => {
       <ul className="navbar__right__auth" ref={refAuth}>
         <Link to="/profile">
           <li className="navbar__right__auth__item">
-            <i className="bx bx-user"></i>Profile
+            <i className="bx bx-user"></i>Trang Cá Nhân
           </li>
         </Link>
         <Link to="/">
           <li className="navbar__right__auth__item">
-            <i className="bx bx-log-in"></i>Home
+            <i className="bx bx-log-in"></i>Trang Chủ
           </li>
         </Link>
         <li className="navbar__right__auth__item" onClick={handleLogout}>
-          <i className="bx bx-log-out"></i>Logout
+          <i className="bx bx-log-out"></i>Đăng Xuất
         </li>
       </ul>
     );

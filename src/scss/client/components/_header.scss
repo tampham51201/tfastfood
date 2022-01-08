@@ -6,6 +6,7 @@
     height: $header-height;
     z-index: 999;
     background: $txt-white;
+    font-size: 1.3rem;
     @include tablet{
         height: $header-tablet-height;
     }
@@ -151,8 +152,9 @@
         &__right{
             @include flex(center,flex-start);
             gap: 1rem;
-            font-size: 1.4rem;
-            letter-spacing: .1rem;
+            font-size: 1.3rem;
+            text-transform: capitalize;
+            font-weight: 500;
             cursor: pointer;
             @include tablet{
                 display: none;
@@ -335,14 +337,24 @@
                         padding: .5rem  1rem;
                         transition: background-color ease .3s;
                         color: $txt-second-color;
-                        
-                        img{
+                        &__img{
                             border: .2rem solid $border-color;
                             width: 6rem;
                             height: 6rem;
-                            object-fit: cover;
                             margin-right: .5rem;
+                            position: relative;
+                            img{
+                              
+                               width: 5rem;
+                                object-fit: cover;
+                                position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                transform: translate(-50%,-50%);
+                              
+                            }
                         }
+                     
                         p{
                             &:nth-child(2){
                                 flex: 1;
@@ -542,9 +554,12 @@
                 }
                 
                button{
-                   font-size: 1.8rem;
+                   font-size: 1.7rem;
                    font-weight: 600;
+                    text-transform: uppercase;
                    letter-spacing: .1rem;
+                   font-family: 'Mitr', sans-serif;
+                   color: $txt-main-color;
                    @include tablet{
                     padding: 1rem 2rem;
                     @include mobile{

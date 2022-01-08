@@ -7,16 +7,16 @@ const offerDiscout02 = require("../../assets/Image/offer-img1.png").default;
 const featuredAbout = {
   img: imgAbout01,
   imgDiscout: imgDiscout01,
-  title: "Let's Happy Hours!",
+  title: "Hạnh Phúc Hàng Giờ!",
   description:
-    "We are proud of our coffee shop with the highest-quality products, most inviting stores, friendliest staff and the best coffee in the world.",
+    "Chúng tôi tự hào về quán cà phê của chúng tôi với các sản phẩm chất lượng cao nhất, hầu hết các cửa hàng mời, nhân viên thân thiện nhất và cà phê tốt nhất trên thế giới.",
 };
 export const offerAbout = {
-  title: "Hungry Like A Wolf!",
+  title: "Đói Như Một Con Sói!",
   img: offerAbout01,
   imgDiscout: offerDiscout02,
   description:
-    "We are proud of our coffee shop with the highest-quality products, most inviting stores, friendliest staff and the best coffee in the world.",
+    "Chúng tôi tự hào về quán cà phê của chúng tôi với các sản phẩm chất lượng cao nhất, hầu hết các cửa hàng mời, nhân viên thân thiện nhất và cà phê tốt nhất trên thế giới.",
 };
 
 export default featuredAbout;

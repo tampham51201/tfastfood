@@ -71,6 +71,7 @@ const AddProduct = () => {
 
   const handleFiletProduct = (e) => {
     setPicture({ ...picture, [e.target.name]: e.target.files[0] });
+    console.log(e.target.files[0]);
   };
 
   const handleCheck = (e) => {
@@ -79,6 +80,7 @@ const AddProduct = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const formData = new FormData();
     formData.append("category_id", product.category_id);
     formData.append("name", product.name);

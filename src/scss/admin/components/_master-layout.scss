@@ -1,5 +1,5 @@
 .master-layout{
-    font-family: 'Poppins', sans-serif;
+
     @include flex(flex-start, space-between);
 
     &__content{     

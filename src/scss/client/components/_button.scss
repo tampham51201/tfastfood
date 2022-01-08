@@ -4,7 +4,8 @@
     padding: 1.2rem 1.4rem ;
     border-radius: .5rem;
     cursor: pointer;
-    font-family: 'Philosopher', sans-serif;    
+    color: $txt-main-color;
+ 
     transition: background-color .1s ease;
     @include flex(center,center);
     &:hover{

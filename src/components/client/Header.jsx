@@ -5,10 +5,14 @@ import logo from "../../assets/Image/footer-logo_1.png";
 import Button from "./Button";
 import NavTopItem from "./NavTopItem";
 
+import { useSelector, useDispatch } from "react-redux";
+import { getUser } from "../../redux/user/userSlice";
+
 import axiosClient from "../../api/axiosClient";
 import swal from "sweetalert";
 
 import categoryApi from "../../api/categoryApi";
+import productApi from "../../api/productApi";
 
 const img =
   require("../../assets/Image/Product/brown-bear-printed-sweater.jpg").default;
@@ -53,66 +57,150 @@ const cardList = [
 ];
 
 const Header = () => {
+  const baseURL = "http://localhost:8000";
   const iconSearchRef = useRef(null);
   const searchRef = useRef(null);
   const toggleRef = useRef(null);
   const iconToggleRef = useRef(null);
   const headerRef = useRef(null);
+  const dispatch = useDispatch();
 
+  //my cart
   const [categorys, setCategorys] = useState([]);
+  const [cartProduct, setCartProduct] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    return dispatch(getUser());
+  }, [dispatch]);
+
+  var user = useSelector((state) => state.users.value);
+  const cartItemsAll = useSelector((state) => state.shoppingCart.value);
+
+  useEffect(() => {
+    var newCartItems = [];
+    if (!localStorage.getItem("auth_token")) {
+      newCartItems = cartItemsAll.filter((item) => item.idUser === 0);
+    } else {
+      if (user !== null && user.data !== "") {
+        newCartItems = cartItemsAll.filter(
+          (item) => item.idUser === user.data.user.id
+        );
+      }
+    }
+    setCartItems(newCartItems);
+  }, [cartItemsAll, user]);
+
+  useEffect(() => {
+    productApi.getAll().then((res) => {
+      if (res.data.status === 200) {
+        const newProduct = res.data.product;
+        console.log(newProduct);
+        setProducts(newProduct);
+        setLoading(false);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    let res = [];
+    if (cartItems.length > 0) {
+      cartItems.forEach((item) => {
+        res.push({
+          ...item,
+          product: products.find((e) => e.slug === item.slug),
+        });
+      });
+    }
+    setCartProduct(res);
+    console.log(res);
+  }, [cartItems, products]);
 
   var authButton = [];
+
+  //menuNav
   if (!localStorage.getItem("auth_token")) {
     authButton = [
       {
-        name: "Sign in",
+        name: "Đăng Nhập",
         path: "/login",
       },
+
       {
-        name: "Compare",
-        path: "/compare",
-      },
-      {
-        name: "Wishlist",
+        name: "Sản phẩm yêu thích",
         path: "/wishlist",
       },
     ];
   } else {
-    authButton = [
-      {
-        name: "Profile",
-        path: "/profile",
-      },
-      {
-        name: "Compare",
-        path: "/compare",
-      },
-      {
-        name: "Wishlist",
-        path: "/wishlist",
-      },
-      {
-        name: "Admin",
-        path: "/admin",
-      },
-      {
-        name: "Logout",
-        path: "login",
-      },
-    ];
+    if (user !== null && user.data !== "") {
+      if (user.data.user.role_as == 0) {
+        authButton = [
+          {
+            name: "Thông Tin Cá Nhân",
+            path: "/profile",
+          },
+
+          {
+            name: "Sản Phẩm Yêu Thích",
+            path: "/wishlist",
+          },
+          {
+            name: "Đơn Hàng",
+            path: "/history-order",
+          },
+
+          {
+            name: "Đăng Xuất",
+            path: "/login",
+          },
+        ];
+      } else {
+        authButton = [
+          {
+            name: "Thông tin cá nhân",
+            path: "/profile",
+          },
+
+          {
+            name: "sản phẩm yêu thích",
+            path: "/wishlist",
+          },
+          {
+            name: "Đơn Hàng",
+            path: "/history-order",
+          },
+          {
+            name: "trang quản trị",
+            path: "/admin",
+          },
+
+          {
+            name: "Đăng Xuất",
+            path: "/login",
+          },
+        ];
+      }
+    }
   }
+
   const navTopList = [
     {
-      label: "my accout",
-      display: "My Account",
+      label: "tài khoản của tôi",
+      display: "tài khoản của tôi",
       icon: "bx bx-user",
       listItem: authButton,
     },
     {
-      label: "Currency",
-      display: "USD $",
+      label: "Tiền Tệ",
+      display: "VNĐ đ",
       icon: "",
       listItem: [
+        {
+          name: "VNĐ đ",
+          path: "/",
+        },
         {
           name: "USD $",
           path: "/",
@@ -124,8 +212,8 @@ const Header = () => {
       ],
     },
     {
-      label: "Language",
-      display: "English",
+      label: "Ngôn Ngữ",
+      display: "Vietnamese",
       icon: "",
       listItem: [
         {
@@ -171,12 +259,14 @@ const Header = () => {
   }
 
   const handleLogout = (value) => {
-    if (value === "Logout") {
+    if (value === "Đăng Xuất") {
+      console.log("dd");
       axiosClient.post("api/logout").then((res) => {
+        console.log("log");
         if (res.data.status === 200) {
           localStorage.removeItem("auth_token");
           localStorage.removeItem("auth_name");
-          history.push("login");
+          history.push("/login");
           swal("Success", res.data.message, "success");
         }
       });
@@ -200,6 +290,9 @@ const Header = () => {
       window.addEventListener("scroll", null);
     };
   }, []);
+  if (loading) {
+    return <div></div>;
+  }
 
   return (
     <div className="header" ref={headerRef}>
@@ -207,7 +300,9 @@ const Header = () => {
         <div className="content">
           <div className="header__top-nav__left">
             <i className="bx bxs-purchase-tag"></i>
-            <p>Get Upto 25% Cashback On First Order : GET25OFF</p>
+            <p style={{ fontSize: "1.3rem" }}>
+              Được Hoàn Tiền Lên Đến 25% Khi Mua Đơn Hàng Đầu Tiên : GET25OFF
+            </p>
           </div>
           <div className="header__top-nav__right">
             {navTopList.map((item, index) => (
@@ -246,7 +341,7 @@ const Header = () => {
               </div>
 
               <div className="header__main__top__item__content">
-                <p>Call On Order</p>
+                <p>Đặt Hàng Gọi</p>
                 <p>0339045945</p>
               </div>
             </div>
@@ -290,32 +385,38 @@ const Header = () => {
                 >
                   <i className="bx bx-cart"></i>
                   <div className="header__main__top__item__icon__quantity">
-                    {cardList.length}
+                    {cartProduct.length}
                   </div>
                 </div>
                 <div
                   className="header__main__top__item__content hide-mobile"
                   onClick={handleCartClick}
                 >
-                  <p>Shopping Cart</p>
-                  <p>{cardList.length} items</p>
+                  <p>Giỏ Hàng</p>
+                  <p>{cartProduct.length} Sản Phẩm</p>
                 </div>
                 <div className="header__main__top__item__list">
-                  {cardList.length <= 0 ? (
-                    <p header__main__top__item__list__null>
-                      No products in the cart
+                  {cartProduct.length <= 0 ? (
+                    <p className="header__main__top__item__list__null">
+                      Không Có Sản Phẩm Trong Giỏ Hàng
                     </p>
                   ) : (
                     <>
                       <p className="header__main__top__item__list__title">
-                        Product added
+                        Sản Phẩm Đã Thêm
                       </p>
                       <ul className="header__main__top__item__list__content">
-                        {cardList.map((item, index) => (
-                          <Link to={`/category/product-${item.id}`} key={index}>
+                        {cartProduct.map((item, index) => (
+                          <Link to={`/product/${item.slug}`} key={index}>
                             <li className="header__main__top__item__list__item">
-                              <img src={item.img} alt="anh" />
-                              <p>{item.title}</p>
+                              <div className="header__main__top__item__list__item__img">
+                                <img
+                                  src={`${baseURL}/${item.product.img01}`}
+                                  alt=""
+                                />
+                              </div>
+
+                              <p>{item.product.name}</p>
                               <p>{item.price}</p>
                             </li>
                           </Link>
@@ -323,9 +424,9 @@ const Header = () => {
                       </ul>
 
                       <div className="header__main__top__item__list__more">
-                        <p>{cardList.length} Add to cart </p>
+                        <p>{cartProduct.length} Sản Phẩm Thêm Vào Giỏ Hàng </p>
                         <Link to="/cart">
-                          <Button backgroundColor="second">View Cart </Button>
+                          <Button backgroundColor="second">Xem Giỏ Hàng</Button>
                         </Link>
                       </div>
                     </>
@@ -351,7 +452,7 @@ const Header = () => {
             <div className="header__main__menu__item">
               <Link to="/profile">
                 <Button backgroundColor="transparent" onClick={handleMenuClick}>
-                  My Account
+                  Tài Khoản
                 </Button>
               </Link>
             </div>
@@ -368,7 +469,7 @@ const Header = () => {
                 </div>
 
                 <div className="header__main__top__item__content">
-                  <p>Call On Order</p>
+                  <p>Đặt Hàng Gọi</p>
                   <p>0339045945</p>
                 </div>
               </div>

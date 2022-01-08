@@ -8,12 +8,16 @@ import Button from "../../components/client/Button";
 import Loading from "../Loading";
 import ProductCard from "../../components/client/ProductCard";
 
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "../../redux/user/userSlice";
+
 import productApi from "../../api/productApi";
 import categoryApi from "../../api/categoryApi";
 
 import Pagination from "../../components/admin/Pagination";
 
 import banner from "../../assets/Image/sandwich.jpg";
+import Helmet from "../../components/Helmet";
 
 const Category = (props) => {
   const baseURL = "http://localhost:8000";
@@ -34,6 +38,12 @@ const Category = (props) => {
   const [loading, setLoading] = useState(true);
   let slug = props.match.params.slug;
 
+  const dispatch = useDispatch();
+  useEffect(() => {
+    return dispatch(getUser());
+  }, [dispatch]);
+  const user = useSelector((state) => state.users.value);
+
   useEffect(() => {
     categoryApi.getSlug(slug).then((res) => {
       if (res.data.status === 200) {
@@ -45,7 +55,7 @@ const Category = (props) => {
   }, [slug]);
 
   useEffect(() => {
-    productApi.getAll().then((res) => {
+    productApi.getAllStatus().then((res) => {
       if (res.data.status === 200) {
         const newProductList = res.data.product;
         setProducts(newProductList);
@@ -100,9 +110,9 @@ const Category = (props) => {
     return <Loading />;
   }
   return (
-    <>
+    <Helmet title={category[0].name}>
       <Breadcrumb>
-        <Link to="/">Home</Link> /<Link to={slug}>{slug}</Link>
+        <Link to="/">Trang Chủ</Link> /<Link to={slug}>{slug}</Link>
       </Breadcrumb>
       <div className="category content">
         <div className="category__filter">
@@ -173,12 +183,17 @@ const Category = (props) => {
                 {productsPagination.map((item, index) => (
                   <ProductCard
                     key={index}
+                    slug={item.slug}
                     img01={`${baseURL}/${item.img01}`}
                     img02={`${baseURL}/${item.img02}`}
                     name={item.name}
+                    idProduct={item.id}
                     priceSell={item.selling_price}
                     priceOld={item.orginal_price}
                     border
+                    idUser={
+                      user === null || user.data === "" ? 0 : user.data.user.id
+                    }
                   />
                 ))}
               </Grid>
@@ -195,7 +210,7 @@ const Category = (props) => {
           />
         </div>
       </div>
-    </>
+    </Helmet>
   );
 };
 

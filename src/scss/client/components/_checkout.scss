@@ -1,0 +1,176 @@
+.checkout{
+    @include flex(flex-start,flex-start);
+
+  
+    @include tablet{
+        flex-direction: column;
+        align-items: center;
+    }
+    &__info{
+        position: sticky;
+        margin-top: 2rem;
+        margin-right: 3rem;
+        width: 50%;
+        padding: 2rem;
+        box-shadow: $box-shadow;
+        color: $txt-second-color;
+        font-weight: 500;
+        @include tablet{
+            width: 100%;
+            margin: 2rem;
+        }
+        &__txt{
+            // *{
+            //     margin-bottom: 1.6rem ;
+            // }
+            h2{
+                font-family: 'Mitr', sans-serif !important;
+                margin-bottom: 0rem;
+            }
+            &__method{
+        
+                @include flex(center,space-between);
+                font-size: 1.3rem;
+                font-weight: 600;
+                margin-bottom: .5rem;
+
+                span:nth-child(2){
+                    color: $main-color;
+                    font-size: 1.5rem;
+
+                    font-weight: 600;
+                    cursor: pointer;
+     
+                }
+               
+            }
+        }
+
+        &__customer{
+
+            .ant-form-item-label{
+            padding-bottom: 0rem;
+           
+            }
+            &__form{
+                margin-top: 0rem !important;
+                margin-bottom: 4rem;
+
+                button{
+                    width: 100%;
+                    margin-top: 1rem;
+                    font-weight: 600;
+                }
+            }
+            
+        }
+        &__btn 
+        {
+           button{
+               width: 100%;
+               font-size: 1.4rem;
+               font-weight: 600;
+              
+           }
+            &>*{
+            
+                margin-bottom: 1.4rem;       
+                
+            }
+        }
+   
+    }
+    &__list{
+        flex: 1;
+        @include tablet{
+            padding: 0 2rem;
+            width: 100%;
+            margin: 0 2rem
+        }
+    }
+    &__item{
+        @include flex(center,flex-start);
+
+        &__img{
+            // margin-right: 2rem;
+            // margin-bottom: 2rem;
+            width: 11rem;
+            overflow: hidden;
+            position: relative;
+            height: 11rem;
+            img{
+               
+                width: 10rem;
+                position: absolute;
+                top:50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+                
+            }
+            
+        }
+        &__info{
+
+            flex-grow: 1;
+            @include flex(center,space-between);
+            @include mobile{
+              
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: center;
+              
+            }
+            &__name{
+                width: 50%;
+               
+                a{
+                    font-family: 'Mitr', sans-serif !important;
+                    font-size: 1.6rem;
+                }
+                @include mobile{
+                  
+                    width: 100%;
+                  
+                }
+            }
+            &__name,&__price{
+                font-family: 'Mitr', sans-serif !important;
+ 
+                a{
+                    font-size: 1.5rem;
+                }
+              
+                @include mobile{
+              
+                    width: 100%;
+                  margin-bottom: .6rem; 
+                }
+            }
+            &__right{
+            text-align: right;
+            }
+            &__quantity{
+            font-weight: 600;
+
+                @include mobile{
+              
+                 margin-bottom: .6rem; 
+                }
+
+            }
+            &__price{
+                color: $main-color;
+            }
+            &__del{
+                font-size: 2.2rem;
+                cursor: pointer;
+                transition: all ease .3s;
+                &:hover{
+                    color: $main-color;
+                }
+            }
+    
+        }
+    }
+
+}

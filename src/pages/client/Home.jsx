@@ -24,12 +24,11 @@ const sliderList = [
 ];
 
 const Home = () => {
-  
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    productApi.getAll().then((res) => {
+    productApi.getAllStatus().then((res) => {
       if (res.data.status === 200) {
         const newProductList = res.data.product;
         setProducts(newProductList);
@@ -43,7 +42,7 @@ const Home = () => {
   }
 
   return (
-    <Helmet title="Home">
+    <Helmet title="Trang Chủ">
       {/* slider start */}
       <HeroSlider data={sliderList} />
       {/* slider end */}

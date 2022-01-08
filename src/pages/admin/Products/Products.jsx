@@ -98,7 +98,7 @@ const Products = () => {
               value={searchInput}
               placeholder="Search by name"
             />
-            <Link to="/admin/add-product">
+            <Link to="/admin/product-add">
               <Button>Add Product</Button>
             </Link>
           </ContainerHeaderRight>
@@ -133,11 +133,10 @@ const Products = () => {
                   >
                     {item.status === 1 ? "Active" : "InActive"}
                   </Button>
-                  {item.featured}/{item.popular}
                 </td>
 
                 <td className="edit">
-                  <Link to={`edit-product/${item.id}`}>
+                  <Link to={`product-edit/${item.id}`}>
                     <Button size="sm" bg="success">
                       <i className="bx bx-edit-alt"></i>
                     </Button>

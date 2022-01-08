@@ -1,0 +1,136 @@
+.cart{
+    @include flex(flex-start,flex-start);
+
+  
+    @include tablet{
+        flex-direction: column;
+        align-items: center;
+    }
+    &__info{
+        position: sticky;
+        margin-top: 2rem;
+        margin-right: 3rem;
+        width: 40%;
+        padding: 2rem;
+        box-shadow: $box-shadow;
+        color: $txt-second-color;
+        font-weight: 500;
+        @include tablet{
+            width: 100%;
+            margin: 2rem;
+        }
+        &__txt{
+            *{
+                margin-bottom: 1.6rem ;
+            }
+            &__price{
+             
+                @include flex(center,space-between);
+                span:nth-child(2){
+                    color: $main-color;
+                   font-size: 1.8rem;
+                    font-weight: 600;
+                    font-family: 'Mitr', sans-serif !important;
+                }
+            }
+        }
+        &__btn 
+        {
+           button{
+               width: 100%;
+               font-size: 1.4rem;
+               font-weight: 600;
+              
+           }
+            &>*{
+            
+                margin-bottom: 1.4rem;       
+                
+            }
+        }
+    }
+    &__list{
+        flex: 1;
+        @include tablet{
+            padding: 0 2rem;
+            width: 100%;
+            margin: 0 2rem
+        }
+    }
+    &__item{
+        @include flex(center,flex-start);
+
+        &__img{
+            // margin-right: 2rem;
+            // margin-bottom: 2rem;
+            width: 15rem;
+            overflow: hidden;
+            position: relative;
+            height: 15rem;
+            img{
+               
+                width: 12rem;
+                position: absolute;
+                top:50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+                
+            }
+            
+        }
+        &__info{
+            flex-grow: 1;
+            @include flex(center,space-between);
+            @include mobile{
+              
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: center;
+              
+            }
+            &__name{
+                width: 50%;
+               
+                a{
+                    font-family: 'Mitr', sans-serif !important;
+                    font-size: 1.6rem;
+                }
+                @include mobile{
+                  
+                    width: 100%;
+                  
+                }
+            }
+            &__name,&__price{
+                font-family: 'Mitr', sans-serif !important;
+                font-size: 1.6rem;
+              
+                @include mobile{
+              
+                    width: 100%;
+                 margin-bottom: .6rem; 
+                }
+            }
+            &__quantity{
+
+                @include mobile{
+              
+                 margin-bottom: .6rem; 
+                }
+
+            }
+            &__price{
+                color: $main-color;
+            }
+            &__del{
+                font-size: 2.2rem;
+                cursor: pointer;
+                transition: all ease .3s;
+                &:hover{
+                    color: $main-color;
+                }
+            }
+    
+        }
+    }
+}

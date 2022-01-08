@@ -5,10 +5,20 @@ const productApi = {
     const url = "/api/view-product";
     return axiosClient.get(url);
   },
+  getAllStatus: () => {
+    const url = "/api/view-product-status";
+    return axiosClient.get(url);
+  },
   getId: (id) => {
     const url = `/api/edit-product/${id}`;
     return axiosClient.get(url);
   },
+
+  getSlug: (slug) => {
+    const url = `/api/slug-product/${slug}`;
+    return axiosClient.get(url);
+  },
+
   getStatus: () => {
     const url = `api/all-product`;
     return axiosClient.get(url);

@@ -74,8 +74,8 @@ const EditUser = (props) => {
     formData.append("password", user.password);
     formData.append("role_as", user.role_as);
 
-    formData.append("first_name", user.first_name);
-    formData.append("last_name", user.last_name);
+    formData.append("full_name", user.full_name);
+
     formData.append("phone_number", user.phone_number);
     formData.append("andress", user.andress);
     formData.append("data_birth", user.date_birth);
@@ -103,19 +103,21 @@ const EditUser = (props) => {
       <Container>
         <ContainerHeader>
           <ContainerTitle>
-            Edit User
-            <ContainerDescription>Edit information user.</ContainerDescription>
+            Chỉnh Sửa Người Dùng
+            <ContainerDescription>
+              Chỉnh Sửa Thông Tin Người Dùng.
+            </ContainerDescription>
           </ContainerTitle>
           <ContainerHeaderRight>
             <Link to="/admin/user">
-              <Button>Back</Button>
+              <Button>Trở Vế</Button>
             </Link>
           </ContainerHeaderRight>
         </ContainerHeader>
         <ContainerBody>
           <form onSubmit={handleSubmit}>
             <InputItem
-              label="Username"
+              label="Tên Đăng Nhập"
               type="text"
               onChange={handleInputUser}
               name="username"
@@ -131,7 +133,7 @@ const EditUser = (props) => {
               // message={user.message.email_input}
             />
             <InputItem
-              label="Password"
+              label="Mật Khẩu"
               type="password"
               onChange={handleInputUser}
               name="password"
@@ -139,7 +141,7 @@ const EditUser = (props) => {
             />
 
             <SelectInput
-              label="Select Role"
+              label="Chọn Quyền"
               value={`${user.role_as}`}
               name="role_as"
               onChange={handleInputUser}
@@ -147,21 +149,15 @@ const EditUser = (props) => {
             />
 
             <InputItem
-              label="First Name"
+              label="Họ Và Tên"
               type="text"
               onChange={handleInputUser}
-              name="first_name"
-              value={user.first_name || ""}
+              name="full_name"
+              value={user.full_name || ""}
             />
+
             <InputItem
-              label="Last Name"
-              type="text"
-              onChange={handleInputUser}
-              name="last_name"
-              value={user.last_name || ""}
-            />
-            <InputItem
-              label="Image Avata"
+              label="Hình Ảnh Đại Diện"
               type="file"
               onChange={handleFileAvata}
               name="avata"
@@ -176,49 +172,49 @@ const EditUser = (props) => {
             )}
 
             <InputItem
-              label="Phone Number"
+              label="Số Điện Thoại"
               type="text"
               onChange={handleInputUser}
               name="phone_number"
               value={user.phone_number || ""}
             />
             <InputItem
-              label="Andress"
+              label="Địa Chỉ"
               type="text"
               onChange={handleInputUser}
               name="andress"
               value={user.andress || ""}
             />
             <InputItem
-              label="Date of Birth"
+              label="Ngày Sinh"
               type="date"
               onChange={handleInputUser}
               name="date_birth"
               value={user.date_birth || ""}
             />
             <InputItem
-              label="Genner"
-              labelRadio="Male"
+              label="Giối Tính"
+              labelRadio="Name"
               type="radio"
               onChange={() => handlecheckGender(0)}
               name="gender"
               checked={checkGender === 0 ? true : false}
             />
             <InputItem
-              labelRadio="Female"
+              labelRadio="Nữ"
               type="radio"
               onChange={() => handlecheckGender(1)}
               name="gender"
               checked={checkGender === 1 ? true : false}
             />
             <InputItem
-              label="Status"
+              label="Trạng Thái"
               type="checkbox"
               onChange={handleCheckStatus}
               name="status"
               checked={checkStatus === 1 ? true : false}
             />
-            <Button submit>Add New</Button>
+            <Button submit>Lưu</Button>
           </form>
         </ContainerBody>
       </Container>

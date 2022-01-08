@@ -5,7 +5,7 @@ import swal from "sweetalert";
 import InputItem from "../../components/client/InputItem";
 import authApi from "../../api/authApi";
 import axiosClient from "../../api/axiosClient";
-
+import "antd/dist/antd.css";
 import logo from "../../assets/Image/footer-logo_1.png";
 import Helmet from "../../components/Helmet";
 
