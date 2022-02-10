@@ -53,13 +53,13 @@ const Register = () => {
           </Link>
         </div>
         <div className="auth__title">
-          <h3>Register</h3>
-          <p>Please register to continue!</p>
+          <h3>Tạo Tài Khoản</h3>
+          <p>Vui lòng tạo tài khoản để tiếp tục!</p>
         </div>
         <form className="auth__form">
           <InputItem
-            label="Username"
-            placeholder="Type your username"
+            label="Tên Đăng Nhập"
+            placeholder="Nhập tên đăng nhập của bạn"
             type="text"
             icon="bx bx-user"
             name="username"
@@ -69,7 +69,7 @@ const Register = () => {
           />
           <InputItem
             label="Email"
-            placeholder="Type your email"
+            placeholder="Nhập email của bạn"
             type="email"
             icon="bx bx-envelope"
             name="email"
@@ -78,8 +78,8 @@ const Register = () => {
             message={register.message.email}
           />
           <InputItem
-            label="Password"
-            placeholder="Type your password"
+            label="Mật Khẩu"
+            placeholder="Nhập mật khẩu của bạn"
             type="password"
             icon="bx bx-lock-alt"
             name="password"
@@ -88,8 +88,8 @@ const Register = () => {
             message={register.message.password}
           />
           <InputItem
-            label="Confirm Password"
-            placeholder="Type your confirm password"
+            label="Xác Nhận Mật Khẩu"
+            placeholder="Nhập mật khẩu xác nhận của bạn"
             type="password"
             icon="bx bx-lock-alt"
             name="confirm_password"
@@ -98,12 +98,12 @@ const Register = () => {
             message={register.message.confirm_password}
           />
           <button className="auth__form__submit" onClick={registerSubmit}>
-            CREATE
+            Đăng Kí
           </button>
         </form>
         <div className="auth__bottom">
           <p>
-            Do you already have an account? <Link to="/login">Login</Link>
+            Bạn đã có tài khoản? <Link to="/login">Đăng Nhập</Link>
           </p>
         </div>
       </div>

@@ -201,6 +201,9 @@ const Products = (props) => {
                 {dateFormat(bill.created_at, "dd/mm/yyyy h:MM TT")}
               </div>
               <div className="order-detail__id">
+                <span>Địa Chỉ Nhận Hàng:</span> {bill.andress}
+              </div>
+              <div className="order-detail__id">
                 <span>Đơn Giá:</span> {numberWithCommas(bill.total_price)}
               </div>
               <div className="order-detail__id">

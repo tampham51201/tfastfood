@@ -3,6 +3,7 @@
     @include flex(flex-start, space-between);
 
     &__content{     
+        overflow:hidden ;
         flex:1;
         background-color: #f4f6f9;
         margin-left: 30rem;

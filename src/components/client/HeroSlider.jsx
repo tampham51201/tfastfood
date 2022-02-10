@@ -35,7 +35,7 @@ const HeroSlider = (props) => {
       >
         {props.data.map((item, index) => (
           <SwiperSlide className="hero-slider__item" key={index}>
-            <img src={item.img} alt="slider" />
+            <img src={`http://localhost:8000/${item.img}`} alt="slider" />
           </SwiperSlide>
         ))}
         <div className="hero-slider__control">

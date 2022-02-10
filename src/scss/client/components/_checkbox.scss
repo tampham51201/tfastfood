@@ -36,3 +36,14 @@
     }
 
 }
+.ant-checkbox
+{
+  margin-top: .5rem;
+
+  .ant-checkbox-checked .ant-checkbox-inner {
+    background-color: $second-color;
+    border-color: $second-color;
+
+  }
+ 
+}

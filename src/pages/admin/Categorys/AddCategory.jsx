@@ -55,21 +55,21 @@ const AddCategory = () => {
       <Container>
         <ContainerHeader>
           <ContainerTitle>
-            New Category
+            Thêm Danh Mục
             <ContainerDescription>
-              Add information and add new category.
+             Thêm thông tin và danh mục mới.
             </ContainerDescription>
           </ContainerTitle>
           <ContainerHeaderRight>
             <Link to="/admin/category">
-              <Button>Back</Button>
+              <Button>Trở Về</Button>
             </Link>
           </ContainerHeaderRight>
         </ContainerHeader>
         <ContainerBody>
           <form onSubmit={handleSubmit}>
             <InputItem
-              label="Category Title"
+              label="Tên Danh Mục"
               type="text"
               onChange={handleInputCategory}
               name="name"
@@ -77,7 +77,7 @@ const AddCategory = () => {
               message={category.message.name}
             />
             <InputItem
-              label="Description"
+              label="Mô Tả"
               type="textarea"
               onChange={handleInputCategory}
               name="description"
@@ -92,7 +92,7 @@ const AddCategory = () => {
               message={category.message.slug}
             />
             <InputItem
-              label="Status"
+              label="Trạng Thái"
               type="checkbox"
               onChange={(e) => {
                 const value = e.target.checked ? 1 : 0;
@@ -101,7 +101,7 @@ const AddCategory = () => {
               name="status"
               checked={checkStatus === 1 ? true : false}
             />
-            <Button submit>Add New</Button>
+            <Button submit>Thêm Mới</Button>
           </form>
         </ContainerBody>
       </Container>

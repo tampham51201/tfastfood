@@ -1,19 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { InputNumber, Rate, Comment, Avatar } from "antd";
-
+import { InputNumber, Rate } from "antd";
+import { notification } from "antd";
 import Breadcrumb from "../../components/client/Breadcrumb ";
 import Loading from "../Loading";
 import numberWithCommas from "../../utils/numberWithCommas";
 
+import Grid from "../../components/Grid";
+
+import ProductCard from "../../components/client/ProductCard";
+
 import productApi from "../../api/productApi";
 import Button from "../../components/client/Button";
-import { Input } from "antd";
+
+import Comment from "../../components/client/CommentUser";
+
+import Section, {
+  SectionTitle,
+  SectionBody,
+} from "../../components/client/Section";
+
+import dateFormat from "dateformat";
 
 import { useRef } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { addItems } from "../../redux/shopping-cart/cartItemsSlice";
+
+import { addItemsFavorite } from "../../redux/favorite-products/favoriteItemsSlice";
+
 import { getUser } from "../../redux/user/userSlice";
 
 import Helmet from "../../components/Helmet";
@@ -25,7 +40,12 @@ const Product = (props) => {
   let slug = props.match.params.slug;
 
   const [product, setProduct] = useState({});
+  const [productList, setProductList] = useState([]);
+  const [productsRelated, setProductsRelated] = useState([]);
+
   const [loading, setLoading] = useState(true);
+
+  const [totalStar, setTotalStar] = useState(5);
 
   const history = useHistory();
 
@@ -84,10 +104,38 @@ const Product = (props) => {
     productApi.getSlug(slug).then((res) => {
       const newProduct = res.data.product;
       console.log(newProduct);
+      var newtotalStar = 0;
+      if (newProduct.review.length !== 0) {
+        newtotalStar =
+          newProduct.review.reduce(
+            (total, item) => total + Number(item.rate_star),
+            0
+          ) / newProduct.review.length;
+      } else {
+        newtotalStar = 0;
+      }
+      setTotalStar(newtotalStar);
       setProduct(newProduct);
       setLoading(false);
+      window.scrollTo(0, 0);
     });
   }, [slug]);
+
+  useEffect(() => {
+    productApi.getAllStatus().then((res) => {
+      const newProductList = res.data.product;
+      console.log(newProductList);
+      setProductList(newProductList);
+    });
+  }, []);
+
+  useEffect(() => {
+    const newFeature = productList.filter(
+      (item) => item.category_id === product.category_id
+    );
+
+    setProductsRelated(newFeature.slice(0, 4));
+  }, [product, productList]);
 
   const addCart = () => {
     if (check()) {
@@ -100,9 +148,15 @@ const Product = (props) => {
           idUser: user === null || user.data === "" ? 0 : user.data.user.id,
         })
       );
-      alert("Đã thêm vào giỏ hàng!");
+      notification.success({
+        message: `Thành Công`,
+        description: "Đã Thêm Vào Giỏ Hàng",
+        duration: 2,
+        placement: "topRight",
+      });
     }
   };
+
   const addToCart = () => {
     if (check()) {
       dispatch(
@@ -115,7 +169,31 @@ const Product = (props) => {
         })
       );
       history.push("/cart");
-      alert("Đã thêm vào giỏ hàng!");
+      notification.success({
+        message: `Thành Công`,
+        description: "Đã Thêm Vào Giỏ Hàng",
+        duration: 2,
+        placement: "topRight",
+      });
+    }
+  };
+
+  const addFavorite = () => {
+    if (check()) {
+      dispatch(
+        addItemsFavorite({
+          idProduct: product.id,
+          slug: product.slug,
+          price: product.selling_price,
+          idUser: user === null || user.data === "" ? 0 : user.data.user.id,
+        })
+      );
+      notification.success({
+        message: `Thành Công`,
+        description: "Đã Thêm Vào Danh Sách Yêu Thích",
+        duration: 2,
+        placement: "topRight",
+      });
     }
   };
   if (loading) {
@@ -143,10 +221,11 @@ const Product = (props) => {
               <div className="product__info__item">
                 <Rate
                   disabled
-                  defaultValue={2}
+                  allowHalf
+                  defaultValue={totalStar}
                   className="product__info__item__rate"
                 />
-                {"  "} (1 Đánh Giá Của Khách Hàng)
+                {"  "} ({product.review.length} Đánh Giá Của Khách Hàng)
               </div>
 
               <div className="product__info__item">
@@ -180,6 +259,7 @@ const Product = (props) => {
                     Mua Hàng
                   </Button>
                   <Button
+                    onClick={addFavorite}
                     type="cricle"
                     icon="bx bxs-heart"
                     backgroundColor="second"
@@ -259,53 +339,81 @@ const Product = (props) => {
                 className="product__tab__content__comment"
                 ref={refContentComment}
               >
-                <Comment
-                  actions={[
-                    <span key="comment-nested-reply-to">Reply to</span>,
-                  ]}
-                  author={<a>Han Solo</a>}
-                  avatar={
-                    <Avatar
-                      src="https://joeschmoe.io/api/v1/random"
-                      alt="Han Solo"
-                    />
-                  }
-                  content={
-                    <p>
-                      We supply a series of design principles, practical
-                      patterns and high quality design resources (Sketch and
-                      Axure).
-                    </p>
-                  }
-                >
-                  <Comment
-                    actions={[
-                      <span key="comment-nested-reply-to">Reply to</span>,
-                    ]}
-                    author={<a>Han Solo</a>}
-                    avatar={
-                      <Avatar
-                        src="https://joeschmoe.io/api/v1/random"
-                        alt="Han Solo"
-                      />
-                    }
-                    content={
-                      <p>
-                        We supply a series of design principles, practical
-                        patterns and high quality design resources (Sketch and
-                        Axure).
-                      </p>
-                    }
-                  ></Comment>
-                </Comment>
+                <Comment comment={product.comment} idProduct={product.id} />
               </div>
               <div
                 className="product__tab__content__review"
                 ref={refContentReview}
               >
-                {product.description}
+                <div className="product__tab__content__review__rate-star">
+                  <Rate
+                    allowHalf
+                    className="product__tab__content__review__rate-star__star"
+                    defaultValue={totalStar}
+                    disabled
+                  />
+                  <span> ({totalStar} Trên 5 Sao)</span>
+                </div>
+                {product.review.map((item, index) => (
+                  <div
+                    className="product__tab__content__review__item"
+                    key={index}
+                  >
+                    <div className="product__tab__content__review__item__user">
+                      <div className="product__tab__content__review__item__user__avata">
+                        <i className="bx bxs-user-circle"></i>
+                      </div>
+                      <div className="product__tab__content__review__item__user__info">
+                        <span> {item.user.username}</span>
+                        <Rate
+                          allowHalf
+                          className="product__tab__content__review__item__user__info__star"
+                          defaultValue={item.rate_star}
+                          disabled
+                        />
+                      </div>
+                    </div>
+                    <div className="product__tab__content__review__item__content">
+                      {item.content}
+                    </div>
+                    <div className="product__tab__content__review__item__time">
+                      {dateFormat(item.created_at, "dd/mm/yyyy h:MM TT")}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
+          </div>
+          <div className="product__feature" style={{ marginTop: "10rem" }}>
+            <Section>
+              <SectionTitle>Món Ăn Liên Quan</SectionTitle>
+              <SectionBody>
+                {productsRelated.lenght !== 0 ? (
+                  <Grid col={4} mdCol={2} smCol={1} gap={1}>
+                    {productsRelated.map((item, index) => (
+                      <ProductCard
+                        key={index}
+                        slug={item.slug}
+                        img01={`${baseURL}/${item.img01}`}
+                        img02={`${baseURL}/${item.img02}`}
+                        name={item.name}
+                        idProduct={item.id}
+                        priceSell={item.selling_price}
+                        priceOld={item.orginal_price}
+                        border
+                        idUser={
+                          user === null || user.data === ""
+                            ? 0
+                            : user.data.user.id
+                        }
+                      />
+                    ))}
+                  </Grid>
+                ) : (
+                  ""
+                )}
+              </SectionBody>
+            </Section>
           </div>
         </div>
       </Helmet>

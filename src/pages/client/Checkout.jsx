@@ -18,11 +18,13 @@ import {
   DatePicker,
   Spin,
 } from "antd";
+import axios from "axios";
 
 import Button from "../../components/client/Button";
 import CartItem from "../../components/client/CartItem";
 import productApi from "../../api/productApi";
-import Loading from "../Loading";
+import discountApi from "../../api/discountApi";
+
 import Breadcrumb from "../../components/client/Breadcrumb ";
 import numberWithCommas, {
   numberWithCommasTotal,
@@ -31,6 +33,8 @@ import billsApi from "../../api/billsApi";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const Checkout = () => {
+  const { Option } = Select;
+
   const [form] = Form.useForm();
   const baseURL = "http://localhost:8000";
   const cartItemsAll = useSelector((state) => state.shoppingCart.value);
@@ -40,6 +44,18 @@ const Checkout = () => {
   const [cartProduct, setCartProduct] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [products, setProducts] = useState([]);
+
+  const [discount, setDiscount] = useState([]);
+  const [discountTotal, setDiscountTotal] = useState(0);
+  const [discountString, setDiscountString] = useState("");
+  const [discountMessage, setDiscountMessage] = useState("");
+  const [discountError, setDiscountError] = useState("");
+
+  const [shipfee, setShipfee] = useState(0);
+
+  const [states, setStates] = useState([]);
+  const [districts, setDistricts] = useState([]);
+  const [wards, setWards] = useState([]);
 
   const [totalProduct, setTotalProduct] = useState(0);
 
@@ -68,12 +84,89 @@ const Checkout = () => {
           full_name: user.data.user.full_name,
           email: user.data.user.email,
           mobile_phone: user.data.user.phone_number,
-          andress: user.data.user.andress,
+          // andress: user.data.user.andress,
         });
       }
     }
     setCartItems(newCartItems);
-  }, [cartItemsAll, user]);
+  }, [cartItemsAll, user, states]);
+
+  const handleGetDiscount = () => {
+    setDiscountTotal(0);
+    setDiscountMessage("");
+    const getDiscount = discount.filter(
+      (item) => item.idDiscount === discountString
+    );
+    if (getDiscount.length > 0) {
+      const time_start = new Date(getDiscount[0].time_start);
+      const time_end = new Date(getDiscount[0].time_end);
+      const date = new Date();
+
+      if (getDiscount[0].time_start === null) {
+        if (
+          getDiscount[0].quatity <= getDiscount[0].quatity_used &&
+          getDiscount[0].quatity !== 0
+        ) {
+          setDiscountError("Đã Hết Lượt Dùng");
+        } else {
+          if (getDiscount[0].unit === 0) {
+            setDiscountTotal((getDiscount[0].value / 100) * totalPrice);
+            setDiscountMessage(` (Giảm ${getDiscount[0].value}%) `);
+            setDiscountError(` (Giảm ${getDiscount[0].value}%) `);
+          } else {
+            setDiscountTotal(getDiscount[0].value);
+            setDiscountMessage(
+              ` (Giảm ${numberWithCommasTotal(getDiscount[0].value)})`
+            );
+            setDiscountError(
+              ` (Giảm ${numberWithCommasTotal(getDiscount[0].value)})`
+            );
+          }
+        }
+      } else {
+        if (time_start <= date && date <= time_end) {
+          if (
+            getDiscount[0].quatity <= getDiscount[0].quatity_used &&
+            getDiscount[0].quatity !== 0
+          ) {
+            setDiscountError("Đã Hết Lượt Dùng");
+          } else {
+            if (getDiscount[0].unit === 0) {
+              setDiscountTotal((getDiscount[0].value / 100) * totalPrice);
+              setDiscountMessage(` (Giảm ${getDiscount[0].value}%) `);
+              setDiscountError(` (Giảm ${getDiscount[0].value}%) `);
+            } else {
+              setDiscountTotal(getDiscount[0].value);
+              setDiscountMessage(
+                ` (Giảm ${numberWithCommasTotal(getDiscount[0].value)})`
+              );
+              setDiscountError(
+                ` (Giảm ${numberWithCommasTotal(getDiscount[0].value)})`
+              );
+            }
+          }
+        } else {
+          if (time_start > date) {
+            setDiscountError("Mã Giảm Giá Chưa Được Mở");
+          } else {
+            setDiscountError("Mã Giảm Giá Đã Hết Hạn");
+          }
+        }
+      }
+    } else {
+      setDiscountError("Mã Giảm Giá Không Tồn Tại!");
+    }
+  };
+
+  useEffect(() => {
+    discountApi.getAll().then((res) => {
+      if (res.data.status === 200) {
+        const newDiscounts = res.data.discounts;
+
+        setDiscount(newDiscounts);
+      }
+    });
+  }, []);
 
   useEffect(() => {
     productApi.getAll().then((res) => {
@@ -84,6 +177,52 @@ const Checkout = () => {
       }
     });
   }, []);
+
+  useEffect(() => {
+    axios.get("https://provinces.open-api.vn/api/?depth=3").then((res) => {
+      const newState = res.data.filter(
+        (item) => item.code === 46 || item.code === 48 || item.code === 49
+      );
+
+      setStates(newState);
+    });
+  }, []);
+
+  const onChangeState = (value) => {
+    const statesCheck = states.filter((item) => item.code === value);
+
+    switch (value) {
+      case 46:
+        setShipfee(25000);
+        break;
+      case 48:
+        setShipfee(20000);
+        break;
+
+      case 49:
+        setShipfee(30000);
+        break;
+    }
+
+    setDistricts(statesCheck[0].districts);
+    form.setFieldsValue({
+      districts_name: null,
+      wards_name: null,
+    });
+  };
+
+  const onChangeDistrict = (value) => {
+    const districtCheck = districts.filter((item) => item.name === value);
+
+    setWards(districtCheck[0].wards);
+    form.setFieldsValue({
+      wards_name: null,
+    });
+  };
+
+  const handleOnChangeDiscount = (value) => {
+    setDiscountString(value.target.value);
+  };
 
   useEffect(() => {
     let res = [];
@@ -106,12 +245,14 @@ const Checkout = () => {
       )
     );
   }, [cartItems, products]);
+
   const onFinish = (value) => {
     const data = {
       ...value,
       id_user: user === null || user.data === "" ? "0" : user.data.user.id,
       product_list: cartProduct,
-      total_price: totalPrice + 15000,
+      total_price: totalPrice - discountTotal + shipfee,
+      andress: `${value["andress"]}, ${value["wards_name"]}, ${value["districts_name"]}, ${value["states_name"]}`,
     };
 
     billsApi.addBill(data).then((res) => {
@@ -142,7 +283,6 @@ const Checkout = () => {
         <div className="checkout__info">
           <div className="checkout__info__txt">
             <h2>Sản Phẩm</h2>
-
             <div className="checkout__list">
               {cartProduct.map((item, index) => (
                 <div className="checkout__item" key={index}>
@@ -168,18 +308,6 @@ const Checkout = () => {
               ))}
             </div>
           </div>
-
-          {/* <div className="checkout__info__btn">
-            <Link
-              to="/checkout"
-              style={{ marginBottom: "1rem", display: "block" }}
-            >
-              <Button backgroundColor="second">ĐẶT HÀNG</Button>
-            </Link>
-            <Link to="/">
-              <Button backgroundColor="second">TIẾP TỤC MUA HÀNG</Button>
-            </Link>
-          </div> */}
         </div>
         <div className="checkout__info">
           <div className="checkout__info__txt">
@@ -190,6 +318,37 @@ const Checkout = () => {
               <span>Thay Đổi</span>
             </div>
           </div>
+          <div className="checkout__info__txt">
+            <h2 style={{ marginTop: "3rem" }}>Mã Giảm Giá</h2>
+          </div>
+          <div className="checkout__info__customer">
+            <Form.Item
+              label="Nhập Mã Giảm Giá Nếu Có"
+              name="checkout_discount"
+              style={{ display: "block" }}
+              help={discountError}
+            >
+              <Input
+                size="large"
+                onChange={handleOnChangeDiscount}
+                style={{
+                  marginTop: "1rem",
+                }}
+              />
+            </Form.Item>
+            <Form.Item style={{ width: "100%" }}>
+              <Button
+                backgroundColor="second"
+                onClick={handleGetDiscount}
+                type="button"
+
+                // type="button"
+              >
+                ÁP DỤNG
+              </Button>
+            </Form.Item>
+          </div>
+
           <div className="checkout__info__txt">
             <h2 style={{ marginTop: "3rem" }}>Thông Tin Nhận Hàng</h2>
           </div>
@@ -208,7 +367,6 @@ const Checkout = () => {
               <Form.Item
                 label="Họ Và Tên"
                 name="full_name"
-                // hasFeedback
                 style={{ marginBottom: ".5rem" }}
                 rules={[
                   {
@@ -225,28 +383,12 @@ const Checkout = () => {
                 label="Email"
                 name="email"
                 style={{ marginBottom: ".5rem" }}
-                // hasFeedback
                 rules={[
                   {
                     required: true,
                     message: "Vui Lòng Nhập Trường Này!",
                   },
                 ]}
-              >
-                <Input />
-              </Form.Item>
-
-              <Form.Item
-                label="Địa Chỉ"
-                name="andress"
-                style={{ marginBottom: ".5rem" }}
-                rules={[
-                  {
-                    required: true,
-                    message: "Vui Lòng Chọn Trường Này!",
-                  },
-                ]}
-                // hasFeedback
               >
                 <Input />
               </Form.Item>
@@ -264,6 +406,112 @@ const Checkout = () => {
               >
                 <Input />
               </Form.Item>
+              <Form.Item
+                label="Tỉnh Thành"
+                name="states_name"
+                rules={[
+                  {
+                    required: true,
+                    message: "Vui Lòng Chọn Trường Này!",
+                  },
+                ]}
+              >
+                <Select
+                  showSearch
+                  // style={{ width: "100%" }}
+                  placeholder="Chọn Tỉnh Thành"
+                  optionFilterProp="children"
+                  onChange={onChangeState}
+                  filterOption={(input, option) =>
+                    option.children
+                      .toLowerCase()
+                      .indexOf(input.toLowerCase()) >= 0
+                  }
+                >
+                  {states.map((item, index) => (
+                    <Option key={index} value={item.code}>
+                      {item.name}
+                    </Option>
+                  ))}
+                </Select>
+              </Form.Item>
+
+              <Form.Item
+                label="Quận Huyện"
+                style={{ marginTop: "-2rem" }}
+                name="districts_name"
+                rules={[
+                  {
+                    required: true,
+                    message: "Vui Lòng Chọn Trường Này!",
+                  },
+                ]}
+              >
+                <Select
+                  showSearch
+                  // style={{ width: "100%" }}
+                  placeholder="Chọn Quận Huyện"
+                  optionFilterProp="children"
+                  onChange={onChangeDistrict}
+                  filterOption={(input, option) =>
+                    option.children
+                      .toLowerCase()
+                      .indexOf(input.toLowerCase()) >= 0
+                  }
+                >
+                  {districts.map((item, index) => (
+                    <Option key={index} value={item.name}>
+                      {item.name}
+                    </Option>
+                  ))}
+                </Select>
+              </Form.Item>
+
+              <Form.Item
+                label="Phường Xã"
+                style={{ marginTop: "-2rem" }}
+                name="wards_name"
+                rules={[
+                  {
+                    required: true,
+                    message: "Vui Lòng Chọn Trường Này!",
+                  },
+                ]}
+              >
+                <Select
+                  showSearch
+                  // style={{ width: "100%" }}
+                  placeholder="Chọn Phường Xã"
+                  optionFilterProp="children"
+                  // onChange={onChangeDistrict}
+                  filterOption={(input, option) =>
+                    option.children
+                      .toLowerCase()
+                      .indexOf(input.toLowerCase()) >= 0
+                  }
+                >
+                  {wards.map((item, index) => (
+                    <Option key={index} value={item.name}>
+                      {item.name}
+                    </Option>
+                  ))}
+                </Select>
+              </Form.Item>
+
+              <Form.Item
+                label="Địa Chỉ Chi Tiết( Số Nhà, Đường)"
+                name="andress"
+                style={{ marginBottom: ".5rem", marginTop: "-2rem" }}
+                rules={[
+                  {
+                    required: true,
+                    message: "Vui Lòng Chọn Trường Này!",
+                  },
+                ]}
+              >
+                <Input />
+              </Form.Item>
+
               <div className="checkout__info__txt">
                 <h2 style={{ marginTop: "3rem", marginBottom: "1rem" }}>
                   Hóa Đơn
@@ -274,11 +522,13 @@ const Checkout = () => {
                 </div>
                 <div className="checkout__info__txt__method">
                   <span>Phí Vận Chuyển</span>
-                  <span>{numberWithCommasTotal(15000)}</span>
+                  <span>{numberWithCommasTotal(shipfee)}</span>
                 </div>
                 <div className="checkout__info__txt__method">
                   <span>Giảm Giá</span>
-                  <span>{numberWithCommasTotal(0)}</span>
+                  <span>
+                    {discountMessage} - {numberWithCommasTotal(discountTotal)}
+                  </span>
                 </div>
                 <div className="checkout__info__txt__method">
                   <span>Vat</span>
@@ -286,22 +536,17 @@ const Checkout = () => {
                 </div>
                 <div className="checkout__info__txt__method">
                   <span>Tổng Thanh Toán</span>
-                  <span>{numberWithCommasTotal(totalPrice + 15000)}</span>
+                  <span>
+                    {numberWithCommasTotal(
+                      totalPrice - discountTotal + shipfee
+                    )}
+                  </span>
                 </div>
               </div>
               <Form.Item style={{ width: "100%" }}>
                 <Button backgroundColor="second" type="submit">
                   ĐẶT HÀNG
                 </Button>
-
-                {/* <Button
-                type="primary"
-                htmlType="submit"
-                className="login-form-button"
-                style={{ width: "10rem" }}
-              >
-                Lưu
-              </Button> */}
               </Form.Item>
             </Form>
           </div>

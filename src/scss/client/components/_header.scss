@@ -132,6 +132,7 @@
             @include flex(center,flex-start);
              @include tablet{
                 flex-grow: 1;
+                // font-size: 1.4rem;
                justify-content: center;
             }
             @include mobile{
@@ -549,6 +550,8 @@
                     @include tablet{
                         @include flex(center,flex-start);
                         flex-direction: column;
+                        font-size: 1.4rem;
+                        
                       
                     }
                 }

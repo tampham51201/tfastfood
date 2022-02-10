@@ -5,6 +5,8 @@ import logo from "../../assets/Image/footer-logo_1.png";
 import Button from "./Button";
 import NavTopItem from "./NavTopItem";
 
+import numberWithCommas from "../../utils/numberWithCommas";
+
 import { useSelector, useDispatch } from "react-redux";
 import { getUser } from "../../redux/user/userSlice";
 
@@ -13,48 +15,10 @@ import swal from "sweetalert";
 
 import categoryApi from "../../api/categoryApi";
 import productApi from "../../api/productApi";
+import infoShopApi from "../../api/infoShopApi";
 
 const img =
   require("../../assets/Image/Product/brown-bear-printed-sweater.jpg").default;
-
-const cardList = [
-  {
-    id: 1,
-    title: "Quaerat outt voluptatem ewuaerat outt voluptatem 1",
-    img: img,
-    price: "10$",
-  },
-  {
-    id: 2,
-    title: "quaerat outt voluptatem 2",
-    img: img,
-    price: "33$",
-  },
-  {
-    id: 3,
-    title: "quaerat outt voluptatem 3",
-    img: img,
-    price: "55$",
-  },
-  {
-    id: 4,
-    title: "quaerat outt voluptatem 4",
-    img: img,
-    price: "100$",
-  },
-  {
-    id: 4,
-    title: "quaerat outt voluptatem 4",
-    img: img,
-    price: "100$",
-  },
-  {
-    id: 4,
-    title: "quaerat outt voluptatem 4",
-    img: img,
-    price: "100$",
-  },
-];
 
 const Header = () => {
   const baseURL = "http://localhost:8000";
@@ -127,10 +91,9 @@ const Header = () => {
         name: "Đăng Nhập",
         path: "/login",
       },
-
       {
-        name: "Sản phẩm yêu thích",
-        path: "/wishlist",
+        name: "Sản Phẩm Yêu Thích",
+        path: "/my-favorite",
       },
     ];
   } else {
@@ -144,7 +107,7 @@ const Header = () => {
 
           {
             name: "Sản Phẩm Yêu Thích",
-            path: "/wishlist",
+            path: "/my-favorite",
           },
           {
             name: "Đơn Hàng",
@@ -157,30 +120,57 @@ const Header = () => {
           },
         ];
       } else {
-        authButton = [
-          {
-            name: "Thông tin cá nhân",
-            path: "/profile",
-          },
+        if (user.data.user.role_as == 1) {
+          authButton = [
+            {
+              name: "Thông tin cá nhân",
+              path: "/profile",
+            },
 
-          {
-            name: "sản phẩm yêu thích",
-            path: "/wishlist",
-          },
-          {
-            name: "Đơn Hàng",
-            path: "/history-order",
-          },
-          {
-            name: "trang quản trị",
-            path: "/admin",
-          },
+            {
+              name: "Sản Phẩm Yêu Thích",
+              path: "/my-favorite",
+            },
+            {
+              name: "Đơn Hàng",
+              path: "/history-order",
+            },
+            {
+              name: "Trang quản trị",
+              path: "/admin/order",
+            },
 
-          {
-            name: "Đăng Xuất",
-            path: "/login",
-          },
-        ];
+            {
+              name: "Đăng Xuất",
+              path: "/login",
+            },
+          ];
+        } else {
+          authButton = [
+            {
+              name: "Thông tin cá nhân",
+              path: "/profile",
+            },
+
+            {
+              name: "Sản Phẩm Yêu Thích",
+              path: "/my-favorite",
+            },
+            {
+              name: "Đơn Hàng",
+              path: "/history-order",
+            },
+            {
+              name: "Trang quản trị",
+              path: "/admin",
+            },
+
+            {
+              name: "Đăng Xuất",
+              path: "/login",
+            },
+          ];
+        }
       }
     }
   }
@@ -238,6 +228,19 @@ const Header = () => {
         const newCategoryList = res.data.categorys;
         console.log(newCategoryList);
         setCategorys(newCategoryList);
+      }
+    });
+  }, []);
+
+  const [infoShop, setInfoShop] = useState({});
+  useEffect(() => {
+    infoShopApi.getInfo().then((res) => {
+      if (res.data.status === 200) {
+        const newInfoshop = res.data.infoshop;
+        console.log(newInfoshop);
+        setInfoShop(newInfoshop);
+
+        setLoading(false);
       }
     });
   }, []);
@@ -301,7 +304,8 @@ const Header = () => {
           <div className="header__top-nav__left">
             <i className="bx bxs-purchase-tag"></i>
             <p style={{ fontSize: "1.3rem" }}>
-              Được Hoàn Tiền Lên Đến 25% Khi Mua Đơn Hàng Đầu Tiên : GET25OFF
+              {infoShop.header_sale}
+              {/* Được Hoàn Tiền Lên Đến 25% Khi Mua Đơn Hàng Đầu Tiên : GET25OFF */}
             </p>
           </div>
           <div className="header__top-nav__right">
@@ -324,7 +328,10 @@ const Header = () => {
           <div className="header__main__top">
             <div className="header__main__top__logo">
               <Link to="/">
-                <img src={logo} alt="logo" />
+                <img
+                  src={`http://localhost:8000/${infoShop.logo}`}
+                  alt="logo"
+                />
               </Link>
             </div>
 
@@ -342,7 +349,7 @@ const Header = () => {
 
               <div className="header__main__top__item__content">
                 <p>Đặt Hàng Gọi</p>
-                <p>0339045945</p>
+                <p>{infoShop.mobile_phone}</p>
               </div>
             </div>
 
@@ -417,7 +424,7 @@ const Header = () => {
                               </div>
 
                               <p>{item.product.name}</p>
-                              <p>{item.price}</p>
+                              <p>{numberWithCommas(item.price)}</p>
                             </li>
                           </Link>
                         ))}

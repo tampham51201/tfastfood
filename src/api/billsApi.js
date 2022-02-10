@@ -16,13 +16,18 @@ const billsApi = {
     return axiosClient.get(url);
   },
 
+  getBillDayPrice: (data) => {
+    const url = `/api/view-bill-order`;
+    return axiosClient.post(url, data);
+  },
+
   getBillUser: () => {
     const url = `/api/get-bill-user`;
     return axiosClient.get(url);
   },
 
-  getSlug: (slug) => {
-    const url = `/api/slug-category/${slug}`;
+  getAllGroupBy: () => {
+    const url = `/api/get-bill-group`;
     return axiosClient.get(url);
   },
   getStatus: () => {

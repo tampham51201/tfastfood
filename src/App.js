@@ -8,6 +8,9 @@ import {
 } from "react-router-dom";
 
 import Login from "./pages/client/Login";
+import ForgotPassword from "./pages/client/ForgotPassword";
+import ResetPassword from "./pages/client/ResetPassword";
+
 import Register from "./pages/client/Register";
 import AdminPrivateRoute from "./AdminPrivateRoute";
 import PublicRoute from "./PublicRoute";
@@ -28,11 +31,25 @@ const App = () => {
               <Login />
             )}
           </Route>
+
+          <Route
+            path="/reset-password/:emailUser/:token"
+            component={ResetPassword}
+          />
+
           <Route path="/register">
             {localStorage.getItem("auth_token") ? (
               <Redirect to="/" />
             ) : (
               <Register />
+            )}
+          </Route>
+
+          <Route path="/forgot-password">
+            {localStorage.getItem("auth_token") ? (
+              <Redirect to="/" />
+            ) : (
+              <ForgotPassword />
             )}
           </Route>
 

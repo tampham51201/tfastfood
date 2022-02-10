@@ -86,14 +86,14 @@ const Users = () => {
     <div>
       <Container>
         <ContainerHeader>
-          <h3>Users</h3>
+          <h3>Người Dùng</h3>
           <ContainerHeaderRight>
             <InputItem
               searchbox
               type="text"
               onChange={handleSearch}
               value={searchInput}
-              placeholder="Search by username"
+              placeholder="Tìm theo tên đăng nhập..."
             />
 
             <Link to="/admin/user-add">

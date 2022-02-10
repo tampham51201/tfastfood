@@ -24,15 +24,17 @@
             //     margin-bottom: 1.6rem ;
             // }
             h2{
+              
                 font-family: 'Mitr', sans-serif !important;
                 margin-bottom: 0rem;
             }
             &__method{
         
                 @include flex(center,space-between);
-                font-size: 1.3rem;
-                font-weight: 600;
-                margin-bottom: .5rem;
+                font-size: 1.4rem;
+                font-weight: 500;
+                margin-top: .5rem;
+                margin-bottom: 1rem;
 
                 span:nth-child(2){
                     color: $main-color;
@@ -171,6 +173,9 @@
             }
     
         }
+    }
+    .ant-form-item-explain-success{
+        color: red;
     }
 
 }

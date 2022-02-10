@@ -19,6 +19,16 @@ import AddProduct from "../pages/admin/Products/AddProduct";
 import Orders from "../pages/admin/Order/Orders";
 import OrderDetail from "../pages/admin/Order/OrderDetail";
 
+import Banner from "../pages/admin/Banner/Banner";
+import EditBanner from "../pages/admin/Banner/EditBanner";
+import AddBanner from "../pages/admin/Banner/AddBanner";
+
+import Discounts from "../pages/admin/Discounts/Discounts";
+import AddDiscount from "../pages/admin/Discounts/AddDiscount";
+import EditDiscount from "../pages/admin/Discounts/EditDiscount";
+
+import InfoShop from "../pages/admin/InfoShop/InfoShop";
+
 const RoutersAdmin = () => {
   return (
     <Switch>
@@ -44,11 +54,33 @@ const RoutersAdmin = () => {
       <Route exact={true} path="/admin/product-add" component={AddProduct} />
 
       <Route exact={true} path="/admin/order" component={Orders} />
+
       <Route
         exact={true}
         path="/admin/details-order/:id"
         component={OrderDetail}
       />
+      <Route exact={true} path="/admin/banner" component={Banner} />
+
+      <Route exact={true} path="/admin/banner-add" component={AddBanner} />
+
+      <Route
+        exact={true}
+        path="/admin/banner-edit/:id"
+        component={EditBanner}
+      />
+
+      <Route exact={true} path="/admin/discount" component={Discounts} />
+
+      <Route exact={true} path="/admin/discount-add" component={AddDiscount} />
+
+      <Route
+        exact={true}
+        path="/admin/discount-edit/:id"
+        component={EditDiscount}
+      />
+
+      <Route exact={true} path="/admin/info-shop" component={InfoShop} />
 
       <Redirect from="/admin" to="/admin/doahboard" />
     </Switch>

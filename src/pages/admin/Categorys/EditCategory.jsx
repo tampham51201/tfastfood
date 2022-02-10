@@ -69,21 +69,21 @@ const EditCategory = (props) => {
       <Container>
         <ContainerHeader>
           <ContainerTitle>
-            Edit Category
+           Chỉnh Sửa Danh Mục
             <ContainerDescription>
-              Edit information ategory.
+             Chỉnh sửa thông tin danh mục.
             </ContainerDescription>
           </ContainerTitle>
           <ContainerHeaderRight>
             <Link to="/admin/category">
-              <Button>Back</Button>
+              <Button>Trở Về</Button>
             </Link>
           </ContainerHeaderRight>
         </ContainerHeader>
         <ContainerBody>
           <form onSubmit={handleSubmit}>
             <InputItem
-              label="Category Title"
+              label="Tên Danh Mục"
               type="text"
               onChange={handleInputCategory}
               name="name"
@@ -91,7 +91,7 @@ const EditCategory = (props) => {
               message={error.name}
             />
             <InputItem
-              label="Description"
+              label="Mô Tả"
               type="textarea"
               onChange={handleInputCategory}
               name="description"
@@ -107,7 +107,7 @@ const EditCategory = (props) => {
               message={error.slug}
             />
             <InputItem
-              label="Status"
+              label="Trạng Thái"
               type="checkbox"
               onChange={(e) => {
                 const value = e.target.checked ? 1 : 0;
@@ -116,7 +116,7 @@ const EditCategory = (props) => {
               name="status"
               checked={checkStatus === 1 ? true : false}
             />
-            <Button submit>Edit Category</Button>
+            <Button submit>Lưu</Button>
           </form>
         </ContainerBody>
       </Container>

@@ -124,14 +124,14 @@ const EditProduct = (props) => {
       <Container>
         <ContainerHeader>
           <ContainerTitle>
-            Edit Product
+           Chỉnh Sửa Sản Phẩm
             <ContainerDescription>
-              Edit information product.
+           Chỉnh sửa thông tin sản phẩm.
             </ContainerDescription>
           </ContainerTitle>
           <ContainerHeaderRight>
             <Link to="/admin/product">
-              <Button>Back</Button>
+              <Button>Trở Về</Button>
             </Link>
           </ContainerHeaderRight>
         </ContainerHeader>
@@ -142,11 +142,11 @@ const EditProduct = (props) => {
               onChange={handleInputProduct}
               value={`${product.category_id}`}
               data={categorys}
-              label="Select Category"
+              label="Chọn Danh Mục"
               // message={errors.category_id}
             />
             <InputItem
-              label="Product Title"
+              label="Tên Sản Phẩm"
               type="text"
               onChange={handleInputProduct}
               name="name"
@@ -164,7 +164,7 @@ const EditProduct = (props) => {
             />
 
             <InputItem
-              label="Orginal Price"
+              label="Giá Cũ"
               type="text"
               onChange={handleInputProduct}
               name="orginal_price"
@@ -172,7 +172,7 @@ const EditProduct = (props) => {
               message={errors.orginal_price}
             />
             <InputItem
-              label="Selling Price"
+              label="Giá Mới"
               type="text"
               onChange={handleInputProduct}
               name="selling_price"
@@ -180,7 +180,7 @@ const EditProduct = (props) => {
               message={errors.selling_price}
             />
             <InputItem
-              label="Quantity"
+              label="Số Lượng"
               type="text"
               onChange={handleInputProduct}
               name="qty"
@@ -188,7 +188,7 @@ const EditProduct = (props) => {
               message={errors.qty}
             />
             <InputItem
-              label="Image"
+              label="Ảnh"
               type="file"
               onChange={handleFiletProduct}
               name="img01"
@@ -214,7 +214,7 @@ const EditProduct = (props) => {
             )} */}
 
             <InputItem
-              label="Description"
+              label="Mô Tả"
               type="ckedit"
               onChange={(value) => {
                 handleDescProduct(value);
@@ -223,27 +223,27 @@ const EditProduct = (props) => {
             />
 
             <InputItem
-              label="Featured"
+              label="Đặc Sắc"
               type="checkbox"
               onChange={handleCheck}
               name="featured"
               checked={check.featured === 1 ? true : false}
             />
             <InputItem
-              label="Popular"
+              label="Phổ Biến"
               type="checkbox"
               onChange={handleCheck}
               name="popular"
               checked={check.popular === 1 ? true : false}
             />
             <InputItem
-              label="Status"
+              label="Trạng Thái"
               type="checkbox"
               onChange={handleCheck}
               checked={check.status === 1 ? true : false}
               name="status"
             />
-            <Button submit>Add New</Button>
+            <Button submit>Lưu</Button>
           </form>
         </ContainerBody>
       </Container>

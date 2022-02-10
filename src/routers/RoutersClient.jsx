@@ -9,6 +9,7 @@ import Product from "../pages/client/Product";
 import Profile from "../pages/client/Profile";
 import Checkout from "../pages/client/Checkout";
 import HistoryOrder from "../pages/client/HistoryOrder";
+import MyFavorite from "../pages/client/MyFavorite";
 
 const RoutersClient = () => {
   return (
@@ -25,6 +26,8 @@ const RoutersClient = () => {
         exact={true}
         component={HistoryOrder}
       />
+
+      <Route exact path="/my-favorite" exact={true} component={MyFavorite} />
 
       <Route exact path="/profile">
         {!localStorage.getItem("auth_token") ? (

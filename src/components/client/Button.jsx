@@ -10,7 +10,7 @@ const Button = (props) => {
     <button
       className={`btn ${bg} ${type} ${size}`}
       onClick={props.onClick ? () => props.onClick() : null}
-      type={props.type === "submit" ? "submit" : ""}
+      type={props.type === "submit" ? "submit" : "button"}
     >
       {props.icon ? (
         <span className="btn-icon">

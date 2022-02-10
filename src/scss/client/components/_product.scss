@@ -2,12 +2,24 @@
 
     margin-top: 5rem;
     font-family: 'Mitr', sans-serif;
+    @include mobile{
+        padding: 0 2rem
+     }
     &__container{
         @include flex(flex-start,space-between);
+        @include mobile{
+           flex-direction: column;
+           justify-content: flex-start;
+           align-items: flex-start;
+        }
     }
     &__img{
         flex:1;
         @include flex(center,center);
+        @include mobile{
+            width: 100%;
+            margin-bottom: 3rem;
+         }
         img{
             transition: .3s linear;
         }
@@ -164,6 +176,168 @@
                     opacity: 1;
                     visibility: visible;
                     height: max-content;
+                }
+            }
+
+            &__review{
+                &__rate-star{
+                    background: white;
+                    box-shadow: $box-shadow;
+                    margin-bottom: 2rem;
+                    border-bottom: .2rem solid $main-color;
+                    padding: 1.6rem;
+                    &__star{
+                        color:$main-color;
+                        font-size: 2.2rem;
+                    }
+                }
+                &__item{
+                    padding-bottom: 1rem;
+                    border-bottom: .1rem solid 
+                    $border-color;
+                    margin-bottom: 1rem;
+                    &__user{
+                        @include flex(center,flex-start);
+                        &__avata{
+                            width: 5rem;
+                            height: 5rem;
+                            @include flex(center,center);
+                            i{
+                                font-size: 4rem;
+                                
+                            }
+                      
+                        }
+                        &__info
+                        {  font-size: 1.2rem;
+                            span{
+                                display: block;
+                              
+                            }
+                            &__star{
+                                font-size: 1.4rem;
+                                li{
+                                    margin-right: .2rem !important;
+                                }
+                            }
+                        }
+                    }
+
+                &__content{
+                    padding-left: 5rem;
+                    font-family: 'Roboto Condensed', sans-serif;     
+                    color: #000000;
+
+                    font-size: 1.5rem;
+                    
+                }
+                &__time{
+                          padding-left: 5rem;
+                    font-family: 'Roboto Condensed',sans-serif; 
+                    margin-top:1rem ;
+                }
+                   
+                }
+            }
+            &__comment{
+                &__item,&__item__reply{
+                    
+                   
+                    .ant-comment-inner{
+                        padding: 0;
+                        margin-top: .4rem;
+                      
+                    }
+                    .ant-comment-content{
+                        p{
+                            height: max-content !important;
+                        }
+                        background: #f0f2f5;
+                        padding: 1rem 1.4rem;
+                        border-radius: 2.2rem;
+                        font-family: 'Roboto', sans-serif;     
+                        // background: #d32b25;
+                        color: #000000;
+                        .ant-comment-content-author{
+                            margin-bottom: 0;
+                        }
+                        .ant-comment-content-author-name{
+                            color: #000000;
+                            font-weight: 600;
+                            font-size: 1.3rem;
+
+                           
+                        }
+                        .ant-input{
+                            border-radius: 4rem;
+                        }
+                        .ant-comment-actions{
+                            margin-top: .2rem;
+                            span{
+                                color: #333030;
+                                font-size: 1.2rem;
+                                font-weight: 600;
+                            }
+                        }
+                        .ant-form-item-control-input-content{
+                            text-align: right;
+                        }
+                        .ant-form-item{
+                            margin-bottom: .5rem;
+                        }
+                       
+                       
+                    }
+                }
+                &__item
+                {
+                    &.active &__reply {
+                        display: block !important;
+                    }
+                    &.active &__reply__write {
+                        display: block !important;
+                    }
+                }
+                &__item__write{
+                    .ant-input{
+                        border-radius: 4rem;
+                        padding: .5rem 2rem;
+         
+                    }
+                    .ant-form-item-control-input-content{
+                        text-align: right;
+                        font-family: 'Roboto', sans-serif;     
+                    }
+                    .ant-comment-actions{
+                        margin-top: .2rem;
+                        span{
+                            color: #333030;
+                            font-size: 1.2rem;
+                            font-weight: 600;
+                        }
+                    }
+                    .ant-form-item{
+                        margin-bottom: .5rem;
+                    }
+
+                }
+                &__item__reply{
+                    display: none !important; 
+                    overflow: hidden;
+                
+                    &__write
+                    {
+                        display: none !important; 
+                        overflow: hidden;
+                    
+                        .ant-comment-content{
+                            background: #ffffff;
+                          
+                            padding: 0;
+                            border-radius: 2.2rem;
+                        } 
+                        
+                    }
                 }
             }
             

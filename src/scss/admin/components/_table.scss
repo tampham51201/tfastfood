@@ -1,8 +1,20 @@
+.table{
+   
+    width: 100%;
+    // min-width: 1;
+    overflow-y: scroll;
+    &>table{
+      min-width: 110rem;
+    }
+}
+
 table {
  
 
     border-collapse: collapse;
     width: 100%;
+   
+  
     box-shadow: $box-shadow;
     background-color: $main-bg ;
     font-size: 1.5rem;
@@ -26,7 +38,7 @@ table {
     .edit,.delete{
         width: 10rem;
         padding: 12px;
-        text-align: center;
+        text-align: left;
     }
     a{
         font-family: 'Poppins', sans-serif;

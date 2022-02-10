@@ -55,13 +55,13 @@ const Login = () => {
             </Link>
           </div>
           <div className="auth__title">
-            <h3>Login</h3>
-            <p>Please login to continue!</p>
+            <h3>Đăng Nhập</h3>
+            <p>Vui Lòng Đăng Nhập Để Tiếp Tục!</p>
           </div>
           <form className="auth__form" onSubmit={handleSubmit}>
             <InputItem
-              label="Email or username"
-              placeholder="Type your username or email"
+              label="Email hoặc tên đăng nhập"
+              placeholder="Nhập email hoặc tên đăng nhập của bạn"
               type="text"
               icon="bx bx-user"
               name="username"
@@ -70,8 +70,8 @@ const Login = () => {
               message={login.message.username}
             />
             <InputItem
-              label="Password"
-              placeholder="Type your password"
+              label="Mật Khẩu"
+              placeholder="Mật khẩu của bạn"
               type="password"
               icon="bx bx-lock-alt"
               name="password"
@@ -81,14 +81,14 @@ const Login = () => {
             />
 
             <div className="auth__form__forgot">
-              <Link to="/forgot">Forgot password?</Link>
+              <Link to="/forgot-password">Quên Mật Khẩu?</Link>
             </div>
             <button type="submit" className="auth__form__submit">
-              LOGIN
+              Đăng Nhập
             </button>
           </form>
           <div className="auth__bottom">
-            Do not have an account? <Link to="/register">Register</Link>
+            Bạn Chưa Có Tài Khoản? <Link to="/register">Tạo Tài Khoản</Link>
           </div>
         </div>
       </div>

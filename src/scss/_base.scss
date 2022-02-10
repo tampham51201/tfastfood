@@ -20,6 +20,7 @@
 }
 html{
     font-size: 62.5%;
+    scroll-behavior: smooth;
 }
 body{
     font-family: 'Roboto Condensed', sans-serif;     
@@ -106,6 +107,28 @@ form{
     width: 100%;
  
    margin: 0 auto;
+
+}
+
+.time_picker_admin{
+    label{
+        color: #666666;
+        display: block;
+        width: 100%;
+    }
+    .ant-form-item-control{
+        display: block;
+    }
+    .item_time_admin{
+        border-color:#ada9b9 ;
+        border-radius: .8rem;
+        box-shadow: #ada9b9 !important;
+    
+    }
+    .item_time_admin:focus{
+        color: red;
+        border-color:red ;
+    }
 
 }
 

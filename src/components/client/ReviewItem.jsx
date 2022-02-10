@@ -5,6 +5,7 @@ import InputItem from "../../components/admin/InputItem";
 import { notification, Rate } from "antd";
 import Button from "../../components/client/Button";
 import { numberWithCommasTotal } from "../../utils/numberWithCommas";
+import reviewApi from "../../api/reviewApi";
 
 const ReviewItem = (props) => {
   const item = props.item;
@@ -27,6 +28,17 @@ const ReviewItem = (props) => {
       content: content,
       id_product: props.idProduct,
     };
+    reviewApi.addReview(data).then((res) => {
+      if (res.data.status === 200) {
+        notification.success({
+          message: `Thành Công`,
+          description: res.data.message,
+          duration: 2,
+          placement: "topRight",
+        });
+        reviewRef.current.classList.toggle("toggle");
+      }
+    });
     console.log(data);
   };
 

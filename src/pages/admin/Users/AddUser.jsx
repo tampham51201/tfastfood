@@ -78,6 +78,8 @@ const AddUser = () => {
     formData.append("andress", user.andress);
     formData.append("date_birth", user.date_birth);
 
+    console.log(user.date_birth);
+    console.log(user);
     formData.append("avata", avata);
     formData.append("gender", checkGender);
     formData.append("status", checkStatus);
@@ -99,14 +101,14 @@ const AddUser = () => {
       <Container>
         <ContainerHeader>
           <ContainerTitle>
-            New User
+            Thêm Người Dùng
             <ContainerDescription>
-              Add information and add new user.
+              Thêm Thông Tin Và Người Dùng Mới!
             </ContainerDescription>
           </ContainerTitle>
           <ContainerHeaderRight>
             <Link to="/admin/user">
-              <Button>Back</Button>
+              <Button>Trở Về</Button>
             </Link>
           </ContainerHeaderRight>
         </ContainerHeader>

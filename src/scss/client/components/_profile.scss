@@ -1,0 +1,65 @@
+.profile{
+    &__title{
+        margin-top: 2rem;
+        padding: 1rem;
+        box-shadow: $box-shadow;
+        background: $txt-white;
+        
+        
+        h2{
+            margin-bottom: 0;
+            font-weight: 600;
+            
+        }
+        p{
+            font-size: 1.5rem;
+        }
+    
+
+    }
+    &__content
+    {
+        margin-top: 1rem;
+        background: $txt-white;
+        box-shadow: $box-shadow;
+    
+        &__header{
+            @include flex(center,space-between);
+            padding: 1rem 2rem;
+            border-bottom: .2rem solid $second-color;
+            cursor: pointer;
+            h3{
+            
+                font-weight: 600;
+                padding: 0;
+                margin: 0;
+             
+            }
+            i{
+                font-size: 2rem;
+            }
+        }
+        &__form{ 
+            height: 0;
+            overflow: hidden;
+            margin-top: 0 !important;
+       
+            visibility: hidden;
+            padding-right: 2rem;
+        
+            transition: all .3s linear;
+            &__box{
+                height: auto;
+            }
+            &.active{ 
+               
+                visibility: visible;
+                height: min-content;
+          
+                
+                
+            }
+        }
+        
+    }
+}

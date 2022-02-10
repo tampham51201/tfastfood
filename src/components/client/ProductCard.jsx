@@ -4,8 +4,11 @@ import Button from "./Button";
 import { Link } from "react-router-dom";
 import numberWithCommas from "../../utils/numberWithCommas";
 
+import { notification } from "antd";
+
 import { useDispatch } from "react-redux";
 import { addItems } from "../../redux/shopping-cart/cartItemsSlice";
+import { addItemsFavorite } from "../../redux/favorite-products/favoriteItemsSlice";
 
 const ProductCard = (props) => {
   const border = props.border ? "border-product" : "";
@@ -20,7 +23,30 @@ const ProductCard = (props) => {
         idUser: props.idUser,
       })
     );
-    alert("Đã thêm vào giỏ hàng!");
+    notification.success({
+      message: `Thành Công`,
+      description: "Đã Thêm Vào Giỏ Hàng",
+      duration: 2,
+      placement: "topRight",
+    });
+  };
+
+  const addFavorite = () => {
+    dispatch(
+      addItemsFavorite({
+        idProduct: props.idProduct,
+        slug: props.slug,
+        price: props.priceSell,
+        idUser: props.idUser,
+      })
+    );
+
+    notification.success({
+      message: `Thành Công`,
+      description: "Đã Thêm Vào Danh Sách Yêu Thích",
+      duration: 2,
+      placement: "topRight",
+    });
   };
   return (
     <div className={`product-card ${border}`}>
@@ -39,6 +65,7 @@ const ProductCard = (props) => {
           </div>
           <div className="product-card__btn__item">
             <Button
+              onClick={addFavorite}
               type="cricle"
               backgroundColor="second"
               icon="bx bxs-heart"

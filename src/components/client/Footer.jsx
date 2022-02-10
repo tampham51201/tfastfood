@@ -1,31 +1,14 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 
 import logoFooter from "../../assets/Image/footer-logo_1.png";
 import bannerFooter from "../../assets/Image/footer-banner.jpg";
 
 import { Link } from "react-router-dom";
 
+import infoShopApi from "../../api/infoShopApi";
+
 import Grid from "../../components/Grid";
 import Button from "../client/Button";
-
-const footerAbout = [
-  {
-    display: "Store Viet Nam",
-    icon: "bx bxs-map",
-  },
-  {
-    display: "0339045945",
-    icon: "bx bxs-phone",
-  },
-  {
-    display: "0339-045-945",
-    icon: "bx bxs-mobile",
-  },
-  {
-    display: "pttquangnam@gmail.com",
-    icon: "bx bxs-envelope",
-  },
-];
 
 const footerAboutLink = [
   {
@@ -34,11 +17,11 @@ const footerAboutLink = [
   },
   {
     display: "Sản Phẩm Mới",
-    path: "/about",
+    path: "/home",
   },
   {
     display: "Sản Phẩm Tốt Nhất",
-    path: "/about",
+    path: "/home",
   },
   {
     display: "Liên Hệ",
@@ -50,34 +33,6 @@ const footerAboutLink = [
   },
 ];
 
-const footerIcon = [
-  {
-    icon: "bx bxl-facebook",
-    path: "www.facebook.com/PhamThanhTam2001",
-    color: "blue",
-  },
-  {
-    icon: "bx bxl-twitter",
-    path: "www.facebook.com/PhamThanhTam2001",
-    color: "blue",
-  },
-  {
-    icon: "bx bxl-google-plus",
-    path: "www.facebook.com/PhamThanhTam2001",
-    color: "blue",
-  },
-  {
-    icon: "bx bxl-pinterest-alt",
-    path: "www.facebook.com/PhamThanhTam2001",
-    color: "blue",
-  },
-  {
-    icon: "bx bxl-instagram-alt",
-    path: "www.facebook.com/PhamThanhTam2001",
-    color: "blue",
-  },
-];
-
 const Footer = () => {
   const iconBoxProductRef = useRef(null);
   const boxProductRef = useRef(null);
@@ -85,6 +40,62 @@ const Footer = () => {
   const iconBoxContactRef = useRef(null);
   const boxContactRef = useRef(null);
 
+  const [infoShop, setInfoShop] = useState({});
+  useEffect(() => {
+    infoShopApi.getInfo().then((res) => {
+      if (res.data.status === 200) {
+        const newInfoshop = res.data.infoshop;
+        console.log(newInfoshop);
+        setInfoShop(newInfoshop);
+      }
+    });
+  }, []);
+  var footerIcon = [
+    {
+      icon: "bx bxl-facebook",
+      path: `${infoShop.link_fb}`,
+      color: "blue",
+    },
+    {
+      icon: "bx bxl-twitter",
+      path: `${infoShop.twitter}`,
+      color: "blue",
+    },
+    {
+      icon: "bx bxl-google-plus",
+      path: `${infoShop.link_gg_plus}`,
+      color: "blue",
+    },
+    {
+      icon: "bx bxl-pinterest-alt",
+      path: `${infoShop.link_pinterest}`,
+      color: "blue",
+    },
+    {
+      icon: "bx bxl-instagram-alt",
+      path: `${infoShop.link_instagram}`,
+      color: "blue",
+    },
+  ];
+
+  var footerAbout = [
+    {
+      display: `Store ${infoShop.andress}`,
+      icon: "bx bxs-map",
+    },
+    {
+      display: infoShop.mobile_phone,
+      icon: "bx bxs-phone",
+    },
+    // {
+    //   display: "0339-045-945",
+    //   icon: "bx bxs-mobile",
+    // },
+    {
+      display: infoShop.email,
+      icon: "bx bxs-envelope",
+    },
+  ];
   const superToggle = (refBox, refIcon) => {
     refBox.current.classList.toggle("active");
     refIcon.current.classList.toggle("bx-minus");
@@ -158,15 +169,13 @@ const Footer = () => {
           <div className="footer__bottom__list-icon">
             {footerIcon.map((item, index) => (
               <div key={index} className="footer__bottom__list-icon__item">
-                <Link to={item.path}>
+                <a href={item.path}>
                   <i className={item.icon}></i>
-                </Link>
+                </a>
               </div>
             ))}
           </div>
-          <p className="footer__bottom__blank">
-            © 2021 - Hệ Thống Thương Mại Điện Tử Của Tâm
-          </p>
+          <p className="footer__bottom__blank">© {infoShop.coppyright}</p>
         </div>
       </div>
     </div>

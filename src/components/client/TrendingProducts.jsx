@@ -33,10 +33,11 @@ const TrendingProducts = (props) => {
     return dispatch(getUser());
   }, [dispatch]);
   const user = useSelector((state) => state.users.value);
-  console.log(user);
+
 
   const handleClick = (type) => {
     let temp = props.data;
+  
 
     switch (type) {
       case "FEATURED":
@@ -48,20 +49,24 @@ const TrendingProducts = (props) => {
         setIsActive(1);
         break;
       case "NEW":
-        temp = temp.filter((product) => product.status === 1);
+        const tempnew = temp.filter((product) => product.status === 1);
+        temp = tempnew.slice(0,8);
         setIsActive(2);
         break;
     }
-    setProductsActive(temp);
+    
+    setProducts(temp);
+    
   };
+
 
   useEffect(() => {
     handleClick("FEATURED");
   }, []);
 
-  useEffect(() => {
-    setProducts(productsActive);
-  }, [productsActive]);
+  // useEffect(() => {
+  //   setProducts(productsActive);
+  // }, [productsActive]);
 
   // const update = useCallback(() => {
   //   setProducts(productsActive);
@@ -94,7 +99,7 @@ const TrendingProducts = (props) => {
                   handleClick("BEST");
                 }}
               >
-                Sản Phẩm Mới
+                 Phổ Biến
               </Button>
               <Button
                 backgroundColor={isActive === 2 ? "main" : "white"}
@@ -103,7 +108,8 @@ const TrendingProducts = (props) => {
                   handleClick("NEW");
                 }}
               >
-                Bán Chạy Nhất
+              Sản Phẩm Mới
+               
               </Button>
             </div>
 
@@ -118,18 +124,18 @@ const TrendingProducts = (props) => {
                 740: {
                   slidesPerView: 3,
                   spaceBetween: 10,
-                  grid: {
-                    fill: "row",
-                    rows: 2,
-                  },
+                  // grid: {
+                  //   fill: "row",
+                  //   rows: 2,
+                  // },
                 },
                 1024: {
                   slidesPerView: 4,
                   spaceBetween: 20,
-                  grid: {
-                    fill: "row",
-                    rows: 2,
-                  },
+                  // grid: {
+                  //   fill: "row",
+                  //   rows: 2,
+                  // },
                 },
               }}
               navigation={{
@@ -142,9 +148,10 @@ const TrendingProducts = (props) => {
               }}
               className="trending-product__content"
             >
-              {products.map((item, index) => (
-                <SwiperSlide key={index}>
-                  <ProductCard
+              { 
+                  products.map((item, index) => (
+                  <SwiperSlide key={index}>
+                   <ProductCard
                     slug={item.slug}
                     img01={`${baseURL}/${item.img01}`}
                     img02={`${baseURL}/${item.img02}`}
@@ -155,9 +162,10 @@ const TrendingProducts = (props) => {
                     idUser={
                       user === null || user.data === "" ? 0 : user.data.user.id
                     }
-                  />
-                </SwiperSlide>
-              ))}
+                    />
+                   </SwiperSlide>))
+              
+            }
               <div className="trending-product__control">
                 <div
                   className="trending-product__control__prev"

@@ -114,14 +114,14 @@ const AddProduct = () => {
       <Container>
         <ContainerHeader>
           <ContainerTitle>
-            New Product
+         Thêm Sản Phẩm
             <ContainerDescription>
-              Add information and add new product.
+          Thêm thông tin và sản phẩm mới.
             </ContainerDescription>
           </ContainerTitle>
           <ContainerHeaderRight>
             <Link to="/admin/product">
-              <Button>Back</Button>
+              <Button>Trở Về</Button>
             </Link>
           </ContainerHeaderRight>
         </ContainerHeader>
@@ -132,11 +132,11 @@ const AddProduct = () => {
               onChange={handleInputProduct}
               value={product.category_id}
               data={categorys}
-              label="Select Category"
+              label="Chọn Danh Mục"
               message={product.message.category_id}
             />
             <InputItem
-              label="Product Title"
+              label="Tên Sản Phẩm"
               type="text"
               onChange={handleInputProduct}
               name="name"
@@ -154,7 +154,7 @@ const AddProduct = () => {
             />
 
             <InputItem
-              label="Orginal Price"
+              label="Giá Cũ"
               type="text"
               onChange={handleInputProduct}
               name="orginal_price"
@@ -162,7 +162,7 @@ const AddProduct = () => {
               message={product.message.orginal_price}
             />
             <InputItem
-              label="Selling Price"
+              label="Giá Mới"
               type="text"
               onChange={handleInputProduct}
               name="selling_price"
@@ -170,7 +170,7 @@ const AddProduct = () => {
               message={product.message.selling_price}
             />
             <InputItem
-              label="Quantity"
+              label="Số Lượng"
               type="text"
               onChange={handleInputProduct}
               name="qty"
@@ -178,7 +178,7 @@ const AddProduct = () => {
               message={product.message.qty}
             />
             <InputItem
-              label="Image 01"
+              label="Ảnh"
               type="file"
               onChange={handleFiletProduct}
               name="img01"
@@ -194,7 +194,7 @@ const AddProduct = () => {
             /> */}
 
             <InputItem
-              label="Description"
+              label="Mô Tả"
               type="ckedit"
               onChange={(value) => {
                 handleDescProduct(value);
@@ -203,7 +203,7 @@ const AddProduct = () => {
             />
 
             <InputItem
-              label="Featured"
+              label="Đặc Sắc"
               type="checkbox"
               onChange={handleCheck}
               name="featured"
@@ -211,7 +211,7 @@ const AddProduct = () => {
               message={product.message.featured}
             />
             <InputItem
-              label="Popular"
+              label="Phổ Biến"
               type="checkbox"
               onChange={handleCheck}
               name="popular"
@@ -219,14 +219,14 @@ const AddProduct = () => {
               message={product.message.popular}
             />
             <InputItem
-              label="Status"
+              label="Trạng Thái"
               type="checkbox"
               onChange={handleCheck}
               name="status"
               value={check.status}
               message={product.message.status}
             />
-            <Button submit>Add New</Button>
+            <Button submit>Thêm Mới</Button>
           </form>
         </ContainerBody>
       </Container>

@@ -35,7 +35,7 @@ const EditUser = (props) => {
         setCheckStatus(newUser.status);
         setCheckGender(newUser.gender);
         setUser(newUser);
-        console.log(newUser);
+
         setLoading(false);
       } else if (res.data.status === 404) {
         swal("Erorr", res.data.message, "error");
@@ -78,7 +78,7 @@ const EditUser = (props) => {
 
     formData.append("phone_number", user.phone_number);
     formData.append("andress", user.andress);
-    formData.append("data_birth", user.date_birth);
+    formData.append("date_birth", user.date_birth);
 
     formData.append("avata", avata);
     formData.append("gender", checkGender);
@@ -89,7 +89,6 @@ const EditUser = (props) => {
         swal("Success", res.data.message, "success");
       } else if (res.data.status === 400) {
         setUser({ ...user, message: res.data.errors });
-        console.log(res.data.errors);
       }
     });
   };
@@ -110,7 +109,7 @@ const EditUser = (props) => {
           </ContainerTitle>
           <ContainerHeaderRight>
             <Link to="/admin/user">
-              <Button>Trở Vế</Button>
+              <Button>Trở Về</Button>
             </Link>
           </ContainerHeaderRight>
         </ContainerHeader>

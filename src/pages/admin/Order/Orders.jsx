@@ -38,7 +38,7 @@ const Orders = () => {
 
   // paganation
   const [currentPage, setCurrentPage] = useState(1);
-  const [categorysPerPage] = useState(5);
+  const [categorysPerPage] = useState(8);
 
   const [isDelete, setIsDelete] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -48,6 +48,7 @@ const Orders = () => {
       if (res.data.status === 200) {
         const newCategoryList = res.data.bills;
         setCategorylist(newCategoryList);
+        newCategoryList.sort((a, b) => b.id - a.id);
         console.log(newCategoryList);
         setIsDelete(false);
       }

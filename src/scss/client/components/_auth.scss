@@ -1,24 +1,32 @@
 .auth{
     background-image: linear-gradient(to right bottom,$second-color,$main-color);
+    background-repeat: no-repeat;
+    height: 120vh;
     min-height: 100vh;
     width: 100%;
     position: relative;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
     color: #333;
     @include mobile{
         background-image:none;  
         height: max-content;
     }
+    input{
+        font-family: 'Roboto Condensed', sans-serif !important;
+        
+    }
    
     &__container{
      
        position: absolute;
-       top: 50%;
+       
+      
        left: 50%;
-       transform: translate(-50%,-50%);
+       margin-top: 5rem;
+       transform: translateX(-50%);
        width: 50rem;
        background: $txt-white;
-       min-height: 90%;
+    //    min-height: 90%;
        border-radius: 1rem;
        padding: 6rem 5.5rem 5rem;
        @include mobile{
@@ -37,14 +45,18 @@
     }
     }
     &__title{
-        margin-top: 1rem;
+        margin-top: 4rem;
         color: #333333;
-        font-size: 2.2rem;
-        font-weight: 600;
-        margin-bottom: 3rem;
+     
+        margin-bottom: 2rem;
+        h3{
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0rem;
+        }
         p{
-            font-size: 1.3rem;
-            font-weight: 400;}
+            font-size: 1.5rem;
+            font-weight: 500;}
         @include mobile{
             font-size: 2.8rem;
             margin-bottom: 2rem;
@@ -57,20 +69,22 @@
             text-align: right;
             font-size: 1.3rem;
             a{
-                font-family: 'Poppins', sans-serif;
+                // font-family: 'Poppins', sans-serif;
             }  
           
         }
         &__submit{
+            
             margin-top: 2rem;
             padding:1.4rem 0;
             font-size: 1.7rem;
             border-radius: 10rem;
             outline: none;
             border: none;
-            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+
             background-image: linear-gradient(to right,$second-color,$main-color);
-            font-weight: 500;
+    
             color: $txt-white;
             width: 100%;
             cursor: pointer;
@@ -83,6 +97,7 @@
             &:hover{
                 background-image: linear-gradient(to left,$second-color,$main-color);
             }
+        
         }
     }
 

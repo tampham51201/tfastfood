@@ -10,7 +10,7 @@ const SelectInput = (props) => {
         value={props.value}
         onChange={props.onChange ? props.onChange : null}
       >
-        <option value={-1}>Select</option>
+        <option value={-1}>Chọn</option>
         {props.data.map((item) => (
           <option key={item.id} value={item.id}>
             {item.name}

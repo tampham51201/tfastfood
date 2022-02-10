@@ -11,6 +11,24 @@ const authApi = {
     return axiosClient.post(url, data);
   },
 
+  forgotPassword: (data) => {
+    const url = `/api/forgot-password`;
+    return axiosClient.post(url, data);
+  },
+
+  resetForgotPassword: (data) => {
+    const url = `/api/reset-password`;
+    return axiosClient.post(url, data);
+  },
+
+  updateUser: (data) => {
+    const url = `/api/update-customer`;
+    return axiosClient.post(url, data);
+  },
+  resetPassword: (data) => {
+    const url = `/api/reset-pass-customer`;
+    return axiosClient.post(url, data);
+  },
   getAll: () => {
     const url = `/api/view-users`;
     return axiosClient.get(url);

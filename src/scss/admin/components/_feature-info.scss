@@ -1,0 +1,128 @@
+
+
+.feature-info{
+    @include flex(center,space-between);
+    background-color: white ;
+    border-radius: .5rem ;
+    padding: 3rem 2rem;
+    box-shadow: $box-shadow;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    &:hover  &__icon{
+        transform: translateY(-1rem) scale(1.2);
+       
+    }
+
+    &__content{
+        &__title{
+            font-weight: 500;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+        }
+        &__value{
+            font-size: 2.4rem;
+            font-weight: 600;
+            color: #6d5f69;
+        }
+    }
+    &__icon{
+        font-size: 3rem;
+        transition: .3s linear ;
+
+    }
+    &::before{
+        content: "";
+        position: absolute;
+        width: 200%;
+        left: 0;
+        top:70%;
+        height: 100%;
+        transform: rotateZ(-10deg);
+        background: $main-color;
+        }
+   
+}
+.bg-green{
+    &::before{
+        
+        background:#1cc88a ;
+    }
+
+   .feature-info__content__title{
+        color: #1cc88a;   
+    }
+    .feature-info__icon{    
+
+       
+        i{
+            color: #1cc88a;
+        }
+    }
+
+}
+
+.bg-blue{
+    &::before{
+        background: #4e73df;
+    }
+
+   .feature-info__content__title{
+        color: #4e73df;   
+    }
+    .feature-info__icon{    
+
+       
+        i{
+            color: #4e73df;
+        }
+    }
+
+}
+.bg-blue{
+    &::before{
+        background: #4e73df;
+    }
+
+   .feature-info__content__title{
+        color: #4e73df;   
+    }
+    .feature-info__icon{    
+
+       
+        i{
+            color: #4e73df;
+        }
+    }
+
+}
+.bg-yellow{
+    &::before{
+        background:  #f6c23e;
+  }
+  .feature-info__content__title{
+        color:     #f6c23e;   
+    }
+    .feature-info__icon{    
+        i{
+            color:   #f6c23e;
+        }
+    }
+
+}
+
+.bg-light-blue{
+    &::before{
+        background:  #42bcce;
+  }
+  .feature-info__content__title{
+        color:     #42bcce;   
+    }
+    .feature-info__icon{    
+        i{
+            color:   #42bcce;
+        }
+    }
+
+}
+

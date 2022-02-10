@@ -15,7 +15,7 @@ import swal from "sweetalert";
 import categoryApi from "../../../api/categoryApi";
 import Loading from "../../Loading";
 const Categorys = () => {
-  const coloums = ["STT", "Name", "Slug", "Status", "Edit", "Delete"];
+  const coloums = ["STT", "Tên", "Slug", "Trạng Thái", "Thao Tác"];
   const [categorylist, setCategorylist] = useState([]);
 
   // search input
@@ -78,18 +78,18 @@ const Categorys = () => {
     <div>
       <Container>
         <ContainerHeader>
-          <h3>Categorys</h3>
+          <h3>Danh Mục</h3>
           <ContainerHeaderRight>
             <InputItem
               searchbox
               type="text"
               onChange={handleSearch}
               value={searchInput}
-              placeholder="Search by name"
+              placeholder="Tìm kiếm theo tên..."
             />
 
             <Link to="/admin/category-add">
-              <Button>Add Category</Button>
+              <Button>Thêm Danh Mục</Button>
             </Link>
           </ContainerHeaderRight>
         </ContainerHeader>
@@ -109,15 +109,13 @@ const Categorys = () => {
                     {item.status === 1 ? "Active" : "InActive"}
                   </Button>
                 </td>
-                <td className="edit">
+                <td className="edit" style={{ width: "22rem" }}>
                   <Link to={`category-edit/${item.id}`}>
                     <Button size="sm" bg="success">
                       <i className="bx bx-edit-alt"></i>
                     </Button>
                   </Link>
-                </td>
-                <td className="delete">
-                  <Button
+                   <Button
                     size="sm"
                     bg="danger"
                     onClick={(e) => {
@@ -127,6 +125,7 @@ const Categorys = () => {
                     <i className="bx bx-trash-alt"></i>
                   </Button>
                 </td>
+              
               </tr>
             ))}
           </Table>

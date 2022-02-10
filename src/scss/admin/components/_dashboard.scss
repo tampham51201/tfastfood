@@ -1,0 +1,80 @@
+
+.dashboard{
+    margin: 3rem;
+    min-height: 100vh;
+
+        &__chart{
+            height: max-content;
+
+            &__title{
+                text-align: right;
+                text-transform: uppercase;
+                h3{
+                    text-align: center;
+                    font-size: 1.6rem;
+                    font-weight: 600;
+                 
+                    height: 3.6rem;
+                }
+               
+
+            }
+            &__content{
+                margin-top: 5rem;
+                height: 50rem;
+            }
+            padding: 3rem 3rem;
+            min-height: 50rem;
+            margin-top: 2rem;
+            width: 100%;
+            border-radius: .5rem;
+            box-shadow: $box-shadow;
+            background: white;
+        }
+    
+    
+}
+.activity-item-quantity{
+    padding: 1rem 2rem;
+ 
+    background: white;
+    box-shadow: $box-shadow;
+    margin-bottom: .5rem;
+    border-radius: .5rem;
+    @include flex(center,flex-start);
+    cursor: pointer;
+    &__img{
+        // border: .1rem #4e73df solid;
+        box-shadow: $box-shadow;
+        width: 10rem;
+        height: 10rem;
+        position: relative;
+        border-radius: .5rem;
+        margin-right: 2rem;
+        img{
+            position: absolute;
+           top: 50%;
+           left: 50%;
+           transform: translate(-50%,-50%);
+           width: 9rem;
+        }
+    }
+
+    &__id{
+        
+        color:#4e73df
+    }
+    &__title{
+        font-size: 1.8rem;
+        font-weight: 500;
+        font-weight: 600;
+    //    color: $second-color;
+    }
+    &__quantity{
+        font-weight: 600;
+        // color: $main-color;
+        font-size: 1.4rem;
+
+       
+    }
+   }

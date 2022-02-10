@@ -22,14 +22,13 @@ import Loading from "../../Loading";
 const Products = () => {
   const coloums = [
     "STT",
-    "Product Name",
-    "Category Name",
-    "Selling Price",
+    "Tên Sản Phẩm",
+    "Tên Danh Mục",
+    "Giá",
     "Image",
 
-    "Status",
-    "Edit",
-    "Delete",
+    "Trạng Thái",
+    "Thao Tác",
   ];
   const [productList, setProductList] = useState([]);
 
@@ -75,7 +74,7 @@ const Products = () => {
   );
 
   const handleDelete = (e, id) => {
-    axios.delete(`/api/delete-category/${id}`).then((res) => {
+    productApi.Delete(id).then((res) => {
       if (res.data.status === 200) {
         setIsDelete(true);
         swal("Success", res.data.message, "success");
@@ -89,17 +88,17 @@ const Products = () => {
     <div>
       <Container>
         <ContainerHeader>
-          <h3>Products</h3>
+          <h3>Sản Phẩm</h3>
           <ContainerHeaderRight>
             <InputItem
               searchbox
               type="text"
               onChange={handleSearch}
               value={searchInput}
-              placeholder="Search by name"
+              placeholder="Tìm kiếm theo tên..."
             />
             <Link to="/admin/product-add">
-              <Button>Add Product</Button>
+              <Button>Thêm Sản Phẩm</Button>
             </Link>
           </ContainerHeaderRight>
         </ContainerHeader>
@@ -135,14 +134,12 @@ const Products = () => {
                   </Button>
                 </td>
 
-                <td className="edit">
+                <td className="edit" style={{ width: "20rem" }}>
                   <Link to={`product-edit/${item.id}`}>
                     <Button size="sm" bg="success">
                       <i className="bx bx-edit-alt"></i>
                     </Button>
                   </Link>
-                </td>
-                <td className="delete">
                   <Button
                     size="sm"
                     bg="danger"
