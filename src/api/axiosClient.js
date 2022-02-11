@@ -5,7 +5,7 @@ import queryString from "query-string";
 // Please have a look at here `https://github.com/axios/axios#requestconfig` for the full list of configs
 const axiosClient = axios.create({
   // baseURL: "http://localhost:8000",
-  baseURL: "http://tfastfood-api.tk",
+  baseURL: "http://www.tfastfood-api.tk",
   headers: {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
