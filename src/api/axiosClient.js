@@ -7,8 +7,6 @@ const axiosClient = axios.create({
   // baseURL: "http://localhost:8000",
   baseURL: "http://www.tfastfood-api.tk",
   headers: {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
     "content-type": "application/json",
     Accept: "application/json",
   },
