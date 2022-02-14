@@ -12,18 +12,6 @@ import productApi from "../../api/productApi";
 import Loading from "../Loading";
 import bannerApi from "../../api/bannerApi";
 
-// const slider01 = require("../../assets/Image/Banner/slider_01.jpg").default;
-// const slider02 = require("../../assets/Image/Banner/slider_02.jpg").default;
-
-// const sliderList = [
-//   {
-//     img: slider01,
-//   },
-//   {
-//     img: slider02,
-//   },
-// ];
-
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -31,24 +19,28 @@ const Home = () => {
   const [sliderList, setSliderList] = useState([]);
 
   useEffect(() => {
-    productApi.getAllStatus().then((res) => {
+    const getProducts = async () => {
+      const res = await productApi.getAllStatus();
       if (res.data.status === 200) {
         const newProductList = res.data.product;
         setProducts(newProductList);
-        setLoading(false);
+        console.log(res);
       }
-    });
+    };
+    getProducts();
   }, []);
 
   useEffect(() => {
-    bannerApi.getAll().then((res) => {
+    const getBanner = async () => {
+      const res = await bannerApi.getAll();
       if (res.data.status === 200) {
         const newBannerList = res.data.banners;
         setSliderList(newBannerList);
-        console.log(newBannerList);
+        console.log(res);
         setLoading(false);
       }
-    });
+    };
+    getBanner();
   }, []);
 
   if (loading) {

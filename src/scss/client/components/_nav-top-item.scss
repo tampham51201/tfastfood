@@ -50,11 +50,16 @@
         padding: 0 2.5rem ;
         height: 0;
         transition: all ease .3s;
+  
      
         &.active{
             height: max-content;
-            padding: 1.6rem 2.5rem ;
-            
+            padding: 1.3rem 2rem ;
+            @include tablet{
+                padding: 1rem 1.3rem ;
+                font-size: 1.5rem;
+            }
+         
             visibility: visible;
             
         }

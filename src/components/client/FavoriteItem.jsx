@@ -9,7 +9,7 @@ import { removeItemFavorite } from "../../redux/favorite-products/favoriteItemsS
 import { addItems } from "../../redux/shopping-cart/cartItemsSlice";
 
 const FavoriteItem = (props) => {
-  const baseURL = "http://localhost:8000";
+  const baseURL = process.env.REACT_APP_API_URL;
   const dispatch1 = useDispatch();
 
   const [item, setItem] = useState(props.item);

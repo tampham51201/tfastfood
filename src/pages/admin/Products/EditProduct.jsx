@@ -124,9 +124,9 @@ const EditProduct = (props) => {
       <Container>
         <ContainerHeader>
           <ContainerTitle>
-           Chỉnh Sửa Sản Phẩm
+            Chỉnh Sửa Sản Phẩm
             <ContainerDescription>
-           Chỉnh sửa thông tin sản phẩm.
+              Chỉnh sửa thông tin sản phẩm.
             </ContainerDescription>
           </ContainerTitle>
           <ContainerHeaderRight>
@@ -195,7 +195,10 @@ const EditProduct = (props) => {
               message={errors.img01}
             />
             <div className="img_input">
-              <img src={`http://localhost:8000/${product.img01}`} alt="img01" />
+              <img
+                src={`${process.env.REACT_APP_API_URL}/${product.img01}`}
+                alt="img01"
+              />
             </div>
 
             {/* <InputItem

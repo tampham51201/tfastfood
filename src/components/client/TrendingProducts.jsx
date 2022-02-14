@@ -19,7 +19,7 @@ import SwiperCore, { Navigation, Grid } from "swiper";
 SwiperCore.use([Navigation, Grid]);
 
 const TrendingProducts = (props) => {
-  const baseURL = "http://localhost:8000";
+  const baseURL = process.env.REACT_APP_API_URL;
   const btnPrevRef = useRef(null);
   const btnNextRef = useRef(null);
 
@@ -34,13 +34,11 @@ const TrendingProducts = (props) => {
   }, [dispatch]);
   const user = useSelector((state) => state.users.value);
 
-
   const handleClick = (type) => {
     let temp = props.data;
-  
 
     switch (type) {
-      case "FEATURED":
+      case "featured":
         temp = temp.filter((product) => product.featured === 1);
         setIsActive(0);
         break;
@@ -50,19 +48,17 @@ const TrendingProducts = (props) => {
         break;
       case "NEW":
         const tempnew = temp.filter((product) => product.status === 1);
-        temp = tempnew.slice(0,8);
+        temp = tempnew.slice(0, 8);
         setIsActive(2);
         break;
     }
-    
+
     setProducts(temp);
-    
   };
 
-
   useEffect(() => {
-    handleClick("FEATURED");
-  }, []);
+    handleClick("featured");
+  }, [props.data]);
 
   // useEffect(() => {
   //   setProducts(productsActive);
@@ -99,7 +95,7 @@ const TrendingProducts = (props) => {
                   handleClick("BEST");
                 }}
               >
-                 Phổ Biến
+                Phổ Biến
               </Button>
               <Button
                 backgroundColor={isActive === 2 ? "main" : "white"}
@@ -108,8 +104,7 @@ const TrendingProducts = (props) => {
                   handleClick("NEW");
                 }}
               >
-              Sản Phẩm Mới
-               
+                Sản Phẩm Mới
               </Button>
             </div>
 
@@ -118,24 +113,16 @@ const TrendingProducts = (props) => {
               spaceBetween={10}
               grid={{
                 fill: "row",
-                rows: 2,
+                rows: 1,
               }}
               breakpoints={{
                 740: {
                   slidesPerView: 3,
                   spaceBetween: 10,
-                  // grid: {
-                  //   fill: "row",
-                  //   rows: 2,
-                  // },
                 },
                 1024: {
                   slidesPerView: 4,
                   spaceBetween: 20,
-                  // grid: {
-                  //   fill: "row",
-                  //   rows: 2,
-                  // },
                 },
               }}
               navigation={{
@@ -148,10 +135,9 @@ const TrendingProducts = (props) => {
               }}
               className="trending-product__content"
             >
-              { 
-                  products.map((item, index) => (
-                  <SwiperSlide key={index}>
-                   <ProductCard
+              {products.map((item, index) => (
+                <SwiperSlide key={index}>
+                  <ProductCard
                     slug={item.slug}
                     img01={`${baseURL}/${item.img01}`}
                     img02={`${baseURL}/${item.img02}`}
@@ -162,10 +148,9 @@ const TrendingProducts = (props) => {
                     idUser={
                       user === null || user.data === "" ? 0 : user.data.user.id
                     }
-                    />
-                   </SwiperSlide>))
-              
-            }
+                  />
+                </SwiperSlide>
+              ))}
               <div className="trending-product__control">
                 <div
                   className="trending-product__control__prev"

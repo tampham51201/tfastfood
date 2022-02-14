@@ -21,7 +21,7 @@ import Loading from "../../Loading";
 import bannerApi from "../../../api/bannerApi";
 
 const Banner = () => {
-  const coloums = ["STT","Mã Banner", "Hình Ảnh", "Thao Tác"];
+  const coloums = ["STT", "Mã Banner", "Hình Ảnh", "Thao Tác"];
   const [productList, setProductList] = useState([]);
 
   // search input
@@ -54,7 +54,9 @@ const Banner = () => {
 
   useEffect(() => {
     const newsearchList = productList.filter((category) => {
-      return ("bn000"+category.id).toLowerCase().includes(searchInput.toLowerCase());
+      return ("bn000" + category.id)
+        .toLowerCase()
+        .includes(searchInput.toLowerCase());
     });
     setSearchList(newsearchList);
   }, [searchInput, productList]);
@@ -99,11 +101,13 @@ const Banner = () => {
             {productsPagination.map((item, index) => (
               <tr key={index}>
                 <td style={{ width: "7rem" }}>{index + 1}</td>
-                  <td style={{ width: "15rem" }}>BN000{item.id}</td>
-                
+                <td style={{ width: "15rem" }}>BN000{item.id}</td>
 
                 <td>
-                  <img src={`http://localhost:8000/${item.img}`} alt="img" />
+                  <img
+                    src={`${process.env.REACT_APP_API_URL}/${item.img}`}
+                    alt="img"
+                  />
                 </td>
 
                 <td className="edit" style={{ width: "20rem" }}>

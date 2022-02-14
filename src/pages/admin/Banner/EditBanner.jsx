@@ -100,7 +100,10 @@ const EditBanner = (props) => {
               name="img"
             />
             <div className="img_input">
-              <img src={`http://localhost:8000/${banner.img}`} alt="img" />
+              <img
+                src={`${process.env.REACT_APP_API_URL}/${banner.img}`}
+                alt="img"
+              />
             </div>
 
             <Button submit>Lưu</Button>

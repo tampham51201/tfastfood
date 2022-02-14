@@ -13,7 +13,7 @@ import InputItem from "../../components/admin/InputItem";
 import ReviewItem from "../../components/client/ReviewItem";
 
 const HistoryOrder = () => {
-  const baseURL = "http://localhost:8000";
+  const baseURL = process.env.REACT_APP_API_URL;
   const [billsUser, setBillsUser] = useState([]);
   const [loading, setLoading] = useState(true);
 

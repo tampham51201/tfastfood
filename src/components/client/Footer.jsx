@@ -36,19 +36,19 @@ const footerAboutLink = [
 const Footer = () => {
   const iconBoxProductRef = useRef(null);
   const boxProductRef = useRef(null);
-
   const iconBoxContactRef = useRef(null);
   const boxContactRef = useRef(null);
-
   const [infoShop, setInfoShop] = useState({});
   useEffect(() => {
-    infoShopApi.getInfo().then((res) => {
+    const getInfoShop = async () => {
+      const res = await infoShopApi.getInfo();
       if (res.data.status === 200) {
         const newInfoshop = res.data.infoshop;
-        console.log(newInfoshop);
+
         setInfoShop(newInfoshop);
       }
-    });
+    };
+    getInfoShop();
   }, []);
   var footerIcon = [
     {

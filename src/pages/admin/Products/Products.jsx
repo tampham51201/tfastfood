@@ -114,7 +114,7 @@ const Products = () => {
                 </td>
                 <td style={{ width: "12rem" }}>
                   <img
-                    src={`http://localhost:8000/${item.img01}`}
+                    src={`${process.env.REACT_APP_API_URL}/${item.img01}`}
                     alt="img01"
                   />
                 </td>

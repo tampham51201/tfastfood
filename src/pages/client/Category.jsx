@@ -24,7 +24,7 @@ import Form from "antd/lib/form/Form";
 import FormItem from "antd/lib/form/FormItem";
 
 const Category = (props) => {
-  const baseURL = "http://localhost:8000";
+  const baseURL = process.env.REACT_APP_API_URL;
   const [isSort, setIsSort] = useState(false);
   const [isFilter, setIsFilter] = useState(false);
 

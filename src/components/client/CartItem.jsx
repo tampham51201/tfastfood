@@ -9,7 +9,7 @@ import {
   removeItem,
 } from "../../redux/shopping-cart/cartItemsSlice";
 const CartItem = (props) => {
-  const baseURL = "http://localhost:8000";
+  const baseURL = process.env.REACT_APP_API_URL;
   const dispatch1 = useDispatch();
 
   const [item, setItem] = useState(props.item);

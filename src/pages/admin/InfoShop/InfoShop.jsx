@@ -169,7 +169,10 @@ const EditProduct = (props) => {
               name="logo"
             />
             <div className="img_input">
-              <img src={`http://localhost:8000/${infoShop.logo}`} alt="logo" />
+              <img
+                src={`${process.env.REACT_APP_API_URL}/${infoShop.logo}`}
+                alt="logo"
+              />
             </div>
 
             <InputItem

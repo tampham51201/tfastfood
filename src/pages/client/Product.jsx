@@ -35,7 +35,7 @@ import Helmet from "../../components/Helmet";
 import { useHistory } from "react-router-dom";
 
 const Product = (props) => {
-  const baseURL = "http://localhost:8000";
+  const baseURL = process.env.REACT_APP_API_URL;
 
   let slug = props.match.params.slug;
 

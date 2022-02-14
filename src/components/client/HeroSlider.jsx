@@ -35,7 +35,10 @@ const HeroSlider = (props) => {
       >
         {props.data.map((item, index) => (
           <SwiperSlide className="hero-slider__item" key={index}>
-            <img src={`http://localhost:8000/${item.img}`} alt="slider" />
+            <img
+              src={`${process.env.REACT_APP_API_URL}/${item.img}`}
+              alt="slider"
+            />
           </SwiperSlide>
         ))}
         <div className="hero-slider__control">

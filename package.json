@@ -2,7 +2,8 @@
   "name": "tfastfood",
   "version": "0.1.0",
   "private": true,
-
+  "proxy":"https://tfastfood-api.tk",
+  "homepage": "https://tfastfood12.netlify.app/",
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^31.0.0",
     "@ckeditor/ckeditor5-react": "^3.0.3",
@@ -13,7 +14,9 @@
     "@testing-library/user-event": "^12.1.10",
     "antd": "^4.18.2",
     "axios": "^0.24.0",
+    "cors": "^2.8.5",
     "dateformat": "^5.0.2",
+    "http-proxy-middleware": "^2.0.3",
     "node-sass": "^4.14.1",
     "query-string": "^7.0.1",
     "react": "^17.0.2",

@@ -5,6 +5,7 @@ import swal from "sweetalert";
 import InputItem from "../../components/client/InputItem";
 import authApi from "../../api/authApi";
 import axiosClient from "../../api/axiosClient";
+import axios from "axios";
 import "antd/dist/antd.css";
 import logo from "../../assets/Image/footer-logo_1.png";
 import Helmet from "../../components/Helmet";
@@ -27,23 +28,25 @@ const Login = () => {
       username: login.username,
       password: login.password,
     };
-    axiosClient.get(`/sanctum/csrf-cookie`).then((response) => {
-      authApi.postLogin(data).then((res) => {
-        console.log(res);
-        if (res.data.status === 200) {
-          localStorage.setItem("auth_token", res.data.token);
-          localStorage.setItem("auth_name", res.data.username);
-          swal("Success", res.data.message, "success");
-          history.push("/");
-        } else {
-          if (res.data.status === 401) {
-            swal("Warning", res.data.message, "warning");
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/sanctum/csrf-cookie`)
+      .then((response) => {
+        authApi.postLogin(data).then((res) => {
+          console.log(res);
+          if (res.data.status === 200) {
+            localStorage.setItem("auth_token", res.data.token);
+            localStorage.setItem("auth_name", res.data.username);
+            swal("Success", res.data.message, "success");
+            history.push("/");
           } else {
-            setLogin({ ...login, message: res.data.validation_errors });
+            if (res.data.status === 401) {
+              swal("Warning", res.data.message, "warning");
+            } else {
+              setLogin({ ...login, message: res.data.validation_errors });
+            }
           }
-        }
+        });
       });
-    });
   };
   return (
     <Helmet title="Login">

@@ -36,7 +36,7 @@ const Checkout = () => {
   const { Option } = Select;
 
   const [form] = Form.useForm();
-  const baseURL = "http://localhost:8000";
+  const baseURL = process.env.REACT_APP_API_URL;
   const cartItemsAll = useSelector((state) => state.shoppingCart.value);
 
   const history = useHistory();

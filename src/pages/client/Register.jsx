@@ -5,7 +5,7 @@ import InputItem from "../../components/client/InputItem";
 import { useHistory } from "react-router";
 import swal from "sweetalert";
 import authApi from "../../api/authApi";
-import axiosClient from "../../api/axiosClient";
+import axios from "axios";
 import logo from "../../assets/Image/footer-logo_1.png";
 
 const Register = () => {
@@ -30,18 +30,20 @@ const Register = () => {
       confirm_password: register.confirm_password,
     };
 
-    axiosClient.get(`/sanctum/csrf-cookie`).then((response) => {
-      authApi.postRegister(data).then((res) => {
-        if (res.data.status === 200) {
-          localStorage.setItem("auth_token", res.data.token);
-          localStorage.setItem("auth_name", res.data.username);
-          swal("Success", res.data.message, "success");
-          history.push("/");
-        } else {
-          setRegister({ ...register, message: res.data.validation_errors });
-        }
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/sanctum/csrf-cookie`)
+      .then((response) => {
+        authApi.postRegister(data).then((res) => {
+          if (res.data.status === 200) {
+            localStorage.setItem("auth_token", res.data.token);
+            localStorage.setItem("auth_name", res.data.username);
+            swal("Success", res.data.message, "success");
+            history.push("/");
+          } else {
+            setRegister({ ...register, message: res.data.validation_errors });
+          }
+        });
       });
-    });
   };
 
   return (

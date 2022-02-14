@@ -21,7 +21,7 @@ const img =
   require("../../assets/Image/Product/brown-bear-printed-sweater.jpg").default;
 
 const Header = () => {
-  const baseURL = "http://localhost:8000";
+  const baseURL = process.env.REACT_APP_API_URL;
   const iconSearchRef = useRef(null);
   const searchRef = useRef(null);
   const toggleRef = useRef(null);
@@ -58,18 +58,20 @@ const Header = () => {
   }, [cartItemsAll, user]);
 
   useEffect(() => {
-    productApi.getAll().then((res) => {
+    const getProducts = async () => {
+      const res = await productApi.getAll();
       if (res.data.status === 200) {
         const newProduct = res.data.product;
-        console.log(newProduct);
         setProducts(newProduct);
-        setLoading(false);
       }
-    });
+      console.log(res);
+    };
+    getProducts();
   }, []);
 
   useEffect(() => {
     let res = [];
+
     if (cartItems.length > 0) {
       cartItems.forEach((item) => {
         res.push({
@@ -78,8 +80,8 @@ const Header = () => {
         });
       });
     }
+
     setCartProduct(res);
-    console.log(res);
   }, [cartItems, products]);
 
   var authButton = [];
@@ -223,13 +225,15 @@ const Header = () => {
   const location = useLocation();
 
   useEffect(() => {
-    categoryApi.getStatus().then((res) => {
+    const getCategories = async () => {
+      const res = await categoryApi.getStatus();
       if (res.data.status === 200) {
         const newCategoryList = res.data.categorys;
-        console.log(newCategoryList);
         setCategorys(newCategoryList);
       }
-    });
+      console.log(res);
+    };
+    getCategories();
   }, []);
 
   const [infoShop, setInfoShop] = useState({});
@@ -237,12 +241,21 @@ const Header = () => {
     infoShopApi.getInfo().then((res) => {
       if (res.data.status === 200) {
         const newInfoshop = res.data.infoshop;
-        console.log(newInfoshop);
-        setInfoShop(newInfoshop);
 
-        setLoading(false);
+        setInfoShop(newInfoshop);
       }
     });
+
+    const getInfoShop = async () => {
+      const res = await infoShopApi.getInfo();
+      if (res.data.status === 200) {
+        const newInfoshop = res.data.infoshop;
+        setInfoShop(newInfoshop);
+        setLoading(false);
+      }
+      console.log(res);
+    };
+    getInfoShop();
   }, []);
   const handleToggleSearch = () => {
     searchRef.current.classList.toggle("active");
@@ -263,9 +276,7 @@ const Header = () => {
 
   const handleLogout = (value) => {
     if (value === "Đăng Xuất") {
-      console.log("dd");
       axiosClient.post("api/logout").then((res) => {
-        console.log("log");
         if (res.data.status === 200) {
           localStorage.removeItem("auth_token");
           localStorage.removeItem("auth_name");
@@ -329,7 +340,7 @@ const Header = () => {
             <div className="header__main__top__logo">
               <Link to="/">
                 <img
-                  src={`http://localhost:8000/${infoShop.logo}`}
+                  src={`${process.env.REACT_APP_API_URL}/${infoShop.logo}`}
                   alt="logo"
                 />
               </Link>
@@ -413,21 +424,23 @@ const Header = () => {
                         Sản Phẩm Đã Thêm
                       </p>
                       <ul className="header__main__top__item__list__content">
-                        {cartProduct.map((item, index) => (
-                          <Link to={`/product/${item.slug}`} key={index}>
-                            <li className="header__main__top__item__list__item">
-                              <div className="header__main__top__item__list__item__img">
-                                <img
-                                  src={`${baseURL}/${item.product.img01}`}
-                                  alt=""
-                                />
-                              </div>
+                        {cartProduct != null
+                          ? cartProduct.map((item, index) => (
+                              <Link to={`/product/${item.slug}`} key={index}>
+                                <li className="header__main__top__item__list__item">
+                                  <div className="header__main__top__item__list__item__img">
+                                    <img
+                                      src={`${baseURL}/${item.product.img01}`}
+                                      alt=""
+                                    />
+                                  </div>
 
-                              <p>{item.product.name}</p>
-                              <p>{numberWithCommas(item.price)}</p>
-                            </li>
-                          </Link>
-                        ))}
+                                  <p>{item.product.name}</p>
+                                  <p>{numberWithCommas(item.price)}</p>
+                                </li>
+                              </Link>
+                            ))
+                          : ""}
                       </ul>
 
                       <div className="header__main__top__item__list__more">

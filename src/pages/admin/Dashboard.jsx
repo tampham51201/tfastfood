@@ -32,7 +32,7 @@ import {
 } from "recharts";
 
 const Dashboard = () => {
-  const baseURL = "http://localhost:8000";
+  const baseURL = process.env.REACT_APP_API_URL;
 
   const day = new Date();
   var day_format_month = dateFormat(day, "mm/yyyy");
