@@ -2,7 +2,7 @@
   "name": "tfastfood",
   "version": "0.1.0",
   "private": true,
-  "proxy":"https://tfastfood-api.tk",
+  "proxy": "https://tfastfood-api.tk",
   "homepage": "https://tampham51201.github.io/tfastfood/",
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^31.0.0",
@@ -16,6 +16,7 @@
     "axios": "^0.24.0",
     "cors": "^2.8.5",
     "dateformat": "^5.0.2",
+    "gh-pages": "^3.2.3",
     "http-proxy-middleware": "^2.0.3",
     "node-sass": "^4.14.1",
     "query-string": "^7.0.1",
@@ -33,9 +34,11 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
