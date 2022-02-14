@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "proxy":"https://tfastfood-api.tk",
-  "homepage": "https://tfastfood12.netlify.app/",
+  "homepage": "https://tampham51201.github.io/tfastfood/",
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^31.0.0",
     "@ckeditor/ckeditor5-react": "^3.0.3",
