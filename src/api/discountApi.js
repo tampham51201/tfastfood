@@ -2,17 +2,17 @@ import axiosClient from "./axiosClient";
 
 const discountApi = {
   getAll: () => {
-    const url = "/api/view-discount";
+    const url = "//api/view-discount";
     return axiosClient.get(url);
   },
 
   getId: (id) => {
-    const url = `/api/edit-discount/${id}`;
+    const url = `//api/edit-discount/${id}`;
     return axiosClient.get(url);
   },
 
   addDiscount: (data) => {
-    const url = "/api/store-discount";
+    const url = "//api/store-discount";
     return axiosClient.post(url, data);
   },
 

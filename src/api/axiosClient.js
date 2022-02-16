@@ -5,14 +5,13 @@ import queryString from "query-string";
 // Please have a look at here `https://github.com/axios/axios#requestconfig` for the full list of configs
 
 const axiosClient = axios.create({
-  headers: {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "DELETE,POST,GET,OPTIONS",
-    "content-type": "application/json",
 
+  headers: {
+    "content-type": "application/json",
     Accept: "application/json",
   },
   withCredentials: true,
+
   paramsSerializer: (params) => queryString.stringify(params),
 });
 

@@ -16,7 +16,7 @@ const categoryApi = {
     return axiosClient.get(url);
   },
   getStatus: () => {
-    const url = `api/all-category`;
+    const url = `/api/all-category`;
     return axiosClient.get(url);
   },
 

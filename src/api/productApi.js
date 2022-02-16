@@ -20,7 +20,7 @@ const productApi = {
   },
 
   getStatus: () => {
-    const url = `api/all-product`;
+    const url = `/api/all-product`;
     return axiosClient.get(url);
   },
 
